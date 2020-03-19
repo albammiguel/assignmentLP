@@ -20,14 +20,22 @@ public class PracticaObligatoria {
     public static void main(String[] args) {
         // TODO code application logic here
         try{
+            // Preparar el fichero de entrada para asignarlo al analizador léxico
             CharStream input = CharStreams.fromFileName(args[0]);
-            practicaObligatoriaLexer analex = new practicaObligatoriaLexer(input);
-            
+            // Crear el objeto correspondiente al analizador léxico con el fichero de entrada
+            ListaTokensDetectados depurador = new ListaTokensDetectados();
+            practicaObligatoriaLexer analex = new practicaObligatoriaLexer(input, depurador);
+            // Identificar al analizador léxico como fuente de tokens para el sintactico
             CommonTokenStream tokens = new CommonTokenStream(analex);
             practicaObligatoriaParser anasint = new 
                                               practicaObligatoriaParser(tokens);
             
-            anasint.prg();     
+            /*
+                Comenzar el análisis llamando al axioma de la gramática
+            */
+		anasint.p();
+            // Llamar al método para sacar el resumen del analizado léxico.
+		depurador.mostrarLista();
         } catch (org.antlr.v4.runtime.RecognitionException e) { 
             //Fallo al reconocer la entrada    
             System.err.println("REC " + e.getMessage());

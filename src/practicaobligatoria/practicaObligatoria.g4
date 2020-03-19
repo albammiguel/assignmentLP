@@ -1,5 +1,26 @@
 grammar practicaObligatoria;
 
+@header{
+    package practicaobligatoria;
+    import java.util.*;
+}
+
+@lexer::members{
+
+    private ListaTokensDetectados listaTokens;
+    private TokenDetectado token_actual;
+    
+    //Recibir como parámetro los objetos.
+    public practicaObligatoriaLexer(CharStream ficheroFuente, 
+     ListaTokensDetectados lista){
+        this(ficheroFuente);
+        listaTokens= lista;
+    }
+}
+
+//p: (NUM_REAL_CONST | NUM_INT_CONST | STRING_CONST | IDENT| TOKEN_PROGRAM| TOKEN_END| TOKEN_SUBROUTINE)+;
+
+
 //ANALISIS SINTACTICO
 //PRINCIPIO - ESTRUCTURA PROGRAMA
 prg : TOKEN_PROGRAM IDENT TOKEN_PUNTOCOMA dcllist cabecera sent sentlist 
@@ -25,8 +46,6 @@ decsubprog : decproc decsubprog
 sentlist : sent sentlist 
 | 
 ;
-
-
 
 //PRIMERA ZONA DE DECLARACIONES
 dcl: defcte 
@@ -126,9 +145,6 @@ subpparamlist: TOKEN_PARENTESIS_IZQ exp explist TOKEN_PARENTESIS_DER
 |
 ;
 
-
-
-
 //ZONA IMPLEMENTACION
 subproglist : codproc subproglist 
 | codfun subproglist 
@@ -142,49 +158,114 @@ codfun : TOKEN_FUNCTION IDENT TOKEN_PARENTESIS_IZQ
 nomparamlist TOKEN_PARENTESIS_DER  tipo TOKEN_DOBLEPUNTO IDENT TOKEN_PUNTOCOMA
 dec_f_paramlist dcllist sent sentlist IDENT TOKEN_IGUAL exp TOKEN_PUNTOCOMA
 TOKEN_END TOKEN_FUNCTION IDENT;
- 
+
+
+
 
 //ANALISIS LEXICO
-IDENT:[a-z][a-z0-9_]*; 
+IDENT:[a-z][a-z0-9_]*{ 
+    token_actual = new TokenDetectado(true, getText());
+    listaTokens.añadirToken(token_actual);}; 
 NUM_INT_CONST: '-'? DIGIT+ 
-{ System.out.println("Constante entera "+getText()+"\n");};
+{   
+    token_actual = new TokenDetectado(true, getText());
+    listaTokens.añadirToken(token_actual);};
 NUM_REAL_CONST: (PUNTO_FIJO | EXPONENCIAL | MIXTO) 
-{System.out.println("Constante real "+getText()+"\n");};
-STRING_CONST: (STRING_CONST1 | STRING_CONST2)
-{System.out.println("Constante literal "+getText()+"\n");};
-TOKEN_PROGRAM: 'PROGRAM';
-TOKEN_INTERFACE: 'INTERFACE';
-TOKEN_PUNTOCOMA: ';';
-TOKEN_END: 'END';
-TOKEN_DOBLEPUNTO: '::';
-TOKEN_PARAMETER: 'PARAMETER';
-TOKEN_IGUAL: '=';
-TOKEN_COMA: ',';
-TOKEN_INTEGER: 'INTEGER';
-TOKEN_REAL: 'REAL';
-TOKEN_CHARACTER: 'CHARACTER';
-TOKEN_PARENTESIS_IZQ: '(';
-TOKEN_PARENTESIS_DER: ')';
-TOKEN_SUBROUTINE: 'SUBROUTINE';
-TOKEN_IN: 'IN';
-TOKEN_OUT: 'OUT';
-TOKEN_INOUT: 'INOUT';
-TOKEN_FUNCTION: 'FUNCTION';
-TOKEN_INTENT: 'INTENT';
-TOKEN_MAS: '+';
-TOKEN_MENOS: '-';
-TOKEN_MULTIPLICACION: '*';
-TOKEN_DIVISION:'/';
-TOKEN_CALL: 'CALL';
+{   
+    token_actual = new TokenDetectado(true, getText());
+    listaTokens.añadirToken(token_actual);};
+STRING_CONST: (STRING_CONST1 | STRING_CONST2){
+    token_actual = new TokenDetectado(true, getText());
+    listaTokens.añadirToken(token_actual);};
+TOKEN_PROGRAM: 'PROGRAM'{
+    token_actual = new TokenDetectado(true, getText());
+    listaTokens.añadirToken(token_actual);};
+TOKEN_INTERFACE: 'INTERFACE'{
+    token_actual = new TokenDetectado(true, getText());
+    listaTokens.añadirToken(token_actual);};
+TOKEN_PUNTOCOMA: ';'{
+    token_actual = new TokenDetectado(true, getText());
+    listaTokens.añadirToken(token_actual);};
+TOKEN_END: 'END'{
+    token_actual = new TokenDetectado(true, getText());
+    listaTokens.añadirToken(token_actual);};
+TOKEN_DOBLEPUNTO: '::'{
+    token_actual = new TokenDetectado(true, getText());
+    listaTokens.añadirToken(token_actual);};
+TOKEN_PARAMETER: 'PARAMETER'{
+    token_actual = new TokenDetectado(true, getText());
+    listaTokens.añadirToken(token_actual);};
+TOKEN_IGUAL: '='{
+    token_actual = new TokenDetectado(true, getText());
+    listaTokens.añadirToken(token_actual);};
+TOKEN_COMA: ','{
+    token_actual = new TokenDetectado(true, getText());
+    listaTokens.añadirToken(token_actual);};
+TOKEN_INTEGER: 'INTEGER'{
+    token_actual = new TokenDetectado(true, getText());
+    listaTokens.añadirToken(token_actual);};
+TOKEN_REAL: 'REAL'{
+    token_actual = new TokenDetectado(true, getText());
+    listaTokens.añadirToken(token_actual);};
+TOKEN_CHARACTER: 'CHARACTER'{
+    token_actual = new TokenDetectado(true, getText());
+    listaTokens.añadirToken(token_actual);};
+TOKEN_PARENTESIS_IZQ: '('{
+    token_actual = new TokenDetectado(true, getText());
+    listaTokens.añadirToken(token_actual);};
+TOKEN_PARENTESIS_DER: ')'{
+    token_actual = new TokenDetectado(true, getText());
+    listaTokens.añadirToken(token_actual);};
+TOKEN_SUBROUTINE: 'SUBROUTINE'{
+    token_actual = new TokenDetectado(true, getText());
+    listaTokens.añadirToken(token_actual);};
+TOKEN_IN: 'IN'{
+    token_actual = new TokenDetectado(true, getText());
+    listaTokens.añadirToken(token_actual);};
+TOKEN_OUT: 'OUT'{
+    token_actual = new TokenDetectado(true, getText());
+    listaTokens.añadirToken(token_actual);};
+TOKEN_INOUT: 'INOUT'{
+    token_actual = new TokenDetectado(true, getText());
+    listaTokens.añadirToken(token_actual);};
+TOKEN_FUNCTION: 'FUNCTION'{
+    token_actual = new TokenDetectado(true, getText());
+    listaTokens.añadirToken(token_actual);};
+TOKEN_INTENT: 'INTENT'{
+    token_actual = new TokenDetectado(true, getText());
+    listaTokens.añadirToken(token_actual);};
+TOKEN_MAS: '+'{
+    token_actual = new TokenDetectado(true, getText());
+    listaTokens.añadirToken(token_actual);};
+TOKEN_MENOS: '-'{
+    token_actual = new TokenDetectado(true, getText());
+    listaTokens.añadirToken(token_actual);};
+TOKEN_MULTIPLICACION: '*'{
+    token_actual = new TokenDetectado(true, getText());
+    listaTokens.añadirToken(token_actual);};
+TOKEN_DIVISION:'/'{
+    token_actual = new TokenDetectado(true, getText());
+    listaTokens.añadirToken(token_actual);};
+TOKEN_CALL: 'CALL'{
+    token_actual = new TokenDetectado(true, getText());
+    listaTokens.añadirToken(token_actual);};
 COMENTARIOS: '!' .*? '\r'? '\n' -> skip;
 WS: [\t\n\r ] -> skip;
 
+
 fragment 
 DIGIT: [0-9];
+fragment
 PUNTO_FIJO: '-'? DIGIT+ '.' DIGIT+;
+fragment
 EXPONENCIAL: '-'? DIGIT+ ('e' | 'E') '-'? DIGIT+;
+fragment
 MIXTO: PUNTO_FIJO ('e' | 'E') '-'? DIGIT+;
+fragment
 SIN_COMILLAS_DOBLES: ~('"')+;
+fragment
 SIN_COMILLAS_SIMPLES: ~('\'')+;
-STRING_CONST1: '"' ('""' | SIN_COMILLAS_DOBLES)* '"';
+fragment
+STRING_CONST1: '"' ( '""' | SIN_COMILLAS_DOBLES)* '"';
+fragment
 STRING_CONST2: '\'' ('\'\''| SIN_COMILLAS_SIMPLES)* '\'';

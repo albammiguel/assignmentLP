@@ -1,5 +1,8 @@
-// Generated from practicaObligatoria.g4 by ANTLR 4.7.27
-package practicaobligatoria;
+// Generated from practicaObligatoria.g4 by ANTLR 4.7.2
+
+    package practicaobligatoria;
+    import java.util.*;
+
 import org.antlr.v4.runtime.tree.ParseTreeListener;
 
 /**
@@ -8,13 +11,13 @@ import org.antlr.v4.runtime.tree.ParseTreeListener;
  */
 public interface practicaObligatoriaListener extends ParseTreeListener {
 	/**
-	 * Enter a parse tree produced by {@link practicaObligatoriaParser#prueba}.
+	 * Enter a parse tree produced by {@link practicaObligatoriaParser#p}.
 	 * @param ctx the parse tree
 	 */
-	void enterPrueba(practicaObligatoriaParser.PruebaContext ctx);
+	void enterP(practicaObligatoriaParser.PContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link practicaObligatoriaParser#prueba}.
+	 * Exit a parse tree produced by {@link practicaObligatoriaParser#p}.
 	 * @param ctx the parse tree
 	 */
-	void exitPrueba(practicaObligatoriaParser.PruebaContext ctx);
+	void exitP(practicaObligatoriaParser.PContext ctx);
 }

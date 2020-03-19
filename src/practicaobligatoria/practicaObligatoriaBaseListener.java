@@ -1,5 +1,9 @@
 // Generated from practicaObligatoria.g4 by ANTLR 4.7.2
-package practicaobligatoria;
+
+    package practicaobligatoria;
+    import java.util.*;
+
+
 import org.antlr.v4.runtime.ParserRuleContext;
 import org.antlr.v4.runtime.tree.ErrorNode;
 import org.antlr.v4.runtime.tree.TerminalNode;
@@ -15,13 +19,13 @@ public class practicaObligatoriaBaseListener implements practicaObligatoriaListe
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterPrueba(practicaObligatoriaParser.PruebaContext ctx) { }
+	@Override public void enterP(practicaObligatoriaParser.PContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitPrueba(practicaObligatoriaParser.PruebaContext ctx) { }
+	@Override public void exitP(practicaObligatoriaParser.PContext ctx) { }
 
 	/**
 	 * {@inheritDoc}

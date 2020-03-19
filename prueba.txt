@@ -1,0 +1,15 @@
+"comilla simple ' y doble "" dentro"
+comando4_hola
+34.27
+15
+0.2
+-23.4
+PROGRAM
+END
+SUBROUTINE
+1.23E4
+-1.23E4
+1.23e-4
+
+
+
