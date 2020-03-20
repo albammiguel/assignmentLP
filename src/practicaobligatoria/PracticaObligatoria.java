@@ -33,7 +33,7 @@ public class PracticaObligatoria {
             /*
                 Comenzar el análisis llamando al axioma de la gramática
             */
-		anasint.p();
+		anasint.prg();
             // Llamar al método para sacar el resumen del analizado léxico.
 		depurador.mostrarLista();
         } catch (org.antlr.v4.runtime.RecognitionException e) { 

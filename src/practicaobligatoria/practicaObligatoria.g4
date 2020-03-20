@@ -23,10 +23,10 @@ grammar practicaObligatoria;
 
 //ANALISIS SINTACTICO
 //PRINCIPIO - ESTRUCTURA PROGRAMA
-prg : TOKEN_PROGRAM IDENT TOKEN_PUNTOCOMA dcllist cabecera sent sentlist 
-TOKEN_END TOKEN_PROGRAM IDENT subproglist;
+prg : TOKEN_PROGRAM IDENT TOKEN_PUNTOCOMA dcllist cabecera sent sentlist
+TOKEN_END TOKEN_PROGRAM IDENT subproglist ;
 
-dcllist: dcllist dcl
+dcllist: dcl dcllist
 |
 ;
 
@@ -52,7 +52,9 @@ dcl: defcte
 | defvar;
 
 defcte: tipo TOKEN_COMA TOKEN_PARAMETER TOKEN_DOBLEPUNTO IDENT 
-TOKEN_IGUAL simpvalue defcte 
+TOKEN_IGUAL simpvalue aux1;
+
+aux1: defcte
 |
 ;
 
@@ -64,9 +66,11 @@ simpvalue: NUM_INT_CONST
 | NUM_REAL_CONST 
 | STRING_CONST;
 
-defvar: tipo TOKEN_DOBLEPUNTO varlist TOKEN_PUNTOCOMA defvar 
+defvar: tipo TOKEN_DOBLEPUNTO varlist TOKEN_PUNTOCOMA aux2;
+
+aux2: defvar 
 |
- ;
+;
 
 tipo: TOKEN_INTEGER
 | TOKEN_REAL
@@ -163,7 +167,7 @@ TOKEN_END TOKEN_FUNCTION IDENT;
 
 
 //ANALISIS LEXICO
-IDENT:[a-z][a-z0-9_]*{ 
+IDENT:[a-zA-Z][a-zA-Z0-9_]*{ 
     token_actual = new TokenDetectado(true, getText());
     listaTokens.añadirToken(token_actual);}; 
 NUM_INT_CONST: '-'? DIGIT+ 
