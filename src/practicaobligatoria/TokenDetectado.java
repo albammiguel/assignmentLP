@@ -12,12 +12,14 @@ package practicaobligatoria;
 public class TokenDetectado {
     //ATRIBUTOS
     private String infoToken;
+    private String tipoToken;
     private boolean detectado;
     
     //CONSTRUCTOR
-    public TokenDetectado(boolean aceptado, String texto){
+    public TokenDetectado(boolean aceptado, String texto, String tipo){
         detectado = aceptado;
         infoToken = texto;
+        tipoToken = tipo;
     }
     
     //GETTERS
@@ -28,4 +30,8 @@ public class TokenDetectado {
      public boolean getDetectado(){
         return detectado;
     } 
+    
+    public String getTipoToken(){
+        return tipoToken;
+    }
 }

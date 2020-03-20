@@ -18,13 +18,12 @@ grammar practicaObligatoria;
     }
 }
 
-//p: (NUM_REAL_CONST | NUM_INT_CONST | STRING_CONST | IDENT| TOKEN_PROGRAM| TOKEN_END| TOKEN_SUBROUTINE)+;
 
 
 //ANALISIS SINTACTICO
 //PRINCIPIO - ESTRUCTURA PROGRAMA
 prg : TOKEN_PROGRAM IDENT TOKEN_PUNTOCOMA dcllist cabecera sent sentlist
-TOKEN_END TOKEN_PROGRAM IDENT subproglist ;
+TOKEN_END TOKEN_PROGRAM IDENT subproglist <EOF>;
 
 dcllist: dcl dcllist
 |
@@ -52,7 +51,7 @@ dcl: defcte
 | defvar;
 
 defcte: tipo TOKEN_COMA TOKEN_PARAMETER TOKEN_DOBLEPUNTO IDENT 
-TOKEN_IGUAL simpvalue aux1;
+TOKEN_IGUAL simpvalue ctelist TOKEN_PUNTOCOMA aux1;
 
 aux1: defcte
 |
@@ -167,92 +166,93 @@ TOKEN_END TOKEN_FUNCTION IDENT;
 
 
 //ANALISIS LEXICO
+TOKEN_PROGRAM: 'PROGRAM'{
+    token_actual = new TokenDetectado(true, getText(), "PROGRAM");
+    listaTokens.añadirToken(token_actual);};
+TOKEN_INTERFACE: 'INTERFACE'{
+    token_actual = new TokenDetectado(true, getText(), "INTERFACE");
+    listaTokens.añadirToken(token_actual);};
+TOKEN_PUNTOCOMA: ';'{
+    token_actual = new TokenDetectado(true, getText(), ";");
+    listaTokens.añadirToken(token_actual);};
+TOKEN_END: 'END'{
+    token_actual = new TokenDetectado(true, getText(), "END");
+    listaTokens.añadirToken(token_actual);};
+TOKEN_DOBLEPUNTO: '::'{
+    token_actual = new TokenDetectado(true, getText(), "::");
+    listaTokens.añadirToken(token_actual);};
+TOKEN_PARAMETER: 'PARAMETER'{
+    token_actual = new TokenDetectado(true, getText(), "PARAMETER");
+    listaTokens.añadirToken(token_actual);};
+TOKEN_IGUAL: '='{
+    token_actual = new TokenDetectado(true, getText(), "=");
+    listaTokens.añadirToken(token_actual);};
+TOKEN_COMA: ','{
+    token_actual = new TokenDetectado(true, getText(), ",");
+    listaTokens.añadirToken(token_actual);};
+TOKEN_INTEGER: 'INTEGER'{
+    token_actual = new TokenDetectado(true, getText(), "INTEGER");
+    listaTokens.añadirToken(token_actual);};
+TOKEN_REAL: 'REAL'{
+    token_actual = new TokenDetectado(true, getText(), "REAL");
+    listaTokens.añadirToken(token_actual);};
+TOKEN_CHARACTER: 'CHARACTER'{
+    token_actual = new TokenDetectado(true, getText(), "CHARACTER");
+    listaTokens.añadirToken(token_actual);};
+TOKEN_PARENTESIS_IZQ: '('{
+    token_actual = new TokenDetectado(true, getText(), "(");
+    listaTokens.añadirToken(token_actual);};
+TOKEN_PARENTESIS_DER: ')'{
+    token_actual = new TokenDetectado(true, getText(), ")");
+    listaTokens.añadirToken(token_actual);};
+TOKEN_SUBROUTINE: 'SUBROUTINE'{
+    token_actual = new TokenDetectado(true, getText(), "SUBROUTINE");
+    listaTokens.añadirToken(token_actual);};
+TOKEN_IN: 'IN'{
+    token_actual = new TokenDetectado(true, getText(), "IN");
+    listaTokens.añadirToken(token_actual);};
+TOKEN_OUT: 'OUT'{
+    token_actual = new TokenDetectado(true, getText(), "OUT");
+    listaTokens.añadirToken(token_actual);};
+TOKEN_INOUT: 'INOUT'{
+    token_actual = new TokenDetectado(true, getText(), "INOUT");
+    listaTokens.añadirToken(token_actual);};
+TOKEN_FUNCTION: 'FUNCTION'{
+    token_actual = new TokenDetectado(true, getText(), "FUNCTION");
+    listaTokens.añadirToken(token_actual);};
+TOKEN_INTENT: 'INTENT'{
+    token_actual = new TokenDetectado(true, getText(), "INTENT");
+    listaTokens.añadirToken(token_actual);};
+TOKEN_MAS: '+'{
+    token_actual = new TokenDetectado(true, getText(), "+");
+    listaTokens.añadirToken(token_actual);};
+TOKEN_MENOS: '-'{
+    token_actual = new TokenDetectado(true, getText(),  "-");
+    listaTokens.añadirToken(token_actual);};
+TOKEN_MULTIPLICACION: '*'{
+    token_actual = new TokenDetectado(true, getText(), "*");
+    listaTokens.añadirToken(token_actual);};
+TOKEN_DIVISION:'/'{
+    token_actual = new TokenDetectado(true, getText(), "/");
+    listaTokens.añadirToken(token_actual);};
+TOKEN_CALL: 'CALL'{
+    token_actual = new TokenDetectado(true, getText(), "CALL");
+    listaTokens.añadirToken(token_actual);};
 IDENT:[a-zA-Z][a-zA-Z0-9_]*{ 
-    token_actual = new TokenDetectado(true, getText());
+    token_actual = new TokenDetectado(true, getText(), "IDENT");
     listaTokens.añadirToken(token_actual);}; 
 NUM_INT_CONST: '-'? DIGIT+ 
 {   
-    token_actual = new TokenDetectado(true, getText());
+    token_actual = new TokenDetectado(true, getText(), "NUM_INT_CONST");
     listaTokens.añadirToken(token_actual);};
 NUM_REAL_CONST: (PUNTO_FIJO | EXPONENCIAL | MIXTO) 
 {   
-    token_actual = new TokenDetectado(true, getText());
+    token_actual = new TokenDetectado(true, getText(), "NUM_REAL_CONST");
     listaTokens.añadirToken(token_actual);};
 STRING_CONST: (STRING_CONST1 | STRING_CONST2){
-    token_actual = new TokenDetectado(true, getText());
+    token_actual = new TokenDetectado(true, getText(), "STRING_CONST");
     listaTokens.añadirToken(token_actual);};
-TOKEN_PROGRAM: 'PROGRAM'{
-    token_actual = new TokenDetectado(true, getText());
-    listaTokens.añadirToken(token_actual);};
-TOKEN_INTERFACE: 'INTERFACE'{
-    token_actual = new TokenDetectado(true, getText());
-    listaTokens.añadirToken(token_actual);};
-TOKEN_PUNTOCOMA: ';'{
-    token_actual = new TokenDetectado(true, getText());
-    listaTokens.añadirToken(token_actual);};
-TOKEN_END: 'END'{
-    token_actual = new TokenDetectado(true, getText());
-    listaTokens.añadirToken(token_actual);};
-TOKEN_DOBLEPUNTO: '::'{
-    token_actual = new TokenDetectado(true, getText());
-    listaTokens.añadirToken(token_actual);};
-TOKEN_PARAMETER: 'PARAMETER'{
-    token_actual = new TokenDetectado(true, getText());
-    listaTokens.añadirToken(token_actual);};
-TOKEN_IGUAL: '='{
-    token_actual = new TokenDetectado(true, getText());
-    listaTokens.añadirToken(token_actual);};
-TOKEN_COMA: ','{
-    token_actual = new TokenDetectado(true, getText());
-    listaTokens.añadirToken(token_actual);};
-TOKEN_INTEGER: 'INTEGER'{
-    token_actual = new TokenDetectado(true, getText());
-    listaTokens.añadirToken(token_actual);};
-TOKEN_REAL: 'REAL'{
-    token_actual = new TokenDetectado(true, getText());
-    listaTokens.añadirToken(token_actual);};
-TOKEN_CHARACTER: 'CHARACTER'{
-    token_actual = new TokenDetectado(true, getText());
-    listaTokens.añadirToken(token_actual);};
-TOKEN_PARENTESIS_IZQ: '('{
-    token_actual = new TokenDetectado(true, getText());
-    listaTokens.añadirToken(token_actual);};
-TOKEN_PARENTESIS_DER: ')'{
-    token_actual = new TokenDetectado(true, getText());
-    listaTokens.añadirToken(token_actual);};
-TOKEN_SUBROUTINE: 'SUBROUTINE'{
-    token_actual = new TokenDetectado(true, getText());
-    listaTokens.añadirToken(token_actual);};
-TOKEN_IN: 'IN'{
-    token_actual = new TokenDetectado(true, getText());
-    listaTokens.añadirToken(token_actual);};
-TOKEN_OUT: 'OUT'{
-    token_actual = new TokenDetectado(true, getText());
-    listaTokens.añadirToken(token_actual);};
-TOKEN_INOUT: 'INOUT'{
-    token_actual = new TokenDetectado(true, getText());
-    listaTokens.añadirToken(token_actual);};
-TOKEN_FUNCTION: 'FUNCTION'{
-    token_actual = new TokenDetectado(true, getText());
-    listaTokens.añadirToken(token_actual);};
-TOKEN_INTENT: 'INTENT'{
-    token_actual = new TokenDetectado(true, getText());
-    listaTokens.añadirToken(token_actual);};
-TOKEN_MAS: '+'{
-    token_actual = new TokenDetectado(true, getText());
-    listaTokens.añadirToken(token_actual);};
-TOKEN_MENOS: '-'{
-    token_actual = new TokenDetectado(true, getText());
-    listaTokens.añadirToken(token_actual);};
-TOKEN_MULTIPLICACION: '*'{
-    token_actual = new TokenDetectado(true, getText());
-    listaTokens.añadirToken(token_actual);};
-TOKEN_DIVISION:'/'{
-    token_actual = new TokenDetectado(true, getText());
-    listaTokens.añadirToken(token_actual);};
-TOKEN_CALL: 'CALL'{
-    token_actual = new TokenDetectado(true, getText());
-    listaTokens.añadirToken(token_actual);};
+
 COMENTARIOS: '!' .*? '\r'? '\n' -> skip;
 WS: [\t\n\r ] -> skip;
 

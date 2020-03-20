@@ -20,13 +20,13 @@ public class practicaObligatoriaParser extends Parser {
 	protected static final PredictionContextCache _sharedContextCache =
 		new PredictionContextCache();
 	public static final int
-		IDENT=1, NUM_INT_CONST=2, NUM_REAL_CONST=3, STRING_CONST=4, TOKEN_PROGRAM=5, 
-		TOKEN_INTERFACE=6, TOKEN_PUNTOCOMA=7, TOKEN_END=8, TOKEN_DOBLEPUNTO=9, 
-		TOKEN_PARAMETER=10, TOKEN_IGUAL=11, TOKEN_COMA=12, TOKEN_INTEGER=13, TOKEN_REAL=14, 
-		TOKEN_CHARACTER=15, TOKEN_PARENTESIS_IZQ=16, TOKEN_PARENTESIS_DER=17, 
-		TOKEN_SUBROUTINE=18, TOKEN_IN=19, TOKEN_OUT=20, TOKEN_INOUT=21, TOKEN_FUNCTION=22, 
-		TOKEN_INTENT=23, TOKEN_MAS=24, TOKEN_MENOS=25, TOKEN_MULTIPLICACION=26, 
-		TOKEN_DIVISION=27, TOKEN_CALL=28, COMENTARIOS=29, WS=30;
+		TOKEN_PROGRAM=1, TOKEN_INTERFACE=2, TOKEN_PUNTOCOMA=3, TOKEN_END=4, TOKEN_DOBLEPUNTO=5, 
+		TOKEN_PARAMETER=6, TOKEN_IGUAL=7, TOKEN_COMA=8, TOKEN_INTEGER=9, TOKEN_REAL=10, 
+		TOKEN_CHARACTER=11, TOKEN_PARENTESIS_IZQ=12, TOKEN_PARENTESIS_DER=13, 
+		TOKEN_SUBROUTINE=14, TOKEN_IN=15, TOKEN_OUT=16, TOKEN_INOUT=17, TOKEN_FUNCTION=18, 
+		TOKEN_INTENT=19, TOKEN_MAS=20, TOKEN_MENOS=21, TOKEN_MULTIPLICACION=22, 
+		TOKEN_DIVISION=23, TOKEN_CALL=24, IDENT=25, NUM_INT_CONST=26, NUM_REAL_CONST=27, 
+		STRING_CONST=28, COMENTARIOS=29, WS=30;
 	public static final int
 		RULE_prg = 0, RULE_dcllist = 1, RULE_cabecera = 2, RULE_cablist = 3, RULE_decsubprog = 4, 
 		RULE_sentlist = 5, RULE_dcl = 6, RULE_defcte = 7, RULE_aux1 = 8, RULE_ctelist = 9, 
@@ -51,22 +51,22 @@ public class practicaObligatoriaParser extends Parser {
 
 	private static String[] makeLiteralNames() {
 		return new String[] {
-			null, null, null, null, null, "'PROGRAM'", "'INTERFACE'", "';'", "'END'", 
-			"'::'", "'PARAMETER'", "'='", "','", "'INTEGER'", "'REAL'", "'CHARACTER'", 
-			"'('", "')'", "'SUBROUTINE'", "'IN'", "'OUT'", "'INOUT'", "'FUNCTION'", 
-			"'INTENT'", "'+'", "'-'", "'*'", "'/'", "'CALL'"
+			null, "'PROGRAM'", "'INTERFACE'", "';'", "'END'", "'::'", "'PARAMETER'", 
+			"'='", "','", "'INTEGER'", "'REAL'", "'CHARACTER'", "'('", "')'", "'SUBROUTINE'", 
+			"'IN'", "'OUT'", "'INOUT'", "'FUNCTION'", "'INTENT'", "'+'", "'-'", "'*'", 
+			"'/'", "'CALL'"
 		};
 	}
 	private static final String[] _LITERAL_NAMES = makeLiteralNames();
 	private static String[] makeSymbolicNames() {
 		return new String[] {
-			null, "IDENT", "NUM_INT_CONST", "NUM_REAL_CONST", "STRING_CONST", "TOKEN_PROGRAM", 
-			"TOKEN_INTERFACE", "TOKEN_PUNTOCOMA", "TOKEN_END", "TOKEN_DOBLEPUNTO", 
-			"TOKEN_PARAMETER", "TOKEN_IGUAL", "TOKEN_COMA", "TOKEN_INTEGER", "TOKEN_REAL", 
-			"TOKEN_CHARACTER", "TOKEN_PARENTESIS_IZQ", "TOKEN_PARENTESIS_DER", "TOKEN_SUBROUTINE", 
-			"TOKEN_IN", "TOKEN_OUT", "TOKEN_INOUT", "TOKEN_FUNCTION", "TOKEN_INTENT", 
-			"TOKEN_MAS", "TOKEN_MENOS", "TOKEN_MULTIPLICACION", "TOKEN_DIVISION", 
-			"TOKEN_CALL", "COMENTARIOS", "WS"
+			null, "TOKEN_PROGRAM", "TOKEN_INTERFACE", "TOKEN_PUNTOCOMA", "TOKEN_END", 
+			"TOKEN_DOBLEPUNTO", "TOKEN_PARAMETER", "TOKEN_IGUAL", "TOKEN_COMA", "TOKEN_INTEGER", 
+			"TOKEN_REAL", "TOKEN_CHARACTER", "TOKEN_PARENTESIS_IZQ", "TOKEN_PARENTESIS_DER", 
+			"TOKEN_SUBROUTINE", "TOKEN_IN", "TOKEN_OUT", "TOKEN_INOUT", "TOKEN_FUNCTION", 
+			"TOKEN_INTENT", "TOKEN_MAS", "TOKEN_MENOS", "TOKEN_MULTIPLICACION", "TOKEN_DIVISION", 
+			"TOKEN_CALL", "IDENT", "NUM_INT_CONST", "NUM_REAL_CONST", "STRING_CONST", 
+			"COMENTARIOS", "WS"
 		};
 	}
 	private static final String[] _SYMBOLIC_NAMES = makeSymbolicNames();
@@ -240,9 +240,9 @@ public class practicaObligatoriaParser extends Parser {
 				dcllist();
 				}
 				break;
-			case IDENT:
 			case TOKEN_INTERFACE:
 			case TOKEN_CALL:
+			case IDENT:
 				enterOuterAlt(_localctx, 2);
 				{
 				}
@@ -305,8 +305,8 @@ public class practicaObligatoriaParser extends Parser {
 				match(TOKEN_INTERFACE);
 				}
 				break;
-			case IDENT:
 			case TOKEN_CALL:
+			case IDENT:
 				enterOuterAlt(_localctx, 2);
 				{
 				}
@@ -581,6 +581,10 @@ public class practicaObligatoriaParser extends Parser {
 		public SimpvalueContext simpvalue() {
 			return getRuleContext(SimpvalueContext.class,0);
 		}
+		public CtelistContext ctelist() {
+			return getRuleContext(CtelistContext.class,0);
+		}
+		public TerminalNode TOKEN_PUNTOCOMA() { return getToken(practicaObligatoriaParser.TOKEN_PUNTOCOMA, 0); }
 		public Aux1Context aux1() {
 			return getRuleContext(Aux1Context.class,0);
 		}
@@ -619,6 +623,10 @@ public class practicaObligatoriaParser extends Parser {
 			setState(129);
 			simpvalue();
 			setState(130);
+			ctelist();
+			setState(131);
+			match(TOKEN_PUNTOCOMA);
+			setState(132);
 			aux1();
 			}
 		}
@@ -655,13 +663,13 @@ public class practicaObligatoriaParser extends Parser {
 		Aux1Context _localctx = new Aux1Context(_ctx, getState());
 		enterRule(_localctx, 16, RULE_aux1);
 		try {
-			setState(134);
+			setState(136);
 			_errHandler.sync(this);
 			switch ( getInterpreter().adaptivePredict(_input,6,_ctx) ) {
 			case 1:
 				enterOuterAlt(_localctx, 1);
 				{
-				setState(132);
+				setState(134);
 				defcte();
 				}
 				break;
@@ -711,29 +719,31 @@ public class practicaObligatoriaParser extends Parser {
 		CtelistContext _localctx = new CtelistContext(_ctx, getState());
 		enterRule(_localctx, 18, RULE_ctelist);
 		try {
-			setState(143);
+			setState(145);
 			_errHandler.sync(this);
-			switch ( getInterpreter().adaptivePredict(_input,7,_ctx) ) {
-			case 1:
+			switch (_input.LA(1)) {
+			case TOKEN_COMA:
 				enterOuterAlt(_localctx, 1);
 				{
-				setState(136);
-				match(TOKEN_COMA);
-				setState(137);
-				match(IDENT);
 				setState(138);
-				match(TOKEN_IGUAL);
+				match(TOKEN_COMA);
 				setState(139);
-				simpvalue();
+				match(IDENT);
 				setState(140);
+				match(TOKEN_IGUAL);
+				setState(141);
+				simpvalue();
+				setState(142);
 				ctelist();
 				}
 				break;
-			case 2:
+			case TOKEN_PUNTOCOMA:
 				enterOuterAlt(_localctx, 2);
 				{
 				}
 				break;
+			default:
+				throw new NoViableAltException(this);
 			}
 		}
 		catch (RecognitionException re) {
@@ -772,7 +782,7 @@ public class practicaObligatoriaParser extends Parser {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(145);
+			setState(147);
 			_la = _input.LA(1);
 			if ( !((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << NUM_INT_CONST) | (1L << NUM_REAL_CONST) | (1L << STRING_CONST))) != 0)) ) {
 			_errHandler.recoverInline(this);
@@ -827,15 +837,15 @@ public class practicaObligatoriaParser extends Parser {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(147);
-			tipo();
-			setState(148);
-			match(TOKEN_DOBLEPUNTO);
 			setState(149);
-			varlist();
+			tipo();
 			setState(150);
-			match(TOKEN_PUNTOCOMA);
+			match(TOKEN_DOBLEPUNTO);
 			setState(151);
+			varlist();
+			setState(152);
+			match(TOKEN_PUNTOCOMA);
+			setState(153);
 			aux2();
 			}
 		}
@@ -872,13 +882,13 @@ public class practicaObligatoriaParser extends Parser {
 		Aux2Context _localctx = new Aux2Context(_ctx, getState());
 		enterRule(_localctx, 24, RULE_aux2);
 		try {
-			setState(155);
+			setState(157);
 			_errHandler.sync(this);
 			switch ( getInterpreter().adaptivePredict(_input,8,_ctx) ) {
 			case 1:
 				enterOuterAlt(_localctx, 1);
 				{
-				setState(153);
+				setState(155);
 				defvar();
 				}
 				break;
@@ -925,29 +935,29 @@ public class practicaObligatoriaParser extends Parser {
 		TipoContext _localctx = new TipoContext(_ctx, getState());
 		enterRule(_localctx, 26, RULE_tipo);
 		try {
-			setState(161);
+			setState(163);
 			_errHandler.sync(this);
 			switch (_input.LA(1)) {
 			case TOKEN_INTEGER:
 				enterOuterAlt(_localctx, 1);
 				{
-				setState(157);
+				setState(159);
 				match(TOKEN_INTEGER);
 				}
 				break;
 			case TOKEN_REAL:
 				enterOuterAlt(_localctx, 2);
 				{
-				setState(158);
+				setState(160);
 				match(TOKEN_REAL);
 				}
 				break;
 			case TOKEN_CHARACTER:
 				enterOuterAlt(_localctx, 3);
 				{
-				setState(159);
+				setState(161);
 				match(TOKEN_CHARACTER);
-				setState(160);
+				setState(162);
 				charlength();
 				}
 				break;
@@ -988,17 +998,17 @@ public class practicaObligatoriaParser extends Parser {
 		CharlengthContext _localctx = new CharlengthContext(_ctx, getState());
 		enterRule(_localctx, 28, RULE_charlength);
 		try {
-			setState(167);
+			setState(169);
 			_errHandler.sync(this);
 			switch (_input.LA(1)) {
 			case TOKEN_PARENTESIS_IZQ:
 				enterOuterAlt(_localctx, 1);
 				{
-				setState(163);
-				match(TOKEN_PARENTESIS_IZQ);
-				setState(164);
-				match(NUM_INT_CONST);
 				setState(165);
+				match(TOKEN_PARENTESIS_IZQ);
+				setState(166);
+				match(NUM_INT_CONST);
+				setState(167);
 				match(TOKEN_PARENTESIS_DER);
 				}
 				break;
@@ -1050,28 +1060,28 @@ public class practicaObligatoriaParser extends Parser {
 		VarlistContext _localctx = new VarlistContext(_ctx, getState());
 		enterRule(_localctx, 30, RULE_varlist);
 		try {
-			setState(176);
+			setState(178);
 			_errHandler.sync(this);
 			switch ( getInterpreter().adaptivePredict(_input,11,_ctx) ) {
 			case 1:
 				enterOuterAlt(_localctx, 1);
 				{
-				setState(169);
+				setState(171);
 				match(IDENT);
-				setState(170);
+				setState(172);
 				init();
 				}
 				break;
 			case 2:
 				enterOuterAlt(_localctx, 2);
 				{
-				setState(171);
-				match(IDENT);
-				setState(172);
-				init();
 				setState(173);
-				match(TOKEN_COMA);
+				match(IDENT);
 				setState(174);
+				init();
+				setState(175);
+				match(TOKEN_COMA);
+				setState(176);
 				varlist();
 				}
 				break;
@@ -1111,15 +1121,15 @@ public class practicaObligatoriaParser extends Parser {
 		InitContext _localctx = new InitContext(_ctx, getState());
 		enterRule(_localctx, 32, RULE_init);
 		try {
-			setState(181);
+			setState(183);
 			_errHandler.sync(this);
 			switch (_input.LA(1)) {
 			case TOKEN_IGUAL:
 				enterOuterAlt(_localctx, 1);
 				{
-				setState(178);
+				setState(180);
 				match(TOKEN_IGUAL);
-				setState(179);
+				setState(181);
 				simpvalue();
 				}
 				break;
@@ -1180,19 +1190,19 @@ public class practicaObligatoriaParser extends Parser {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(183);
-			match(TOKEN_SUBROUTINE);
-			setState(184);
-			match(IDENT);
 			setState(185);
-			formal_paramlist();
-			setState(186);
-			dec_s_paramlist();
-			setState(187);
-			match(TOKEN_END);
-			setState(188);
 			match(TOKEN_SUBROUTINE);
+			setState(186);
+			match(IDENT);
+			setState(187);
+			formal_paramlist();
+			setState(188);
+			dec_s_paramlist();
 			setState(189);
+			match(TOKEN_END);
+			setState(190);
+			match(TOKEN_SUBROUTINE);
+			setState(191);
 			match(IDENT);
 			}
 		}
@@ -1231,26 +1241,26 @@ public class practicaObligatoriaParser extends Parser {
 		Formal_paramlistContext _localctx = new Formal_paramlistContext(_ctx, getState());
 		enterRule(_localctx, 36, RULE_formal_paramlist);
 		try {
-			setState(196);
+			setState(198);
 			_errHandler.sync(this);
 			switch (_input.LA(1)) {
 			case TOKEN_PARENTESIS_IZQ:
 				enterOuterAlt(_localctx, 1);
 				{
-				setState(191);
-				match(TOKEN_PARENTESIS_IZQ);
-				setState(192);
-				nomparamlist();
 				setState(193);
+				match(TOKEN_PARENTESIS_IZQ);
+				setState(194);
+				nomparamlist();
+				setState(195);
 				match(TOKEN_PARENTESIS_DER);
 				}
 				break;
-			case IDENT:
 			case TOKEN_END:
 			case TOKEN_INTEGER:
 			case TOKEN_REAL:
 			case TOKEN_CHARACTER:
 			case TOKEN_CALL:
+			case IDENT:
 				enterOuterAlt(_localctx, 2);
 				{
 				}
@@ -1294,24 +1304,24 @@ public class practicaObligatoriaParser extends Parser {
 		NomparamlistContext _localctx = new NomparamlistContext(_ctx, getState());
 		enterRule(_localctx, 38, RULE_nomparamlist);
 		try {
-			setState(202);
+			setState(204);
 			_errHandler.sync(this);
 			switch ( getInterpreter().adaptivePredict(_input,14,_ctx) ) {
 			case 1:
 				enterOuterAlt(_localctx, 1);
 				{
-				setState(198);
+				setState(200);
 				match(IDENT);
 				}
 				break;
 			case 2:
 				enterOuterAlt(_localctx, 2);
 				{
-				setState(199);
-				match(IDENT);
-				setState(200);
-				match(TOKEN_COMA);
 				setState(201);
+				match(IDENT);
+				setState(202);
+				match(TOKEN_COMA);
+				setState(203);
 				nomparamlist();
 				}
 				break;
@@ -1362,29 +1372,29 @@ public class practicaObligatoriaParser extends Parser {
 		Dec_s_paramlistContext _localctx = new Dec_s_paramlistContext(_ctx, getState());
 		enterRule(_localctx, 40, RULE_dec_s_paramlist);
 		try {
-			setState(215);
+			setState(217);
 			_errHandler.sync(this);
 			switch ( getInterpreter().adaptivePredict(_input,15,_ctx) ) {
 			case 1:
 				enterOuterAlt(_localctx, 1);
 				{
-				setState(204);
-				tipo();
-				setState(205);
-				match(TOKEN_COMA);
 				setState(206);
-				match(TOKEN_INTENT);
+				tipo();
 				setState(207);
-				match(TOKEN_PARENTESIS_IZQ);
+				match(TOKEN_COMA);
 				setState(208);
-				tipoparam();
+				match(TOKEN_INTENT);
 				setState(209);
-				match(TOKEN_PARENTESIS_DER);
+				match(TOKEN_PARENTESIS_IZQ);
 				setState(210);
-				match(IDENT);
+				tipoparam();
 				setState(211);
-				match(TOKEN_PUNTOCOMA);
+				match(TOKEN_PARENTESIS_DER);
 				setState(212);
+				match(IDENT);
+				setState(213);
+				match(TOKEN_PUNTOCOMA);
+				setState(214);
 				dec_s_paramlist();
 				}
 				break;
@@ -1431,7 +1441,7 @@ public class practicaObligatoriaParser extends Parser {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(217);
+			setState(219);
 			_la = _input.LA(1);
 			if ( !((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << TOKEN_IN) | (1L << TOKEN_OUT) | (1L << TOKEN_INOUT))) != 0)) ) {
 			_errHandler.recoverInline(this);
@@ -1497,31 +1507,31 @@ public class practicaObligatoriaParser extends Parser {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(219);
-			match(TOKEN_FUNCTION);
-			setState(220);
-			match(IDENT);
 			setState(221);
-			match(TOKEN_PARENTESIS_IZQ);
-			setState(222);
-			nomparamlist();
-			setState(223);
-			match(TOKEN_PARENTESIS_DER);
-			setState(224);
-			tipo();
-			setState(225);
-			match(TOKEN_DOBLEPUNTO);
-			setState(226);
-			match(IDENT);
-			setState(227);
-			match(TOKEN_PUNTOCOMA);
-			setState(228);
-			dec_f_paramlist();
-			setState(229);
-			match(TOKEN_END);
-			setState(230);
 			match(TOKEN_FUNCTION);
+			setState(222);
+			match(IDENT);
+			setState(223);
+			match(TOKEN_PARENTESIS_IZQ);
+			setState(224);
+			nomparamlist();
+			setState(225);
+			match(TOKEN_PARENTESIS_DER);
+			setState(226);
+			tipo();
+			setState(227);
+			match(TOKEN_DOBLEPUNTO);
+			setState(228);
+			match(IDENT);
+			setState(229);
+			match(TOKEN_PUNTOCOMA);
+			setState(230);
+			dec_f_paramlist();
 			setState(231);
+			match(TOKEN_END);
+			setState(232);
+			match(TOKEN_FUNCTION);
+			setState(233);
 			match(IDENT);
 			}
 		}
@@ -1568,29 +1578,29 @@ public class practicaObligatoriaParser extends Parser {
 		Dec_f_paramlistContext _localctx = new Dec_f_paramlistContext(_ctx, getState());
 		enterRule(_localctx, 46, RULE_dec_f_paramlist);
 		try {
-			setState(244);
+			setState(246);
 			_errHandler.sync(this);
 			switch ( getInterpreter().adaptivePredict(_input,16,_ctx) ) {
 			case 1:
 				enterOuterAlt(_localctx, 1);
 				{
-				setState(233);
-				tipo();
-				setState(234);
-				match(TOKEN_COMA);
 				setState(235);
-				match(TOKEN_INTENT);
+				tipo();
 				setState(236);
-				match(TOKEN_PARENTESIS_IZQ);
+				match(TOKEN_COMA);
 				setState(237);
-				match(TOKEN_IN);
+				match(TOKEN_INTENT);
 				setState(238);
-				match(TOKEN_PARENTESIS_DER);
+				match(TOKEN_PARENTESIS_IZQ);
 				setState(239);
-				match(IDENT);
+				match(TOKEN_IN);
 				setState(240);
-				match(TOKEN_PUNTOCOMA);
+				match(TOKEN_PARENTESIS_DER);
 				setState(241);
+				match(IDENT);
+				setState(242);
+				match(TOKEN_PUNTOCOMA);
+				setState(243);
 				dec_f_paramlist();
 				}
 				break;
@@ -1640,28 +1650,28 @@ public class practicaObligatoriaParser extends Parser {
 		SentContext _localctx = new SentContext(_ctx, getState());
 		enterRule(_localctx, 48, RULE_sent);
 		try {
-			setState(254);
+			setState(256);
 			_errHandler.sync(this);
 			switch (_input.LA(1)) {
 			case IDENT:
 				enterOuterAlt(_localctx, 1);
 				{
-				setState(246);
-				match(IDENT);
-				setState(247);
-				match(TOKEN_IGUAL);
 				setState(248);
-				exp(0);
+				match(IDENT);
 				setState(249);
+				match(TOKEN_IGUAL);
+				setState(250);
+				exp(0);
+				setState(251);
 				match(TOKEN_PUNTOCOMA);
 				}
 				break;
 			case TOKEN_CALL:
 				enterOuterAlt(_localctx, 2);
 				{
-				setState(251);
+				setState(253);
 				proc_call();
-				setState(252);
+				setState(254);
 				match(TOKEN_PUNTOCOMA);
 				}
 				break;
@@ -1723,11 +1733,11 @@ public class practicaObligatoriaParser extends Parser {
 			enterOuterAlt(_localctx, 1);
 			{
 			{
-			setState(257);
+			setState(259);
 			factor();
 			}
 			_ctx.stop = _input.LT(-1);
-			setState(265);
+			setState(267);
 			_errHandler.sync(this);
 			_alt = getInterpreter().adaptivePredict(_input,18,_ctx);
 			while ( _alt!=2 && _alt!=org.antlr.v4.runtime.atn.ATN.INVALID_ALT_NUMBER ) {
@@ -1738,16 +1748,16 @@ public class practicaObligatoriaParser extends Parser {
 					{
 					_localctx = new ExpContext(_parentctx, _parentState);
 					pushNewRecursionContext(_localctx, _startState, RULE_exp);
-					setState(259);
-					if (!(precpred(_ctx, 2))) throw new FailedPredicateException(this, "precpred(_ctx, 2)");
-					setState(260);
-					op();
 					setState(261);
+					if (!(precpred(_ctx, 2))) throw new FailedPredicateException(this, "precpred(_ctx, 2)");
+					setState(262);
+					op();
+					setState(263);
 					exp(3);
 					}
 					} 
 				}
-				setState(267);
+				setState(269);
 				_errHandler.sync(this);
 				_alt = getInterpreter().adaptivePredict(_input,18,_ctx);
 			}
@@ -1788,7 +1798,7 @@ public class practicaObligatoriaParser extends Parser {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(268);
+			setState(270);
 			oparit();
 			}
 		}
@@ -1829,7 +1839,7 @@ public class practicaObligatoriaParser extends Parser {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(270);
+			setState(272);
 			_la = _input.LA(1);
 			if ( !((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << TOKEN_MAS) | (1L << TOKEN_MENOS) | (1L << TOKEN_MULTIPLICACION) | (1L << TOKEN_DIVISION))) != 0)) ) {
 			_errHandler.recoverInline(this);
@@ -1883,46 +1893,46 @@ public class practicaObligatoriaParser extends Parser {
 		FactorContext _localctx = new FactorContext(_ctx, getState());
 		enterRule(_localctx, 56, RULE_factor);
 		try {
-			setState(284);
+			setState(286);
 			_errHandler.sync(this);
 			switch ( getInterpreter().adaptivePredict(_input,19,_ctx) ) {
 			case 1:
 				enterOuterAlt(_localctx, 1);
 				{
-				setState(272);
+				setState(274);
 				simpvalue();
 				}
 				break;
 			case 2:
 				enterOuterAlt(_localctx, 2);
 				{
-				setState(273);
-				match(TOKEN_PARENTESIS_IZQ);
-				setState(274);
-				exp(0);
 				setState(275);
+				match(TOKEN_PARENTESIS_IZQ);
+				setState(276);
+				exp(0);
+				setState(277);
 				match(TOKEN_PARENTESIS_DER);
 				}
 				break;
 			case 3:
 				enterOuterAlt(_localctx, 3);
 				{
-				setState(277);
-				match(IDENT);
-				setState(278);
-				match(TOKEN_PARENTESIS_IZQ);
 				setState(279);
-				exp(0);
+				match(IDENT);
 				setState(280);
-				explist();
+				match(TOKEN_PARENTESIS_IZQ);
 				setState(281);
+				exp(0);
+				setState(282);
+				explist();
+				setState(283);
 				match(TOKEN_PARENTESIS_DER);
 				}
 				break;
 			case 4:
 				enterOuterAlt(_localctx, 4);
 				{
-				setState(283);
+				setState(285);
 				match(IDENT);
 				}
 				break;
@@ -1965,17 +1975,17 @@ public class practicaObligatoriaParser extends Parser {
 		ExplistContext _localctx = new ExplistContext(_ctx, getState());
 		enterRule(_localctx, 58, RULE_explist);
 		try {
-			setState(291);
+			setState(293);
 			_errHandler.sync(this);
 			switch (_input.LA(1)) {
 			case TOKEN_COMA:
 				enterOuterAlt(_localctx, 1);
 				{
-				setState(286);
-				match(TOKEN_COMA);
-				setState(287);
-				exp(0);
 				setState(288);
+				match(TOKEN_COMA);
+				setState(289);
+				exp(0);
+				setState(290);
 				explist();
 				}
 				break;
@@ -2025,11 +2035,11 @@ public class practicaObligatoriaParser extends Parser {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(293);
-			match(TOKEN_CALL);
-			setState(294);
-			match(IDENT);
 			setState(295);
+			match(TOKEN_CALL);
+			setState(296);
+			match(IDENT);
+			setState(297);
 			subpparamlist();
 			}
 		}
@@ -2071,19 +2081,19 @@ public class practicaObligatoriaParser extends Parser {
 		SubpparamlistContext _localctx = new SubpparamlistContext(_ctx, getState());
 		enterRule(_localctx, 62, RULE_subpparamlist);
 		try {
-			setState(303);
+			setState(305);
 			_errHandler.sync(this);
 			switch (_input.LA(1)) {
 			case TOKEN_PARENTESIS_IZQ:
 				enterOuterAlt(_localctx, 1);
 				{
-				setState(297);
-				match(TOKEN_PARENTESIS_IZQ);
-				setState(298);
-				exp(0);
 				setState(299);
-				explist();
+				match(TOKEN_PARENTESIS_IZQ);
 				setState(300);
+				exp(0);
+				setState(301);
+				explist();
+				setState(302);
 				match(TOKEN_PARENTESIS_DER);
 				}
 				break;
@@ -2135,24 +2145,24 @@ public class practicaObligatoriaParser extends Parser {
 		SubproglistContext _localctx = new SubproglistContext(_ctx, getState());
 		enterRule(_localctx, 64, RULE_subproglist);
 		try {
-			setState(312);
+			setState(314);
 			_errHandler.sync(this);
 			switch (_input.LA(1)) {
 			case TOKEN_SUBROUTINE:
 				enterOuterAlt(_localctx, 1);
 				{
-				setState(305);
+				setState(307);
 				codproc();
-				setState(306);
+				setState(308);
 				subproglist();
 				}
 				break;
 			case TOKEN_FUNCTION:
 				enterOuterAlt(_localctx, 2);
 				{
-				setState(308);
+				setState(310);
 				codfun();
-				setState(309);
+				setState(311);
 				subproglist();
 				}
 				break;
@@ -2221,25 +2231,25 @@ public class practicaObligatoriaParser extends Parser {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(314);
-			match(TOKEN_SUBROUTINE);
-			setState(315);
-			match(IDENT);
 			setState(316);
-			formal_paramlist();
-			setState(317);
-			dec_s_paramlist();
-			setState(318);
-			dcllist();
-			setState(319);
-			sent();
-			setState(320);
-			sentlist();
-			setState(321);
-			match(TOKEN_END);
-			setState(322);
 			match(TOKEN_SUBROUTINE);
+			setState(317);
+			match(IDENT);
+			setState(318);
+			formal_paramlist();
+			setState(319);
+			dec_s_paramlist();
+			setState(320);
+			dcllist();
+			setState(321);
+			sent();
+			setState(322);
+			sentlist();
 			setState(323);
+			match(TOKEN_END);
+			setState(324);
+			match(TOKEN_SUBROUTINE);
+			setState(325);
 			match(IDENT);
 			}
 		}
@@ -2313,45 +2323,45 @@ public class practicaObligatoriaParser extends Parser {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(325);
-			match(TOKEN_FUNCTION);
-			setState(326);
-			match(IDENT);
 			setState(327);
-			match(TOKEN_PARENTESIS_IZQ);
-			setState(328);
-			nomparamlist();
-			setState(329);
-			match(TOKEN_PARENTESIS_DER);
-			setState(330);
-			tipo();
-			setState(331);
-			match(TOKEN_DOBLEPUNTO);
-			setState(332);
-			match(IDENT);
-			setState(333);
-			match(TOKEN_PUNTOCOMA);
-			setState(334);
-			dec_f_paramlist();
-			setState(335);
-			dcllist();
-			setState(336);
-			sent();
-			setState(337);
-			sentlist();
-			setState(338);
-			match(IDENT);
-			setState(339);
-			match(TOKEN_IGUAL);
-			setState(340);
-			exp(0);
-			setState(341);
-			match(TOKEN_PUNTOCOMA);
-			setState(342);
-			match(TOKEN_END);
-			setState(343);
 			match(TOKEN_FUNCTION);
+			setState(328);
+			match(IDENT);
+			setState(329);
+			match(TOKEN_PARENTESIS_IZQ);
+			setState(330);
+			nomparamlist();
+			setState(331);
+			match(TOKEN_PARENTESIS_DER);
+			setState(332);
+			tipo();
+			setState(333);
+			match(TOKEN_DOBLEPUNTO);
+			setState(334);
+			match(IDENT);
+			setState(335);
+			match(TOKEN_PUNTOCOMA);
+			setState(336);
+			dec_f_paramlist();
+			setState(337);
+			dcllist();
+			setState(338);
+			sent();
+			setState(339);
+			sentlist();
+			setState(340);
+			match(IDENT);
+			setState(341);
+			match(TOKEN_IGUAL);
+			setState(342);
+			exp(0);
+			setState(343);
+			match(TOKEN_PUNTOCOMA);
 			setState(344);
+			match(TOKEN_END);
+			setState(345);
+			match(TOKEN_FUNCTION);
+			setState(346);
 			match(IDENT);
 			}
 		}
@@ -2382,7 +2392,7 @@ public class practicaObligatoriaParser extends Parser {
 	}
 
 	public static final String _serializedATN =
-		"\3\u608b\ua72a\u8133\ub9ed\u417c\u3be7\u7786\u5964\3 \u015d\4\2\t\2\4"+
+		"\3\u608b\ua72a\u8133\ub9ed\u417c\u3be7\u7786\u5964\3 \u015f\4\2\t\2\4"+
 		"\3\t\3\4\4\t\4\4\5\t\5\4\6\t\6\4\7\t\7\4\b\t\b\4\t\t\t\4\n\t\n\4\13\t"+
 		"\13\4\f\t\f\4\r\t\r\4\16\t\16\4\17\t\17\4\20\t\20\4\21\t\21\4\22\t\22"+
 		"\4\23\t\23\4\24\t\24\4\25\t\25\4\26\t\26\4\27\t\27\4\30\t\30\4\31\t\31"+
@@ -2391,110 +2401,110 @@ public class practicaObligatoriaParser extends Parser {
 		"\2\3\3\3\3\3\3\3\3\5\3Y\n\3\3\4\3\4\3\4\3\4\3\4\3\4\5\4a\n\4\3\5\3\5\3"+
 		"\5\3\5\3\5\3\5\5\5i\n\5\3\6\3\6\3\6\3\6\3\6\3\6\3\6\5\6r\n\6\3\7\3\7\3"+
 		"\7\3\7\5\7x\n\7\3\b\3\b\5\b|\n\b\3\t\3\t\3\t\3\t\3\t\3\t\3\t\3\t\3\t\3"+
-		"\n\3\n\5\n\u0089\n\n\3\13\3\13\3\13\3\13\3\13\3\13\3\13\5\13\u0092\n\13"+
-		"\3\f\3\f\3\r\3\r\3\r\3\r\3\r\3\r\3\16\3\16\5\16\u009e\n\16\3\17\3\17\3"+
-		"\17\3\17\5\17\u00a4\n\17\3\20\3\20\3\20\3\20\5\20\u00aa\n\20\3\21\3\21"+
-		"\3\21\3\21\3\21\3\21\3\21\5\21\u00b3\n\21\3\22\3\22\3\22\5\22\u00b8\n"+
-		"\22\3\23\3\23\3\23\3\23\3\23\3\23\3\23\3\23\3\24\3\24\3\24\3\24\3\24\5"+
-		"\24\u00c7\n\24\3\25\3\25\3\25\3\25\5\25\u00cd\n\25\3\26\3\26\3\26\3\26"+
-		"\3\26\3\26\3\26\3\26\3\26\3\26\3\26\5\26\u00da\n\26\3\27\3\27\3\30\3\30"+
-		"\3\30\3\30\3\30\3\30\3\30\3\30\3\30\3\30\3\30\3\30\3\30\3\30\3\31\3\31"+
-		"\3\31\3\31\3\31\3\31\3\31\3\31\3\31\3\31\3\31\5\31\u00f7\n\31\3\32\3\32"+
-		"\3\32\3\32\3\32\3\32\3\32\3\32\5\32\u0101\n\32\3\33\3\33\3\33\3\33\3\33"+
-		"\3\33\3\33\7\33\u010a\n\33\f\33\16\33\u010d\13\33\3\34\3\34\3\35\3\35"+
-		"\3\36\3\36\3\36\3\36\3\36\3\36\3\36\3\36\3\36\3\36\3\36\3\36\5\36\u011f"+
-		"\n\36\3\37\3\37\3\37\3\37\3\37\5\37\u0126\n\37\3 \3 \3 \3 \3!\3!\3!\3"+
-		"!\3!\3!\5!\u0132\n!\3\"\3\"\3\"\3\"\3\"\3\"\3\"\5\"\u013b\n\"\3#\3#\3"+
-		"#\3#\3#\3#\3#\3#\3#\3#\3#\3$\3$\3$\3$\3$\3$\3$\3$\3$\3$\3$\3$\3$\3$\3"+
-		"$\3$\3$\3$\3$\3$\3$\3$\2\3\64%\2\4\6\b\n\f\16\20\22\24\26\30\32\34\36"+
-		" \"$&(*,.\60\62\64\668:<>@BDF\2\5\3\2\4\6\3\2\25\27\3\2\32\35\2\u0155"+
-		"\2H\3\2\2\2\4X\3\2\2\2\6`\3\2\2\2\bh\3\2\2\2\nq\3\2\2\2\fw\3\2\2\2\16"+
-		"{\3\2\2\2\20}\3\2\2\2\22\u0088\3\2\2\2\24\u0091\3\2\2\2\26\u0093\3\2\2"+
-		"\2\30\u0095\3\2\2\2\32\u009d\3\2\2\2\34\u00a3\3\2\2\2\36\u00a9\3\2\2\2"+
-		" \u00b2\3\2\2\2\"\u00b7\3\2\2\2$\u00b9\3\2\2\2&\u00c6\3\2\2\2(\u00cc\3"+
-		"\2\2\2*\u00d9\3\2\2\2,\u00db\3\2\2\2.\u00dd\3\2\2\2\60\u00f6\3\2\2\2\62"+
-		"\u0100\3\2\2\2\64\u0102\3\2\2\2\66\u010e\3\2\2\28\u0110\3\2\2\2:\u011e"+
-		"\3\2\2\2<\u0125\3\2\2\2>\u0127\3\2\2\2@\u0131\3\2\2\2B\u013a\3\2\2\2D"+
-		"\u013c\3\2\2\2F\u0147\3\2\2\2HI\7\7\2\2IJ\7\3\2\2JK\7\t\2\2KL\5\4\3\2"+
-		"LM\5\6\4\2MN\5\62\32\2NO\5\f\7\2OP\7\n\2\2PQ\7\7\2\2QR\7\3\2\2RS\5B\""+
+		"\t\3\t\3\n\3\n\5\n\u008b\n\n\3\13\3\13\3\13\3\13\3\13\3\13\3\13\5\13\u0094"+
+		"\n\13\3\f\3\f\3\r\3\r\3\r\3\r\3\r\3\r\3\16\3\16\5\16\u00a0\n\16\3\17\3"+
+		"\17\3\17\3\17\5\17\u00a6\n\17\3\20\3\20\3\20\3\20\5\20\u00ac\n\20\3\21"+
+		"\3\21\3\21\3\21\3\21\3\21\3\21\5\21\u00b5\n\21\3\22\3\22\3\22\5\22\u00ba"+
+		"\n\22\3\23\3\23\3\23\3\23\3\23\3\23\3\23\3\23\3\24\3\24\3\24\3\24\3\24"+
+		"\5\24\u00c9\n\24\3\25\3\25\3\25\3\25\5\25\u00cf\n\25\3\26\3\26\3\26\3"+
+		"\26\3\26\3\26\3\26\3\26\3\26\3\26\3\26\5\26\u00dc\n\26\3\27\3\27\3\30"+
+		"\3\30\3\30\3\30\3\30\3\30\3\30\3\30\3\30\3\30\3\30\3\30\3\30\3\30\3\31"+
+		"\3\31\3\31\3\31\3\31\3\31\3\31\3\31\3\31\3\31\3\31\5\31\u00f9\n\31\3\32"+
+		"\3\32\3\32\3\32\3\32\3\32\3\32\3\32\5\32\u0103\n\32\3\33\3\33\3\33\3\33"+
+		"\3\33\3\33\3\33\7\33\u010c\n\33\f\33\16\33\u010f\13\33\3\34\3\34\3\35"+
+		"\3\35\3\36\3\36\3\36\3\36\3\36\3\36\3\36\3\36\3\36\3\36\3\36\3\36\5\36"+
+		"\u0121\n\36\3\37\3\37\3\37\3\37\3\37\5\37\u0128\n\37\3 \3 \3 \3 \3!\3"+
+		"!\3!\3!\3!\3!\5!\u0134\n!\3\"\3\"\3\"\3\"\3\"\3\"\3\"\5\"\u013d\n\"\3"+
+		"#\3#\3#\3#\3#\3#\3#\3#\3#\3#\3#\3$\3$\3$\3$\3$\3$\3$\3$\3$\3$\3$\3$\3"+
+		"$\3$\3$\3$\3$\3$\3$\3$\3$\3$\2\3\64%\2\4\6\b\n\f\16\20\22\24\26\30\32"+
+		"\34\36 \"$&(*,.\60\62\64\668:<>@BDF\2\5\3\2\34\36\3\2\21\23\3\2\26\31"+
+		"\2\u0157\2H\3\2\2\2\4X\3\2\2\2\6`\3\2\2\2\bh\3\2\2\2\nq\3\2\2\2\fw\3\2"+
+		"\2\2\16{\3\2\2\2\20}\3\2\2\2\22\u008a\3\2\2\2\24\u0093\3\2\2\2\26\u0095"+
+		"\3\2\2\2\30\u0097\3\2\2\2\32\u009f\3\2\2\2\34\u00a5\3\2\2\2\36\u00ab\3"+
+		"\2\2\2 \u00b4\3\2\2\2\"\u00b9\3\2\2\2$\u00bb\3\2\2\2&\u00c8\3\2\2\2(\u00ce"+
+		"\3\2\2\2*\u00db\3\2\2\2,\u00dd\3\2\2\2.\u00df\3\2\2\2\60\u00f8\3\2\2\2"+
+		"\62\u0102\3\2\2\2\64\u0104\3\2\2\2\66\u0110\3\2\2\28\u0112\3\2\2\2:\u0120"+
+		"\3\2\2\2<\u0127\3\2\2\2>\u0129\3\2\2\2@\u0133\3\2\2\2B\u013c\3\2\2\2D"+
+		"\u013e\3\2\2\2F\u0149\3\2\2\2HI\7\3\2\2IJ\7\33\2\2JK\7\5\2\2KL\5\4\3\2"+
+		"LM\5\6\4\2MN\5\62\32\2NO\5\f\7\2OP\7\6\2\2PQ\7\3\2\2QR\7\33\2\2RS\5B\""+
 		"\2S\3\3\2\2\2TU\5\16\b\2UV\5\4\3\2VY\3\2\2\2WY\3\2\2\2XT\3\2\2\2XW\3\2"+
-		"\2\2Y\5\3\2\2\2Z[\7\b\2\2[\\\5\b\5\2\\]\7\n\2\2]^\7\b\2\2^a\3\2\2\2_a"+
+		"\2\2Y\5\3\2\2\2Z[\7\4\2\2[\\\5\b\5\2\\]\7\6\2\2]^\7\4\2\2^a\3\2\2\2_a"+
 		"\3\2\2\2`Z\3\2\2\2`_\3\2\2\2a\7\3\2\2\2bc\5$\23\2cd\5\n\6\2di\3\2\2\2"+
 		"ef\5.\30\2fg\5\n\6\2gi\3\2\2\2hb\3\2\2\2he\3\2\2\2i\t\3\2\2\2jk\5$\23"+
 		"\2kl\5\n\6\2lr\3\2\2\2mn\5.\30\2no\5\n\6\2or\3\2\2\2pr\3\2\2\2qj\3\2\2"+
 		"\2qm\3\2\2\2qp\3\2\2\2r\13\3\2\2\2st\5\62\32\2tu\5\f\7\2ux\3\2\2\2vx\3"+
 		"\2\2\2ws\3\2\2\2wv\3\2\2\2x\r\3\2\2\2y|\5\20\t\2z|\5\30\r\2{y\3\2\2\2"+
-		"{z\3\2\2\2|\17\3\2\2\2}~\5\34\17\2~\177\7\16\2\2\177\u0080\7\f\2\2\u0080"+
-		"\u0081\7\13\2\2\u0081\u0082\7\3\2\2\u0082\u0083\7\r\2\2\u0083\u0084\5"+
-		"\26\f\2\u0084\u0085\5\22\n\2\u0085\21\3\2\2\2\u0086\u0089\5\20\t\2\u0087"+
-		"\u0089\3\2\2\2\u0088\u0086\3\2\2\2\u0088\u0087\3\2\2\2\u0089\23\3\2\2"+
-		"\2\u008a\u008b\7\16\2\2\u008b\u008c\7\3\2\2\u008c\u008d\7\r\2\2\u008d"+
-		"\u008e\5\26\f\2\u008e\u008f\5\24\13\2\u008f\u0092\3\2\2\2\u0090\u0092"+
-		"\3\2\2\2\u0091\u008a\3\2\2\2\u0091\u0090\3\2\2\2\u0092\25\3\2\2\2\u0093"+
-		"\u0094\t\2\2\2\u0094\27\3\2\2\2\u0095\u0096\5\34\17\2\u0096\u0097\7\13"+
-		"\2\2\u0097\u0098\5 \21\2\u0098\u0099\7\t\2\2\u0099\u009a\5\32\16\2\u009a"+
-		"\31\3\2\2\2\u009b\u009e\5\30\r\2\u009c\u009e\3\2\2\2\u009d\u009b\3\2\2"+
-		"\2\u009d\u009c\3\2\2\2\u009e\33\3\2\2\2\u009f\u00a4\7\17\2\2\u00a0\u00a4"+
-		"\7\20\2\2\u00a1\u00a2\7\21\2\2\u00a2\u00a4\5\36\20\2\u00a3\u009f\3\2\2"+
-		"\2\u00a3\u00a0\3\2\2\2\u00a3\u00a1\3\2\2\2\u00a4\35\3\2\2\2\u00a5\u00a6"+
-		"\7\22\2\2\u00a6\u00a7\7\4\2\2\u00a7\u00aa\7\23\2\2\u00a8\u00aa\3\2\2\2"+
-		"\u00a9\u00a5\3\2\2\2\u00a9\u00a8\3\2\2\2\u00aa\37\3\2\2\2\u00ab\u00ac"+
-		"\7\3\2\2\u00ac\u00b3\5\"\22\2\u00ad\u00ae\7\3\2\2\u00ae\u00af\5\"\22\2"+
-		"\u00af\u00b0\7\16\2\2\u00b0\u00b1\5 \21\2\u00b1\u00b3\3\2\2\2\u00b2\u00ab"+
-		"\3\2\2\2\u00b2\u00ad\3\2\2\2\u00b3!\3\2\2\2\u00b4\u00b5\7\r\2\2\u00b5"+
-		"\u00b8\5\26\f\2\u00b6\u00b8\3\2\2\2\u00b7\u00b4\3\2\2\2\u00b7\u00b6\3"+
-		"\2\2\2\u00b8#\3\2\2\2\u00b9\u00ba\7\24\2\2\u00ba\u00bb\7\3\2\2\u00bb\u00bc"+
-		"\5&\24\2\u00bc\u00bd\5*\26\2\u00bd\u00be\7\n\2\2\u00be\u00bf\7\24\2\2"+
-		"\u00bf\u00c0\7\3\2\2\u00c0%\3\2\2\2\u00c1\u00c2\7\22\2\2\u00c2\u00c3\5"+
-		"(\25\2\u00c3\u00c4\7\23\2\2\u00c4\u00c7\3\2\2\2\u00c5\u00c7\3\2\2\2\u00c6"+
-		"\u00c1\3\2\2\2\u00c6\u00c5\3\2\2\2\u00c7\'\3\2\2\2\u00c8\u00cd\7\3\2\2"+
-		"\u00c9\u00ca\7\3\2\2\u00ca\u00cb\7\16\2\2\u00cb\u00cd\5(\25\2\u00cc\u00c8"+
-		"\3\2\2\2\u00cc\u00c9\3\2\2\2\u00cd)\3\2\2\2\u00ce\u00cf\5\34\17\2\u00cf"+
-		"\u00d0\7\16\2\2\u00d0\u00d1\7\31\2\2\u00d1\u00d2\7\22\2\2\u00d2\u00d3"+
-		"\5,\27\2\u00d3\u00d4\7\23\2\2\u00d4\u00d5\7\3\2\2\u00d5\u00d6\7\t\2\2"+
-		"\u00d6\u00d7\5*\26\2\u00d7\u00da\3\2\2\2\u00d8\u00da\3\2\2\2\u00d9\u00ce"+
-		"\3\2\2\2\u00d9\u00d8\3\2\2\2\u00da+\3\2\2\2\u00db\u00dc\t\3\2\2\u00dc"+
-		"-\3\2\2\2\u00dd\u00de\7\30\2\2\u00de\u00df\7\3\2\2\u00df\u00e0\7\22\2"+
-		"\2\u00e0\u00e1\5(\25\2\u00e1\u00e2\7\23\2\2\u00e2\u00e3\5\34\17\2\u00e3"+
-		"\u00e4\7\13\2\2\u00e4\u00e5\7\3\2\2\u00e5\u00e6\7\t\2\2\u00e6\u00e7\5"+
-		"\60\31\2\u00e7\u00e8\7\n\2\2\u00e8\u00e9\7\30\2\2\u00e9\u00ea\7\3\2\2"+
-		"\u00ea/\3\2\2\2\u00eb\u00ec\5\34\17\2\u00ec\u00ed\7\16\2\2\u00ed\u00ee"+
-		"\7\31\2\2\u00ee\u00ef\7\22\2\2\u00ef\u00f0\7\25\2\2\u00f0\u00f1\7\23\2"+
-		"\2\u00f1\u00f2\7\3\2\2\u00f2\u00f3\7\t\2\2\u00f3\u00f4\5\60\31\2\u00f4"+
-		"\u00f7\3\2\2\2\u00f5\u00f7\3\2\2\2\u00f6\u00eb\3\2\2\2\u00f6\u00f5\3\2"+
-		"\2\2\u00f7\61\3\2\2\2\u00f8\u00f9\7\3\2\2\u00f9\u00fa\7\r\2\2\u00fa\u00fb"+
-		"\5\64\33\2\u00fb\u00fc\7\t\2\2\u00fc\u0101\3\2\2\2\u00fd\u00fe\5> \2\u00fe"+
-		"\u00ff\7\t\2\2\u00ff\u0101\3\2\2\2\u0100\u00f8\3\2\2\2\u0100\u00fd\3\2"+
-		"\2\2\u0101\63\3\2\2\2\u0102\u0103\b\33\1\2\u0103\u0104\5:\36\2\u0104\u010b"+
-		"\3\2\2\2\u0105\u0106\f\4\2\2\u0106\u0107\5\66\34\2\u0107\u0108\5\64\33"+
-		"\5\u0108\u010a\3\2\2\2\u0109\u0105\3\2\2\2\u010a\u010d\3\2\2\2\u010b\u0109"+
-		"\3\2\2\2\u010b\u010c\3\2\2\2\u010c\65\3\2\2\2\u010d\u010b\3\2\2\2\u010e"+
-		"\u010f\58\35\2\u010f\67\3\2\2\2\u0110\u0111\t\4\2\2\u01119\3\2\2\2\u0112"+
-		"\u011f\5\26\f\2\u0113\u0114\7\22\2\2\u0114\u0115\5\64\33\2\u0115\u0116"+
-		"\7\23\2\2\u0116\u011f\3\2\2\2\u0117\u0118\7\3\2\2\u0118\u0119\7\22\2\2"+
-		"\u0119\u011a\5\64\33\2\u011a\u011b\5<\37\2\u011b\u011c\7\23\2\2\u011c"+
-		"\u011f\3\2\2\2\u011d\u011f\7\3\2\2\u011e\u0112\3\2\2\2\u011e\u0113\3\2"+
-		"\2\2\u011e\u0117\3\2\2\2\u011e\u011d\3\2\2\2\u011f;\3\2\2\2\u0120\u0121"+
-		"\7\16\2\2\u0121\u0122\5\64\33\2\u0122\u0123\5<\37\2\u0123\u0126\3\2\2"+
-		"\2\u0124\u0126\3\2\2\2\u0125\u0120\3\2\2\2\u0125\u0124\3\2\2\2\u0126="+
-		"\3\2\2\2\u0127\u0128\7\36\2\2\u0128\u0129\7\3\2\2\u0129\u012a\5@!\2\u012a"+
-		"?\3\2\2\2\u012b\u012c\7\22\2\2\u012c\u012d\5\64\33\2\u012d\u012e\5<\37"+
-		"\2\u012e\u012f\7\23\2\2\u012f\u0132\3\2\2\2\u0130\u0132\3\2\2\2\u0131"+
-		"\u012b\3\2\2\2\u0131\u0130\3\2\2\2\u0132A\3\2\2\2\u0133\u0134\5D#\2\u0134"+
-		"\u0135\5B\"\2\u0135\u013b\3\2\2\2\u0136\u0137\5F$\2\u0137\u0138\5B\"\2"+
-		"\u0138\u013b\3\2\2\2\u0139\u013b\3\2\2\2\u013a\u0133\3\2\2\2\u013a\u0136"+
-		"\3\2\2\2\u013a\u0139\3\2\2\2\u013bC\3\2\2\2\u013c\u013d\7\24\2\2\u013d"+
-		"\u013e\7\3\2\2\u013e\u013f\5&\24\2\u013f\u0140\5*\26\2\u0140\u0141\5\4"+
-		"\3\2\u0141\u0142\5\62\32\2\u0142\u0143\5\f\7\2\u0143\u0144\7\n\2\2\u0144"+
-		"\u0145\7\24\2\2\u0145\u0146\7\3\2\2\u0146E\3\2\2\2\u0147\u0148\7\30\2"+
-		"\2\u0148\u0149\7\3\2\2\u0149\u014a\7\22\2\2\u014a\u014b\5(\25\2\u014b"+
-		"\u014c\7\23\2\2\u014c\u014d\5\34\17\2\u014d\u014e\7\13\2\2\u014e\u014f"+
-		"\7\3\2\2\u014f\u0150\7\t\2\2\u0150\u0151\5\60\31\2\u0151\u0152\5\4\3\2"+
-		"\u0152\u0153\5\62\32\2\u0153\u0154\5\f\7\2\u0154\u0155\7\3\2\2\u0155\u0156"+
-		"\7\r\2\2\u0156\u0157\5\64\33\2\u0157\u0158\7\t\2\2\u0158\u0159\7\n\2\2"+
-		"\u0159\u015a\7\30\2\2\u015a\u015b\7\3\2\2\u015bG\3\2\2\2\31X`hqw{\u0088"+
-		"\u0091\u009d\u00a3\u00a9\u00b2\u00b7\u00c6\u00cc\u00d9\u00f6\u0100\u010b"+
-		"\u011e\u0125\u0131\u013a";
+		"{z\3\2\2\2|\17\3\2\2\2}~\5\34\17\2~\177\7\n\2\2\177\u0080\7\b\2\2\u0080"+
+		"\u0081\7\7\2\2\u0081\u0082\7\33\2\2\u0082\u0083\7\t\2\2\u0083\u0084\5"+
+		"\26\f\2\u0084\u0085\5\24\13\2\u0085\u0086\7\5\2\2\u0086\u0087\5\22\n\2"+
+		"\u0087\21\3\2\2\2\u0088\u008b\5\20\t\2\u0089\u008b\3\2\2\2\u008a\u0088"+
+		"\3\2\2\2\u008a\u0089\3\2\2\2\u008b\23\3\2\2\2\u008c\u008d\7\n\2\2\u008d"+
+		"\u008e\7\33\2\2\u008e\u008f\7\t\2\2\u008f\u0090\5\26\f\2\u0090\u0091\5"+
+		"\24\13\2\u0091\u0094\3\2\2\2\u0092\u0094\3\2\2\2\u0093\u008c\3\2\2\2\u0093"+
+		"\u0092\3\2\2\2\u0094\25\3\2\2\2\u0095\u0096\t\2\2\2\u0096\27\3\2\2\2\u0097"+
+		"\u0098\5\34\17\2\u0098\u0099\7\7\2\2\u0099\u009a\5 \21\2\u009a\u009b\7"+
+		"\5\2\2\u009b\u009c\5\32\16\2\u009c\31\3\2\2\2\u009d\u00a0\5\30\r\2\u009e"+
+		"\u00a0\3\2\2\2\u009f\u009d\3\2\2\2\u009f\u009e\3\2\2\2\u00a0\33\3\2\2"+
+		"\2\u00a1\u00a6\7\13\2\2\u00a2\u00a6\7\f\2\2\u00a3\u00a4\7\r\2\2\u00a4"+
+		"\u00a6\5\36\20\2\u00a5\u00a1\3\2\2\2\u00a5\u00a2\3\2\2\2\u00a5\u00a3\3"+
+		"\2\2\2\u00a6\35\3\2\2\2\u00a7\u00a8\7\16\2\2\u00a8\u00a9\7\34\2\2\u00a9"+
+		"\u00ac\7\17\2\2\u00aa\u00ac\3\2\2\2\u00ab\u00a7\3\2\2\2\u00ab\u00aa\3"+
+		"\2\2\2\u00ac\37\3\2\2\2\u00ad\u00ae\7\33\2\2\u00ae\u00b5\5\"\22\2\u00af"+
+		"\u00b0\7\33\2\2\u00b0\u00b1\5\"\22\2\u00b1\u00b2\7\n\2\2\u00b2\u00b3\5"+
+		" \21\2\u00b3\u00b5\3\2\2\2\u00b4\u00ad\3\2\2\2\u00b4\u00af\3\2\2\2\u00b5"+
+		"!\3\2\2\2\u00b6\u00b7\7\t\2\2\u00b7\u00ba\5\26\f\2\u00b8\u00ba\3\2\2\2"+
+		"\u00b9\u00b6\3\2\2\2\u00b9\u00b8\3\2\2\2\u00ba#\3\2\2\2\u00bb\u00bc\7"+
+		"\20\2\2\u00bc\u00bd\7\33\2\2\u00bd\u00be\5&\24\2\u00be\u00bf\5*\26\2\u00bf"+
+		"\u00c0\7\6\2\2\u00c0\u00c1\7\20\2\2\u00c1\u00c2\7\33\2\2\u00c2%\3\2\2"+
+		"\2\u00c3\u00c4\7\16\2\2\u00c4\u00c5\5(\25\2\u00c5\u00c6\7\17\2\2\u00c6"+
+		"\u00c9\3\2\2\2\u00c7\u00c9\3\2\2\2\u00c8\u00c3\3\2\2\2\u00c8\u00c7\3\2"+
+		"\2\2\u00c9\'\3\2\2\2\u00ca\u00cf\7\33\2\2\u00cb\u00cc\7\33\2\2\u00cc\u00cd"+
+		"\7\n\2\2\u00cd\u00cf\5(\25\2\u00ce\u00ca\3\2\2\2\u00ce\u00cb\3\2\2\2\u00cf"+
+		")\3\2\2\2\u00d0\u00d1\5\34\17\2\u00d1\u00d2\7\n\2\2\u00d2\u00d3\7\25\2"+
+		"\2\u00d3\u00d4\7\16\2\2\u00d4\u00d5\5,\27\2\u00d5\u00d6\7\17\2\2\u00d6"+
+		"\u00d7\7\33\2\2\u00d7\u00d8\7\5\2\2\u00d8\u00d9\5*\26\2\u00d9\u00dc\3"+
+		"\2\2\2\u00da\u00dc\3\2\2\2\u00db\u00d0\3\2\2\2\u00db\u00da\3\2\2\2\u00dc"+
+		"+\3\2\2\2\u00dd\u00de\t\3\2\2\u00de-\3\2\2\2\u00df\u00e0\7\24\2\2\u00e0"+
+		"\u00e1\7\33\2\2\u00e1\u00e2\7\16\2\2\u00e2\u00e3\5(\25\2\u00e3\u00e4\7"+
+		"\17\2\2\u00e4\u00e5\5\34\17\2\u00e5\u00e6\7\7\2\2\u00e6\u00e7\7\33\2\2"+
+		"\u00e7\u00e8\7\5\2\2\u00e8\u00e9\5\60\31\2\u00e9\u00ea\7\6\2\2\u00ea\u00eb"+
+		"\7\24\2\2\u00eb\u00ec\7\33\2\2\u00ec/\3\2\2\2\u00ed\u00ee\5\34\17\2\u00ee"+
+		"\u00ef\7\n\2\2\u00ef\u00f0\7\25\2\2\u00f0\u00f1\7\16\2\2\u00f1\u00f2\7"+
+		"\21\2\2\u00f2\u00f3\7\17\2\2\u00f3\u00f4\7\33\2\2\u00f4\u00f5\7\5\2\2"+
+		"\u00f5\u00f6\5\60\31\2\u00f6\u00f9\3\2\2\2\u00f7\u00f9\3\2\2\2\u00f8\u00ed"+
+		"\3\2\2\2\u00f8\u00f7\3\2\2\2\u00f9\61\3\2\2\2\u00fa\u00fb\7\33\2\2\u00fb"+
+		"\u00fc\7\t\2\2\u00fc\u00fd\5\64\33\2\u00fd\u00fe\7\5\2\2\u00fe\u0103\3"+
+		"\2\2\2\u00ff\u0100\5> \2\u0100\u0101\7\5\2\2\u0101\u0103\3\2\2\2\u0102"+
+		"\u00fa\3\2\2\2\u0102\u00ff\3\2\2\2\u0103\63\3\2\2\2\u0104\u0105\b\33\1"+
+		"\2\u0105\u0106\5:\36\2\u0106\u010d\3\2\2\2\u0107\u0108\f\4\2\2\u0108\u0109"+
+		"\5\66\34\2\u0109\u010a\5\64\33\5\u010a\u010c\3\2\2\2\u010b\u0107\3\2\2"+
+		"\2\u010c\u010f\3\2\2\2\u010d\u010b\3\2\2\2\u010d\u010e\3\2\2\2\u010e\65"+
+		"\3\2\2\2\u010f\u010d\3\2\2\2\u0110\u0111\58\35\2\u0111\67\3\2\2\2\u0112"+
+		"\u0113\t\4\2\2\u01139\3\2\2\2\u0114\u0121\5\26\f\2\u0115\u0116\7\16\2"+
+		"\2\u0116\u0117\5\64\33\2\u0117\u0118\7\17\2\2\u0118\u0121\3\2\2\2\u0119"+
+		"\u011a\7\33\2\2\u011a\u011b\7\16\2\2\u011b\u011c\5\64\33\2\u011c\u011d"+
+		"\5<\37\2\u011d\u011e\7\17\2\2\u011e\u0121\3\2\2\2\u011f\u0121\7\33\2\2"+
+		"\u0120\u0114\3\2\2\2\u0120\u0115\3\2\2\2\u0120\u0119\3\2\2\2\u0120\u011f"+
+		"\3\2\2\2\u0121;\3\2\2\2\u0122\u0123\7\n\2\2\u0123\u0124\5\64\33\2\u0124"+
+		"\u0125\5<\37\2\u0125\u0128\3\2\2\2\u0126\u0128\3\2\2\2\u0127\u0122\3\2"+
+		"\2\2\u0127\u0126\3\2\2\2\u0128=\3\2\2\2\u0129\u012a\7\32\2\2\u012a\u012b"+
+		"\7\33\2\2\u012b\u012c\5@!\2\u012c?\3\2\2\2\u012d\u012e\7\16\2\2\u012e"+
+		"\u012f\5\64\33\2\u012f\u0130\5<\37\2\u0130\u0131\7\17\2\2\u0131\u0134"+
+		"\3\2\2\2\u0132\u0134\3\2\2\2\u0133\u012d\3\2\2\2\u0133\u0132\3\2\2\2\u0134"+
+		"A\3\2\2\2\u0135\u0136\5D#\2\u0136\u0137\5B\"\2\u0137\u013d\3\2\2\2\u0138"+
+		"\u0139\5F$\2\u0139\u013a\5B\"\2\u013a\u013d\3\2\2\2\u013b\u013d\3\2\2"+
+		"\2\u013c\u0135\3\2\2\2\u013c\u0138\3\2\2\2\u013c\u013b\3\2\2\2\u013dC"+
+		"\3\2\2\2\u013e\u013f\7\20\2\2\u013f\u0140\7\33\2\2\u0140\u0141\5&\24\2"+
+		"\u0141\u0142\5*\26\2\u0142\u0143\5\4\3\2\u0143\u0144\5\62\32\2\u0144\u0145"+
+		"\5\f\7\2\u0145\u0146\7\6\2\2\u0146\u0147\7\20\2\2\u0147\u0148\7\33\2\2"+
+		"\u0148E\3\2\2\2\u0149\u014a\7\24\2\2\u014a\u014b\7\33\2\2\u014b\u014c"+
+		"\7\16\2\2\u014c\u014d\5(\25\2\u014d\u014e\7\17\2\2\u014e\u014f\5\34\17"+
+		"\2\u014f\u0150\7\7\2\2\u0150\u0151\7\33\2\2\u0151\u0152\7\5\2\2\u0152"+
+		"\u0153\5\60\31\2\u0153\u0154\5\4\3\2\u0154\u0155\5\62\32\2\u0155\u0156"+
+		"\5\f\7\2\u0156\u0157\7\33\2\2\u0157\u0158\7\t\2\2\u0158\u0159\5\64\33"+
+		"\2\u0159\u015a\7\5\2\2\u015a\u015b\7\6\2\2\u015b\u015c\7\24\2\2\u015c"+
+		"\u015d\7\33\2\2\u015dG\3\2\2\2\31X`hqw{\u008a\u0093\u009f\u00a5\u00ab"+
+		"\u00b4\u00b9\u00c8\u00ce\u00db\u00f8\u0102\u010d\u0120\u0127\u0133\u013c";
 	public static final ATN _ATN =
 		new ATNDeserializer().deserialize(_serializedATN.toCharArray());
 	static {

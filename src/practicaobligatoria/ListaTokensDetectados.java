@@ -33,7 +33,8 @@ public class ListaTokensDetectados {
          System.out.println("Los tokens detectados son:");
          for (TokenDetectado t: getLista()){
             if (t.getDetectado()==true)
-                System.out.println(t.getInfoToken());
+                System.out.println("Tipo: " + t.getTipoToken()+ " " 
+                        + "Contenido: " + t.getInfoToken());
         }
     }
     
