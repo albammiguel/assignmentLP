@@ -43,6 +43,18 @@ public class practicaObligatoriaBaseListener implements practicaObligatoriaListe
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
+	@Override public void enterAux3(practicaObligatoriaParser.Aux3Context ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitAux3(practicaObligatoriaParser.Aux3Context ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
 	@Override public void enterCabecera(practicaObligatoriaParser.CabeceraContext ctx) { }
 	/**
 	 * {@inheritDoc}
@@ -211,6 +223,18 @@ public class practicaObligatoriaBaseListener implements practicaObligatoriaListe
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
+	@Override public void enterAux6(practicaObligatoriaParser.Aux6Context ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitAux6(practicaObligatoriaParser.Aux6Context ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
 	@Override public void enterInit(practicaObligatoriaParser.InitContext ctx) { }
 	/**
 	 * {@inheritDoc}
@@ -307,6 +331,18 @@ public class practicaObligatoriaBaseListener implements practicaObligatoriaListe
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
+	@Override public void enterAux4(practicaObligatoriaParser.Aux4Context ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitAux4(practicaObligatoriaParser.Aux4Context ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
 	@Override public void enterSent(practicaObligatoriaParser.SentContext ctx) { }
 	/**
 	 * {@inheritDoc}
@@ -314,6 +350,30 @@ public class practicaObligatoriaBaseListener implements practicaObligatoriaListe
 	 * <p>The default implementation does nothing.</p>
 	 */
 	@Override public void exitSent(practicaObligatoriaParser.SentContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterAux7(practicaObligatoriaParser.Aux7Context ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitAux7(practicaObligatoriaParser.Aux7Context ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterAux8(practicaObligatoriaParser.Aux8Context ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitAux8(practicaObligatoriaParser.Aux8Context ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
@@ -362,6 +422,18 @@ public class practicaObligatoriaBaseListener implements practicaObligatoriaListe
 	 * <p>The default implementation does nothing.</p>
 	 */
 	@Override public void exitFactor(practicaObligatoriaParser.FactorContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterAux5(practicaObligatoriaParser.Aux5Context ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitAux5(practicaObligatoriaParser.Aux5Context ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
@@ -511,6 +583,18 @@ public class practicaObligatoriaBaseListener implements practicaObligatoriaListe
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
+	@Override public void enterAux9(practicaObligatoriaParser.Aux9Context ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitAux9(practicaObligatoriaParser.Aux9Context ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
 	@Override public void enterEtiquetas(practicaObligatoriaParser.EtiquetasContext ctx) { }
 	/**
 	 * {@inheritDoc}
@@ -518,6 +602,18 @@ public class practicaObligatoriaBaseListener implements practicaObligatoriaListe
 	 * <p>The default implementation does nothing.</p>
 	 */
 	@Override public void exitEtiquetas(practicaObligatoriaParser.EtiquetasContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterAux10(practicaObligatoriaParser.Aux10Context ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitAux10(practicaObligatoriaParser.Aux10Context ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *

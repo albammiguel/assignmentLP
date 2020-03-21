@@ -31,6 +31,16 @@ public interface practicaObligatoriaListener extends ParseTreeListener {
 	 */
 	void exitDcllist(practicaObligatoriaParser.DcllistContext ctx);
 	/**
+	 * Enter a parse tree produced by {@link practicaObligatoriaParser#aux3}.
+	 * @param ctx the parse tree
+	 */
+	void enterAux3(practicaObligatoriaParser.Aux3Context ctx);
+	/**
+	 * Exit a parse tree produced by {@link practicaObligatoriaParser#aux3}.
+	 * @param ctx the parse tree
+	 */
+	void exitAux3(practicaObligatoriaParser.Aux3Context ctx);
+	/**
 	 * Enter a parse tree produced by {@link practicaObligatoriaParser#cabecera}.
 	 * @param ctx the parse tree
 	 */
@@ -171,6 +181,16 @@ public interface practicaObligatoriaListener extends ParseTreeListener {
 	 */
 	void exitVarlist(practicaObligatoriaParser.VarlistContext ctx);
 	/**
+	 * Enter a parse tree produced by {@link practicaObligatoriaParser#aux6}.
+	 * @param ctx the parse tree
+	 */
+	void enterAux6(practicaObligatoriaParser.Aux6Context ctx);
+	/**
+	 * Exit a parse tree produced by {@link practicaObligatoriaParser#aux6}.
+	 * @param ctx the parse tree
+	 */
+	void exitAux6(practicaObligatoriaParser.Aux6Context ctx);
+	/**
 	 * Enter a parse tree produced by {@link practicaObligatoriaParser#init}.
 	 * @param ctx the parse tree
 	 */
@@ -251,6 +271,16 @@ public interface practicaObligatoriaListener extends ParseTreeListener {
 	 */
 	void exitDec_f_paramlist(practicaObligatoriaParser.Dec_f_paramlistContext ctx);
 	/**
+	 * Enter a parse tree produced by {@link practicaObligatoriaParser#aux4}.
+	 * @param ctx the parse tree
+	 */
+	void enterAux4(practicaObligatoriaParser.Aux4Context ctx);
+	/**
+	 * Exit a parse tree produced by {@link practicaObligatoriaParser#aux4}.
+	 * @param ctx the parse tree
+	 */
+	void exitAux4(practicaObligatoriaParser.Aux4Context ctx);
+	/**
 	 * Enter a parse tree produced by {@link practicaObligatoriaParser#sent}.
 	 * @param ctx the parse tree
 	 */
@@ -260,6 +290,26 @@ public interface practicaObligatoriaListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitSent(practicaObligatoriaParser.SentContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link practicaObligatoriaParser#aux7}.
+	 * @param ctx the parse tree
+	 */
+	void enterAux7(practicaObligatoriaParser.Aux7Context ctx);
+	/**
+	 * Exit a parse tree produced by {@link practicaObligatoriaParser#aux7}.
+	 * @param ctx the parse tree
+	 */
+	void exitAux7(practicaObligatoriaParser.Aux7Context ctx);
+	/**
+	 * Enter a parse tree produced by {@link practicaObligatoriaParser#aux8}.
+	 * @param ctx the parse tree
+	 */
+	void enterAux8(practicaObligatoriaParser.Aux8Context ctx);
+	/**
+	 * Exit a parse tree produced by {@link practicaObligatoriaParser#aux8}.
+	 * @param ctx the parse tree
+	 */
+	void exitAux8(practicaObligatoriaParser.Aux8Context ctx);
 	/**
 	 * Enter a parse tree produced by {@link practicaObligatoriaParser#exp}.
 	 * @param ctx the parse tree
@@ -300,6 +350,16 @@ public interface practicaObligatoriaListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitFactor(practicaObligatoriaParser.FactorContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link practicaObligatoriaParser#aux5}.
+	 * @param ctx the parse tree
+	 */
+	void enterAux5(practicaObligatoriaParser.Aux5Context ctx);
+	/**
+	 * Exit a parse tree produced by {@link practicaObligatoriaParser#aux5}.
+	 * @param ctx the parse tree
+	 */
+	void exitAux5(practicaObligatoriaParser.Aux5Context ctx);
 	/**
 	 * Enter a parse tree produced by {@link practicaObligatoriaParser#explist}.
 	 * @param ctx the parse tree
@@ -421,6 +481,16 @@ public interface practicaObligatoriaListener extends ParseTreeListener {
 	 */
 	void exitCasos(practicaObligatoriaParser.CasosContext ctx);
 	/**
+	 * Enter a parse tree produced by {@link practicaObligatoriaParser#aux9}.
+	 * @param ctx the parse tree
+	 */
+	void enterAux9(practicaObligatoriaParser.Aux9Context ctx);
+	/**
+	 * Exit a parse tree produced by {@link practicaObligatoriaParser#aux9}.
+	 * @param ctx the parse tree
+	 */
+	void exitAux9(practicaObligatoriaParser.Aux9Context ctx);
+	/**
 	 * Enter a parse tree produced by {@link practicaObligatoriaParser#etiquetas}.
 	 * @param ctx the parse tree
 	 */
@@ -430,6 +500,16 @@ public interface practicaObligatoriaListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitEtiquetas(practicaObligatoriaParser.EtiquetasContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link practicaObligatoriaParser#aux10}.
+	 * @param ctx the parse tree
+	 */
+	void enterAux10(practicaObligatoriaParser.Aux10Context ctx);
+	/**
+	 * Exit a parse tree produced by {@link practicaObligatoriaParser#aux10}.
+	 * @param ctx the parse tree
+	 */
+	void exitAux10(practicaObligatoriaParser.Aux10Context ctx);
 	/**
 	 * Enter a parse tree produced by {@link practicaObligatoriaParser#listaetiqetas}.
 	 * @param ctx the parse tree
