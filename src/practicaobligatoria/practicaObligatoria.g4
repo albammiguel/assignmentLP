@@ -238,6 +238,18 @@ TOKEN_DIVISION:'/'{
 TOKEN_CALL: 'CALL'{
     token_actual = new TokenDetectado(true, getText(), "CALL");
     listaTokens.añadirToken(token_actual);};
+/* NUM_INT_CONST_B: 'b' ''' [0-1]+ '''{
+    token_actual = new TokenDetectado(true, getText(), "NUM_INT_CONST_B");
+    listaTokens.añadirToken(token_actual);};
+NUM_INT_CONST_O: 'o' ''' [0-7]+ '''{
+    token_actual = new TokenDetectado(true, getText(), "NUM_INT_CONST_O");
+    listaTokens.añadirToken(token_actual);};
+NUM_INT_CONST_H: 'h' ''' [0-9A-F]+ '''{
+    token_actual = new TokenDetectado(true, getText(), "NUM_INT_CONST_H");
+    listaTokens.añadirToken(token_actual);};
+LOGIC_CONST: ('.TRUE.' | '.FALSE.'){
+    token_actual = new TokenDetectado(true, getText(), "LOGIC_CONST");
+    listaTokens.añadirToken(token_actual);};*/ 
 IDENT:[a-zA-Z][a-zA-Z0-9_]*{ 
     token_actual = new TokenDetectado(true, getText(), "IDENT");
     listaTokens.añadirToken(token_actual);}; 
