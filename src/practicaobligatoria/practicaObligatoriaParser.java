@@ -31,8 +31,7 @@ public class practicaObligatoriaParser extends Parser {
 		TOKEN_ENDIF=36, TOKEN_DO=37, TOKEN_WHILE=38, TOKEN_ENDDO=39, TOKEN_SELECT=40, 
 		TOKEN_CASE=41, TOKEN_DEFAULT=42, NUM_INT_CONST_B=43, NUM_INT_CONST_O=44, 
 		NUM_INT_CONST_H=45, LOGIC_CONST=46, TOKEN_NOT=47, IDENT=48, NUM_INT_CONST=49, 
-		NUM_REAL_CONST=50, STRING_CONST=51, COMENTARIOS=52, WS=53, TOKEN_MENORIGUAL=54, 
-		TOKEN_MAYORIGUAL=55, TOKEN_NOIGUAL=56;
+		NUM_REAL_CONST=50, STRING_CONST=51, COMENTARIOS=52, WS=53;
 	public static final int
 		RULE_prg = 0, RULE_dcllist = 1, RULE_cabecera = 2, RULE_cablist = 3, RULE_decsubprog = 4, 
 		RULE_sentlist = 5, RULE_dcl = 6, RULE_defcte = 7, RULE_aux1 = 8, RULE_ctelist = 9, 
@@ -82,8 +81,7 @@ public class practicaObligatoriaParser extends Parser {
 			"TOKEN_ENDIF", "TOKEN_DO", "TOKEN_WHILE", "TOKEN_ENDDO", "TOKEN_SELECT", 
 			"TOKEN_CASE", "TOKEN_DEFAULT", "NUM_INT_CONST_B", "NUM_INT_CONST_O", 
 			"NUM_INT_CONST_H", "LOGIC_CONST", "TOKEN_NOT", "IDENT", "NUM_INT_CONST", 
-			"NUM_REAL_CONST", "STRING_CONST", "COMENTARIOS", "WS", "TOKEN_MENORIGUAL", 
-			"TOKEN_MAYORIGUAL", "TOKEN_NOIGUAL"
+			"NUM_REAL_CONST", "STRING_CONST", "COMENTARIOS", "WS"
 		};
 	}
 	private static final String[] _SYMBOLIC_NAMES = makeSymbolicNames();
@@ -2781,10 +2779,10 @@ public class practicaObligatoriaParser extends Parser {
 	public static class OpcompContext extends ParserRuleContext {
 		public TerminalNode TOKEN_MENORQUE() { return getToken(practicaObligatoriaParser.TOKEN_MENORQUE, 0); }
 		public TerminalNode TOKEN_MAYORQUE() { return getToken(practicaObligatoriaParser.TOKEN_MAYORQUE, 0); }
-		public TerminalNode TOKEN_MENORIGUAL() { return getToken(practicaObligatoriaParser.TOKEN_MENORIGUAL, 0); }
-		public TerminalNode TOKEN_MAYORIGUAL() { return getToken(practicaObligatoriaParser.TOKEN_MAYORIGUAL, 0); }
+		public TerminalNode TOKEN_MENOROIGUAL() { return getToken(practicaObligatoriaParser.TOKEN_MENOROIGUAL, 0); }
+		public TerminalNode TOKEN_MAYOROIGUAL() { return getToken(practicaObligatoriaParser.TOKEN_MAYOROIGUAL, 0); }
 		public TerminalNode TOKEN_IGUALIGUAL() { return getToken(practicaObligatoriaParser.TOKEN_IGUALIGUAL, 0); }
-		public TerminalNode TOKEN_NOIGUAL() { return getToken(practicaObligatoriaParser.TOKEN_NOIGUAL, 0); }
+		public TerminalNode TOKEN_DISTINTO() { return getToken(practicaObligatoriaParser.TOKEN_DISTINTO, 0); }
 		public OpcompContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
@@ -2808,7 +2806,7 @@ public class practicaObligatoriaParser extends Parser {
 			{
 			setState(443);
 			_la = _input.LA(1);
-			if ( !((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << TOKEN_MENORQUE) | (1L << TOKEN_MAYORQUE) | (1L << TOKEN_IGUALIGUAL) | (1L << TOKEN_MENORIGUAL) | (1L << TOKEN_MAYORIGUAL) | (1L << TOKEN_NOIGUAL))) != 0)) ) {
+			if ( !((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << TOKEN_MENORQUE) | (1L << TOKEN_MAYORQUE) | (1L << TOKEN_MENOROIGUAL) | (1L << TOKEN_MAYOROIGUAL) | (1L << TOKEN_IGUALIGUAL) | (1L << TOKEN_DISTINTO))) != 0)) ) {
 			_errHandler.recoverInline(this);
 			}
 			else {
@@ -3120,9 +3118,9 @@ public class practicaObligatoriaParser extends Parser {
 	}
 
 	public static final String _serializedATN =
-		"\3\u608b\ua72a\u8133\ub9ed\u417c\u3be7\u7786\u5964\3:\u01e2\4\2\t\2\4"+
-		"\3\t\3\4\4\t\4\4\5\t\5\4\6\t\6\4\7\t\7\4\b\t\b\4\t\t\t\4\n\t\n\4\13\t"+
-		"\13\4\f\t\f\4\r\t\r\4\16\t\16\4\17\t\17\4\20\t\20\4\21\t\21\4\22\t\22"+
+		"\3\u608b\ua72a\u8133\ub9ed\u417c\u3be7\u7786\u5964\3\67\u01e2\4\2\t\2"+
+		"\4\3\t\3\4\4\t\4\4\5\t\5\4\6\t\6\4\7\t\7\4\b\t\b\4\t\t\t\4\n\t\n\4\13"+
+		"\t\13\4\f\t\f\4\r\t\r\4\16\t\16\4\17\t\17\4\20\t\20\4\21\t\21\4\22\t\22"+
 		"\4\23\t\23\4\24\t\24\4\25\t\25\4\26\t\26\4\27\t\27\4\30\t\30\4\31\t\31"+
 		"\4\32\t\32\4\33\t\33\4\34\t\34\4\35\t\35\4\36\t\36\4\37\t\37\4 \t \4!"+
 		"\t!\4\"\t\"\4#\t#\4$\t$\4%\t%\4&\t&\4\'\t\'\4(\t(\4)\t)\4*\t*\4+\t+\4"+
@@ -3154,23 +3152,23 @@ public class practicaObligatoriaParser extends Parser {
 		"\3*\3*\3*\3*\3*\3*\3*\3*\5*\u01cd\n*\3+\3+\3+\3+\3+\3+\3+\3+\3+\3+\3+"+
 		"\3+\5+\u01db\n+\3,\3,\3,\5,\u01e0\n,\3,\2\4\64H-\2\4\6\b\n\f\16\20\22"+
 		"\24\26\30\32\34\36 \"$&(*,.\60\62\64\668:<>@BDFHJLNPRTV\2\7\4\2-/\63\65"+
-		"\3\2\30\32\3\2\35 \5\2\n\13\16\168:\3\2\62\63\2\u01e2\2X\3\2\2\2\4h\3"+
-		"\2\2\2\6p\3\2\2\2\bx\3\2\2\2\n\u0081\3\2\2\2\f\u0087\3\2\2\2\16\u008b"+
-		"\3\2\2\2\20\u008d\3\2\2\2\22\u009a\3\2\2\2\24\u00a3\3\2\2\2\26\u00a5\3"+
-		"\2\2\2\30\u00a7\3\2\2\2\32\u00af\3\2\2\2\34\u00b5\3\2\2\2\36\u00bb\3\2"+
-		"\2\2 \u00c4\3\2\2\2\"\u00c9\3\2\2\2$\u00cb\3\2\2\2&\u00d8\3\2\2\2(\u00de"+
-		"\3\2\2\2*\u00eb\3\2\2\2,\u00ed\3\2\2\2.\u00ef\3\2\2\2\60\u0108\3\2\2\2"+
-		"\62\u0146\3\2\2\2\64\u0148\3\2\2\2\66\u0154\3\2\2\28\u0156\3\2\2\2:\u0164"+
-		"\3\2\2\2<\u016b\3\2\2\2>\u016d\3\2\2\2@\u0177\3\2\2\2B\u0180\3\2\2\2D"+
-		"\u0182\3\2\2\2F\u018d\3\2\2\2H\u01a2\3\2\2\2J\u01ae\3\2\2\2L\u01bb\3\2"+
-		"\2\2N\u01bd\3\2\2\2P\u01bf\3\2\2\2R\u01cc\3\2\2\2T\u01da\3\2\2\2V\u01df"+
-		"\3\2\2\2XY\7\3\2\2YZ\7\62\2\2Z[\7\5\2\2[\\\5\4\3\2\\]\5\6\4\2]^\5\62\32"+
-		"\2^_\5\f\7\2_`\7\6\2\2`a\7\3\2\2ab\7\62\2\2bc\5B\"\2c\3\3\2\2\2de\5\16"+
-		"\b\2ef\5\4\3\2fi\3\2\2\2gi\3\2\2\2hd\3\2\2\2hg\3\2\2\2i\5\3\2\2\2jk\7"+
-		"\4\2\2kl\5\b\5\2lm\7\6\2\2mn\7\4\2\2nq\3\2\2\2oq\3\2\2\2pj\3\2\2\2po\3"+
-		"\2\2\2q\7\3\2\2\2rs\5$\23\2st\5\n\6\2ty\3\2\2\2uv\5.\30\2vw\5\n\6\2wy"+
-		"\3\2\2\2xr\3\2\2\2xu\3\2\2\2y\t\3\2\2\2z{\5$\23\2{|\5\n\6\2|\u0082\3\2"+
-		"\2\2}~\5.\30\2~\177\5\n\6\2\177\u0082\3\2\2\2\u0080\u0082\3\2\2\2\u0081"+
+		"\3\2\30\32\3\2\35 \3\2\n\17\3\2\62\63\2\u01e2\2X\3\2\2\2\4h\3\2\2\2\6"+
+		"p\3\2\2\2\bx\3\2\2\2\n\u0081\3\2\2\2\f\u0087\3\2\2\2\16\u008b\3\2\2\2"+
+		"\20\u008d\3\2\2\2\22\u009a\3\2\2\2\24\u00a3\3\2\2\2\26\u00a5\3\2\2\2\30"+
+		"\u00a7\3\2\2\2\32\u00af\3\2\2\2\34\u00b5\3\2\2\2\36\u00bb\3\2\2\2 \u00c4"+
+		"\3\2\2\2\"\u00c9\3\2\2\2$\u00cb\3\2\2\2&\u00d8\3\2\2\2(\u00de\3\2\2\2"+
+		"*\u00eb\3\2\2\2,\u00ed\3\2\2\2.\u00ef\3\2\2\2\60\u0108\3\2\2\2\62\u0146"+
+		"\3\2\2\2\64\u0148\3\2\2\2\66\u0154\3\2\2\28\u0156\3\2\2\2:\u0164\3\2\2"+
+		"\2<\u016b\3\2\2\2>\u016d\3\2\2\2@\u0177\3\2\2\2B\u0180\3\2\2\2D\u0182"+
+		"\3\2\2\2F\u018d\3\2\2\2H\u01a2\3\2\2\2J\u01ae\3\2\2\2L\u01bb\3\2\2\2N"+
+		"\u01bd\3\2\2\2P\u01bf\3\2\2\2R\u01cc\3\2\2\2T\u01da\3\2\2\2V\u01df\3\2"+
+		"\2\2XY\7\3\2\2YZ\7\62\2\2Z[\7\5\2\2[\\\5\4\3\2\\]\5\6\4\2]^\5\62\32\2"+
+		"^_\5\f\7\2_`\7\6\2\2`a\7\3\2\2ab\7\62\2\2bc\5B\"\2c\3\3\2\2\2de\5\16\b"+
+		"\2ef\5\4\3\2fi\3\2\2\2gi\3\2\2\2hd\3\2\2\2hg\3\2\2\2i\5\3\2\2\2jk\7\4"+
+		"\2\2kl\5\b\5\2lm\7\6\2\2mn\7\4\2\2nq\3\2\2\2oq\3\2\2\2pj\3\2\2\2po\3\2"+
+		"\2\2q\7\3\2\2\2rs\5$\23\2st\5\n\6\2ty\3\2\2\2uv\5.\30\2vw\5\n\6\2wy\3"+
+		"\2\2\2xr\3\2\2\2xu\3\2\2\2y\t\3\2\2\2z{\5$\23\2{|\5\n\6\2|\u0082\3\2\2"+
+		"\2}~\5.\30\2~\177\5\n\6\2\177\u0082\3\2\2\2\u0080\u0082\3\2\2\2\u0081"+
 		"z\3\2\2\2\u0081}\3\2\2\2\u0081\u0080\3\2\2\2\u0082\13\3\2\2\2\u0083\u0084"+
 		"\5\62\32\2\u0084\u0085\5\f\7\2\u0085\u0088\3\2\2\2\u0086\u0088\3\2\2\2"+
 		"\u0087\u0083\3\2\2\2\u0087\u0086\3\2\2\2\u0088\r\3\2\2\2\u0089\u008c\5"+

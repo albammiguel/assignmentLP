@@ -184,10 +184,10 @@ factorcond: exp opcomp exp
 
 opcomp: TOKEN_MENORQUE
 | TOKEN_MAYORQUE
-| TOKEN_MENORIGUAL
-| TOKEN_MAYORIGUAL
-| TOKEN_IGUALIGUAL
-| TOKEN_NOIGUAL;
+| TOKEN_MENOROIGUAL
+| TOKEN_MAYOROIGUAL
+| TOKEN_IGUALOIGUAL
+| TOKEN_DISTINTO;
 
 doval: NUM_INT_CONST
 | IDENT;
@@ -349,7 +349,7 @@ LOGIC_CONST: ('.TRUE.' | '.FALSE.'){
     token_actual = new TokenDetectado(true, getText(), "LOGIC_CONST");
     listaTokens.añadirToken(token_actual);};
 TOKEN_NOT: '.NOT.'{
-    token_actual = new TokenDetectado(true, getText(), "TOKEN_DEFAULT");
+    token_actual = new TokenDetectado(true, getText(), "TOKEN_NOT");
     listaTokens.añadirToken(token_actual);};
 IDENT:[a-zA-Z][a-zA-Z0-9_]*{ 
     token_actual = new TokenDetectado(true, getText(), "IDENT");

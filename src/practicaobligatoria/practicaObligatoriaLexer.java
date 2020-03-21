@@ -732,7 +732,7 @@ public class practicaObligatoriaLexer extends Lexer {
 		switch (actionIndex) {
 		case 46:
 
-			    token_actual = new TokenDetectado(true, getText(), "TOKEN_DEFAULT");
+			    token_actual = new TokenDetectado(true, getText(), "TOKEN_NOT");
 			    listaTokens.añadirToken(token_actual);
 			break;
 		}
