@@ -295,13 +295,13 @@ TOKEN_CASE: 'CASE'{
 TOKEN_DEFAULT: 'DEFAULT'{
     token_actual = new TokenDetectado(true, getText(), "TOKEN_DEFAULT");
     listaTokens.añadirToken(token_actual);};
-NUM_INT_CONST_B: 'b' ''' [0-1]+ '''{
+NUM_INT_CONST_B: 'b' '\'' [0-1]+ '\''{
     token_actual = new TokenDetectado(true, getText(), "NUM_INT_CONST_B");
     listaTokens.añadirToken(token_actual);};
-NUM_INT_CONST_O: 'o' ''' [0-7]+ '''{
+NUM_INT_CONST_O: 'o' '\'' [0-7]+ '\''{
     token_actual = new TokenDetectado(true, getText(), "NUM_INT_CONST_O");
     listaTokens.añadirToken(token_actual);};
-NUM_INT_CONST_H: 'h' ''' [0-9A-F]+ '''{
+NUM_INT_CONST_H: 'h' '\'' [0-9A-F]+ '\''{
     token_actual = new TokenDetectado(true, getText(), "NUM_INT_CONST_H");
     listaTokens.añadirToken(token_actual);};
 LOGIC_CONST: ('.TRUE.' | '.FALSE.'){
