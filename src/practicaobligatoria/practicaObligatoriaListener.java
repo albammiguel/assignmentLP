@@ -360,4 +360,84 @@ public interface practicaObligatoriaListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitCodfun(practicaObligatoriaParser.CodfunContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link practicaObligatoriaParser#expcond}.
+	 * @param ctx the parse tree
+	 */
+	void enterExpcond(practicaObligatoriaParser.ExpcondContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link practicaObligatoriaParser#expcond}.
+	 * @param ctx the parse tree
+	 */
+	void exitExpcond(practicaObligatoriaParser.ExpcondContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link practicaObligatoriaParser#oplog}.
+	 * @param ctx the parse tree
+	 */
+	void enterOplog(practicaObligatoriaParser.OplogContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link practicaObligatoriaParser#oplog}.
+	 * @param ctx the parse tree
+	 */
+	void exitOplog(practicaObligatoriaParser.OplogContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link practicaObligatoriaParser#factorcond}.
+	 * @param ctx the parse tree
+	 */
+	void enterFactorcond(practicaObligatoriaParser.FactorcondContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link practicaObligatoriaParser#factorcond}.
+	 * @param ctx the parse tree
+	 */
+	void exitFactorcond(practicaObligatoriaParser.FactorcondContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link practicaObligatoriaParser#opcomp}.
+	 * @param ctx the parse tree
+	 */
+	void enterOpcomp(practicaObligatoriaParser.OpcompContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link practicaObligatoriaParser#opcomp}.
+	 * @param ctx the parse tree
+	 */
+	void exitOpcomp(practicaObligatoriaParser.OpcompContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link practicaObligatoriaParser#doval}.
+	 * @param ctx the parse tree
+	 */
+	void enterDoval(practicaObligatoriaParser.DovalContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link practicaObligatoriaParser#doval}.
+	 * @param ctx the parse tree
+	 */
+	void exitDoval(practicaObligatoriaParser.DovalContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link practicaObligatoriaParser#casos}.
+	 * @param ctx the parse tree
+	 */
+	void enterCasos(practicaObligatoriaParser.CasosContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link practicaObligatoriaParser#casos}.
+	 * @param ctx the parse tree
+	 */
+	void exitCasos(practicaObligatoriaParser.CasosContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link practicaObligatoriaParser#etiquetas}.
+	 * @param ctx the parse tree
+	 */
+	void enterEtiquetas(practicaObligatoriaParser.EtiquetasContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link practicaObligatoriaParser#etiquetas}.
+	 * @param ctx the parse tree
+	 */
+	void exitEtiquetas(practicaObligatoriaParser.EtiquetasContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link practicaObligatoriaParser#listaetiqetas}.
+	 * @param ctx the parse tree
+	 */
+	void enterListaetiqetas(practicaObligatoriaParser.ListaetiqetasContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link practicaObligatoriaParser#listaetiqetas}.
+	 * @param ctx the parse tree
+	 */
+	void exitListaetiqetas(practicaObligatoriaParser.ListaetiqetasContext ctx);
 }

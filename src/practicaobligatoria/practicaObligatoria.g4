@@ -6,7 +6,6 @@ grammar practicaObligatoria;
 }
 
 @lexer::members{
-
     private ListaTokensDetectados listaTokens;
     private TokenDetectado token_actual;
     
@@ -63,7 +62,10 @@ ctelist: TOKEN_COMA IDENT TOKEN_IGUAL simpvalue ctelist
 
 simpvalue: NUM_INT_CONST 
 | NUM_REAL_CONST 
-| STRING_CONST;
+| STRING_CONST
+| NUM_INT_CONST_B
+| NUM_INT_CONST_O
+| NUM_INT_CONST_H;
 
 defvar: tipo TOKEN_DOBLEPUNTO varlist TOKEN_PUNTOCOMA aux2;
 
@@ -121,7 +123,13 @@ TOKEN_IN TOKEN_PARENTESIS_DER IDENT TOKEN_PUNTOCOMA  dec_f_paramlist
 //ZONA DE SENTENCIAS DEL PROGRAMA PRINCIPAL
 
 sent: IDENT TOKEN_IGUAL exp TOKEN_PUNTOCOMA
-| proc_call TOKEN_PUNTOCOMA;
+| proc_call TOKEN_PUNTOCOMA
+| TOKEN_IF TOKEN_PARENTESIS_IZQ expcond TOKEN_PARENTESIS_DER sent
+| TOKEN_IF TOKEN_PARENTESIS_IZQ expcond TOKEN_PARENTESIS_DER TOKEN_THEN sentlist TOKEN_ENDIF
+| TOKEN_IF TOKEN_PARENTESIS_IZQ expcond TOKEN_PARENTESIS_DER TOKEN_THEN sentlist TOKEN_ELSE sentlist TOKEN_ENDIF
+| TOKEN_DO TOKEN_WHILE TOKEN_PARENTESIS_IZQ expcond TOKEN_PARENTESIS_DER sentlist TOKEN_ENDDO
+| TOKEN_DO IDENT TOKEN_IGUAL doval TOKEN_COMA doval TOKEN_COMA doval sentlist TOKEN_ENDDO
+| TOKEN_SELECT TOKEN_CASE TOKEN_PARENTESIS_IZQ exp TOKEN_PARENTESIS_DER casos TOKEN_END TOKEN_SELECT;
 
 exp: exp op exp 
 | factor;
@@ -162,6 +170,42 @@ nomparamlist TOKEN_PARENTESIS_DER  tipo TOKEN_DOBLEPUNTO IDENT TOKEN_PUNTOCOMA
 dec_f_paramlist dcllist sent sentlist IDENT TOKEN_IGUAL exp TOKEN_PUNTOCOMA
 TOKEN_END TOKEN_FUNCTION IDENT;
 
+//SECUENCIAS DE CONTROL DE FLUJO
+
+expcond: expcond oplog expcond
+| factorcond;
+
+oplog: TOKEN_OP_LOG;
+
+factorcond: exp opcomp exp
+| TOKEN_PARENTESIS_IZQ expcond TOKEN_PARENTESIS_DER
+| TOKEN_NOT factorcond
+| LOGIC_CONST;
+
+opcomp: TOKEN_MENORQUE
+| TOKEN_MAYORQUE
+| TOKEN_MENORIGUAL
+| TOKEN_MAYORIGUAL
+| TOKEN_IGUALIGUAL
+| TOKEN_NOIGUAL;
+
+doval: NUM_INT_CONST
+| IDENT;
+
+casos: TOKEN_CASE TOKEN_PARENTESIS_IZQ etiquetas TOKEN_PARENTESIS_DER sentlist casos
+| TOKEN_CASE TOKEN_DEFAULT sentlist
+|
+;
+
+etiquetas: simpvalue listaetiqetas
+| simpvalue TOKEN_DOBLEPUNTO_SIMPLE simpvalue
+| TOKEN_DOBLEPUNTO_SIMPLE simpvalue
+| simpvalue TOKEN_DOBLEPUNTO_SIMPLE;
+
+listaetiqetas: TOKEN_COMA simpvalue
+| 
+;
+
 
 
 
@@ -180,9 +224,6 @@ TOKEN_END: 'END'{
     listaTokens.añadirToken(token_actual);};
 TOKEN_DOBLEPUNTO_SIMPLE: ':'{
     token_actual = new TokenDetectado(true, getText(), "TOKEN_DOBLEPUNTO_SIMPLE");
-    listaTokens.añadirToken(token_actual);};
-TOKEN_TRESPUNTOS: '...'{
-    token_actual = new TokenDetectado(true, getText(), "TOKEN_TRESPUNTOS");
     listaTokens.añadirToken(token_actual);};
 TOKEN_DOBLEPUNTO: '::'{
     token_actual = new TokenDetectado(true, getText(), "TOKEN_DOBLEPUNTO");
@@ -307,15 +348,16 @@ NUM_INT_CONST_H: 'h' '\'' [0-9A-F]+ '\''{
 LOGIC_CONST: ('.TRUE.' | '.FALSE.'){
     token_actual = new TokenDetectado(true, getText(), "LOGIC_CONST");
     listaTokens.añadirToken(token_actual);};
+TOKEN_NOT: '.NOT.'{
+    token_actual = new TokenDetectado(true, getText(), "TOKEN_DEFAULT");
+    listaTokens.añadirToken(token_actual);};
 IDENT:[a-zA-Z][a-zA-Z0-9_]*{ 
     token_actual = new TokenDetectado(true, getText(), "IDENT");
     listaTokens.añadirToken(token_actual);}; 
-NUM_INT_CONST: '-'? DIGIT+ 
-{   
+NUM_INT_CONST: '-'? DIGIT+ {   
     token_actual = new TokenDetectado(true, getText(), "NUM_INT_CONST");
     listaTokens.añadirToken(token_actual);};
-NUM_REAL_CONST: (PUNTO_FIJO | EXPONENCIAL | MIXTO) 
-{   
+NUM_REAL_CONST: (PUNTO_FIJO | EXPONENCIAL | MIXTO) {   
     token_actual = new TokenDetectado(true, getText(), "NUM_REAL_CONST");
     listaTokens.añadirToken(token_actual);};
 STRING_CONST: (STRING_CONST1 | STRING_CONST2){

@@ -103,3 +103,61 @@ FUNCTION Funcion2Param ( Fun2Param1, Fun2Param2 ) ! Funcion con 2 parametros de 
 	CALL Subrutina0Param;
 	Funcion2Param = Sub1Param1;
 END FUNCTION Funcion2Param
+
+SUBROUTINE PruebaIfs ! Subrutina sin parametros de llamada para probar ifs
+	! Declaracion de variables
+	INTEGER :: i1, i2=0, i3 ;
+
+	! Sentencias
+	! Sentencias If con una sola sentencia
+	IF ( .TRUE. ) CALL Subrutina0Param;
+	IF ( .FALSE. ) CALL Subrutina0Param;
+	IF ( a == b ) CALL Subrutina0Param;
+
+	! Sentencias If-then con una lista de sentencias
+	IF ( .TRUE. .OR. a<b .AND. b>c .OR. c==d ) THEN
+		CALL Subrutina1Param ( Funcion1Param(i1)+i2*i3 );
+		concatenacionStrings = 'comilla doble " dentro' + "comilla simple ' dentro";
+	ENDIF
+
+	! Sentencias If-then-else con una lista de sentencias y sentencias anidadas
+	IF ( .NOT. ( .FALSE. .OR. a<=b) .AND. (b>=c .AND. c/=d) ) THEN
+		CALL Subrutina1Param ( Funcion1Param(i1)+i2*i3 );
+		IF ( .TRUE. ) CALL Subrutina0Param;
+		concatenacionStrings = 'comilla doble " dentro' + "comilla simple  dentro";
+	ELSE
+		CALL Subrutina1Param ( Funcion1Param(i1)+i2*i3 );
+		IF ( .TRUE. .OR. a<b .AND. b>c .OR. c==d ) THEN
+			CALL Subrutina1Param ( Funcion1Param(i1)+i2*i3 );
+			concatenacionStrings = 'comilla doble " dentro' + "comilla simple  dentro";	
+		ELSE
+			CALL Subrutina1Param ( Funcion1Param(i1)+i2*i3 );
+			IF ( .TRUE. .OR. a<b .AND. b>c .AND. c==d ) THEN
+				CALL Subrutina1Param ( Funcion1Param(i1)+i2*i3 );
+				concatenacionStrings = 'comilla doble " dentro' + "comilla simple  dentro";
+			ENDIF
+		ENDIF
+	ENDIF
+END SUBROUTINE PruebaIfs
+
+SUBROUTINE PruebaDOs ! Subrutina sin parametros de llamada para probar DOs
+	! Declaracion de variables
+	INTEGER :: i1, i2=0, i3 ;
+	a = 0;
+	! Do while simple
+	DO WHILE ( .TRUE. .OR. a<b .AND. b>c .OR. c==d )
+		CALL PruebaIfs;
+		contador = contador + 1;
+	ENDDO
+
+	!Do while anidado
+	DO WHILE ( .TRUE. .OR. a<b .AND. b>c .AND. c==d )
+		CALL PruebaIfs;
+		DO WHILE ( .TRUE. .OR. a<b .AND. b>c .OR. c==d )
+			CALL Subrutina1Param ( Funcion1Param(i1)+i2*i3 );
+			contador = contador + 1;
+			CALL PruebaIfs;
+			CALL Subrutina0Param;
+		ENDDO
+	ENDDO	
+END SUBROUTINE PruebaDOs
