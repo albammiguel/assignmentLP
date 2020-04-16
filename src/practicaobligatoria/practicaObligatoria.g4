@@ -24,11 +24,8 @@ grammar practicaObligatoria;
 prg : TOKEN_PROGRAM IDENT TOKEN_PUNTOCOMA dcllist cabecera sent sentlist
 TOKEN_END TOKEN_PROGRAM IDENT subproglist <EOF>;
 
-dcllist: dcl aux3;
-
-
-aux3: dcllist 
-| 
+dcllist: dcl dcllist
+|
 ;
 
 
@@ -134,7 +131,6 @@ aux4: dec_f_paramlist
 sent: IDENT TOKEN_IGUAL exp TOKEN_PUNTOCOMA
 | proc_call TOKEN_PUNTOCOMA
 | TOKEN_IF TOKEN_PARENTESIS_IZQ expcond aux7
-| TOKEN_DO TOKEN_WHILE TOKEN_PARENTESIS_IZQ expcond TOKEN_PARENTESIS_DER sentlist TOKEN_ENDDO
 | TOKEN_DO aux8
 | TOKEN_SELECT TOKEN_CASE TOKEN_PARENTESIS_IZQ exp TOKEN_PARENTESIS_DER casos TOKEN_END TOKEN_SELECT;
 

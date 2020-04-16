@@ -31,16 +31,6 @@ public interface practicaObligatoriaListener extends ParseTreeListener {
 	 */
 	void exitDcllist(practicaObligatoriaParser.DcllistContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link practicaObligatoriaParser#aux3}.
-	 * @param ctx the parse tree
-	 */
-	void enterAux3(practicaObligatoriaParser.Aux3Context ctx);
-	/**
-	 * Exit a parse tree produced by {@link practicaObligatoriaParser#aux3}.
-	 * @param ctx the parse tree
-	 */
-	void exitAux3(practicaObligatoriaParser.Aux3Context ctx);
-	/**
 	 * Enter a parse tree produced by {@link practicaObligatoriaParser#cabecera}.
 	 * @param ctx the parse tree
 	 */

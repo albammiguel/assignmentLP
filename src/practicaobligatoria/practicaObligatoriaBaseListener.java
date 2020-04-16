@@ -43,18 +43,6 @@ public class practicaObligatoriaBaseListener implements practicaObligatoriaListe
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterAux3(practicaObligatoriaParser.Aux3Context ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void exitAux3(practicaObligatoriaParser.Aux3Context ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
 	@Override public void enterCabecera(practicaObligatoriaParser.CabeceraContext ctx) { }
 	/**
 	 * {@inheritDoc}
