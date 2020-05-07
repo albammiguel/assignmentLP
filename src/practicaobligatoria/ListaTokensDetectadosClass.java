@@ -11,27 +11,27 @@ import java.util.ArrayList;
  *
  * @author albam
  */
-public class ListaTokensDetectados {
-    private ArrayList<TokenDetectado> listaTokens;
+public class ListaTokensDetectadosClass {
+    private ArrayList<TokenDetectadoClass> listaTokens;
     //CONSTRUCTORES
-    public ListaTokensDetectados(){
-        listaTokens = new ArrayList <TokenDetectado> ();   
+    public ListaTokensDetectadosClass(){
+        listaTokens = new ArrayList <TokenDetectadoClass> ();   
     }
     
     //GETTERS
-    public ArrayList<TokenDetectado> getLista(){
+    public ArrayList<TokenDetectadoClass> getLista(){
         return listaTokens;
     }
     
     //METODOS
     
-    public void añadirToken(TokenDetectado token){
+    public void añadirToken(TokenDetectadoClass token){
         listaTokens.add(token);
     }
     
     public void mostrarLista(){
          System.out.println("Los tokens detectados son:");
-         for (TokenDetectado t: getLista()){
+         for (TokenDetectadoClass t: getLista()){
             if (t.getDetectado()==true)
                 System.out.println("Tipo: " + t.getTipoToken()+ " " 
                         + "Contenido: " + t.getInfoToken());

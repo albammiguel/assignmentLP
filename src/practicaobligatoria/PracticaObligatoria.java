@@ -23,7 +23,7 @@ public class PracticaObligatoria {
             // Preparar el fichero de entrada para asignarlo al analizador léxico
             CharStream input = CharStreams.fromFileName(args[0]);
             // Crear el objeto correspondiente al analizador léxico con el fichero de entrada
-            ListaTokensDetectados depurador = new ListaTokensDetectados();
+            ListaTokensDetectadosClass depurador = new ListaTokensDetectadosClass();
             practicaObligatoriaLexer analex = new practicaObligatoriaLexer(input, depurador);
             // Identificar al analizador léxico como fuente de tokens para el sintactico
             CommonTokenStream tokens = new CommonTokenStream(analex);
@@ -34,7 +34,7 @@ public class PracticaObligatoria {
                 Comenzar el análisis llamando al axioma de la gramática
             */
 		anasint.prg();
-            // Llamar al método para sacar el resumen del analizado léxico.
+            // Llamar al método para sacar el resumen del analizador léxico.
 		depurador.mostrarLista();
         } catch (org.antlr.v4.runtime.RecognitionException e) { 
             //Fallo al reconocer la entrada    

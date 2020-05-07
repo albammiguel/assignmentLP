@@ -9,14 +9,14 @@ package practicaobligatoria;
  *
  * @author albam
  */
-public class TokenDetectado {
+public class TokenDetectadoClass {
     //ATRIBUTOS
     private String infoToken;
     private String tipoToken;
     private boolean detectado;
     
     //CONSTRUCTOR
-    public TokenDetectado(boolean aceptado, String texto, String tipo){
+    public TokenDetectadoClass(boolean aceptado, String texto, String tipo){
         detectado = aceptado;
         infoToken = texto;
         tipoToken = tipo;

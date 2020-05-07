@@ -122,12 +122,12 @@ public class practicaObligatoriaLexer extends Lexer {
 	}
 
 
-	    private ListaTokensDetectados listaTokens;
-	    private TokenDetectado token_actual;
+	    private ListaTokensDetectadosClass listaTokens;
+	    private TokenDetectadoClass token_actual;
 	    
 	    //Recibir como parámetro los objetos.
 	    public practicaObligatoriaLexer(CharStream ficheroFuente, 
-	     ListaTokensDetectados lista){
+	     ListaTokensDetectadosClass lista){
 	        this(ficheroFuente);
 	        listaTokens= lista;
 	    }
@@ -318,7 +318,7 @@ public class practicaObligatoriaLexer extends Lexer {
 		switch (actionIndex) {
 		case 0:
 
-			    token_actual = new TokenDetectado(true, getText(), "TOKEN_PROGRAM");
+			    token_actual = new TokenDetectadoClass(true, getText(), "TOKEN_PROGRAM");
 			    listaTokens.añadirToken(token_actual);
 			break;
 		}
@@ -327,7 +327,7 @@ public class practicaObligatoriaLexer extends Lexer {
 		switch (actionIndex) {
 		case 1:
 
-			    token_actual = new TokenDetectado(true, getText(), "TOKEN_INTERFACE");
+			    token_actual = new TokenDetectadoClass(true, getText(), "TOKEN_INTERFACE");
 			    listaTokens.añadirToken(token_actual);
 			break;
 		}
@@ -336,7 +336,7 @@ public class practicaObligatoriaLexer extends Lexer {
 		switch (actionIndex) {
 		case 2:
 
-			    token_actual = new TokenDetectado(true, getText(), "TOKEN_PUNTOCOMA");
+			    token_actual = new TokenDetectadoClass(true, getText(), "TOKEN_PUNTOCOMA");
 			    listaTokens.añadirToken(token_actual);
 			break;
 		}
@@ -345,7 +345,7 @@ public class practicaObligatoriaLexer extends Lexer {
 		switch (actionIndex) {
 		case 3:
 
-			    token_actual = new TokenDetectado(true, getText(), "TOKEN_END");
+			    token_actual = new TokenDetectadoClass(true, getText(), "TOKEN_END");
 			    listaTokens.añadirToken(token_actual);
 			break;
 		}
@@ -354,7 +354,7 @@ public class practicaObligatoriaLexer extends Lexer {
 		switch (actionIndex) {
 		case 4:
 
-			    token_actual = new TokenDetectado(true, getText(), "TOKEN_DOBLEPUNTO_SIMPLE");
+			    token_actual = new TokenDetectadoClass(true, getText(), "TOKEN_DOBLEPUNTO_SIMPLE");
 			    listaTokens.añadirToken(token_actual);
 			break;
 		}
@@ -363,7 +363,7 @@ public class practicaObligatoriaLexer extends Lexer {
 		switch (actionIndex) {
 		case 5:
 
-			    token_actual = new TokenDetectado(true, getText(), "TOKEN_DOBLEPUNTO");
+			    token_actual = new TokenDetectadoClass(true, getText(), "TOKEN_DOBLEPUNTO");
 			    listaTokens.añadirToken(token_actual);
 			break;
 		}
@@ -372,7 +372,7 @@ public class practicaObligatoriaLexer extends Lexer {
 		switch (actionIndex) {
 		case 6:
 
-			    token_actual = new TokenDetectado(true, getText(), "TOKEN_PARAMETER");
+			    token_actual = new TokenDetectadoClass(true, getText(), "TOKEN_PARAMETER");
 			    listaTokens.añadirToken(token_actual);
 			break;
 		}
@@ -381,7 +381,7 @@ public class practicaObligatoriaLexer extends Lexer {
 		switch (actionIndex) {
 		case 7:
 
-			    token_actual = new TokenDetectado(true, getText(), "TOKEN_MENORQUE");
+			    token_actual = new TokenDetectadoClass(true, getText(), "TOKEN_MENORQUE");
 			    listaTokens.añadirToken(token_actual);
 			break;
 		}
@@ -390,7 +390,7 @@ public class practicaObligatoriaLexer extends Lexer {
 		switch (actionIndex) {
 		case 8:
 
-			    token_actual = new TokenDetectado(true, getText(), "TOKEN_MAYORQUE");
+			    token_actual = new TokenDetectadoClass(true, getText(), "TOKEN_MAYORQUE");
 			    listaTokens.añadirToken(token_actual);
 			break;
 		}
@@ -399,7 +399,7 @@ public class practicaObligatoriaLexer extends Lexer {
 		switch (actionIndex) {
 		case 9:
 
-			    token_actual = new TokenDetectado(true, getText(), "TOKEN_MENOROIGUAL");
+			    token_actual = new TokenDetectadoClass(true, getText(), "TOKEN_MENOROIGUAL");
 			    listaTokens.añadirToken(token_actual);
 			break;
 		}
@@ -408,7 +408,7 @@ public class practicaObligatoriaLexer extends Lexer {
 		switch (actionIndex) {
 		case 10:
 
-			    token_actual = new TokenDetectado(true, getText(), "TOKEN_MAYOROIGUAL");
+			    token_actual = new TokenDetectadoClass(true, getText(), "TOKEN_MAYOROIGUAL");
 			    listaTokens.añadirToken(token_actual);
 			break;
 		}
@@ -417,7 +417,7 @@ public class practicaObligatoriaLexer extends Lexer {
 		switch (actionIndex) {
 		case 11:
 
-			    token_actual = new TokenDetectado(true, getText(), "TOKEN_IGUALIGUAL");
+			    token_actual = new TokenDetectadoClass(true, getText(), "TOKEN_IGUALIGUAL");
 			    listaTokens.añadirToken(token_actual);
 			break;
 		}
@@ -426,7 +426,7 @@ public class practicaObligatoriaLexer extends Lexer {
 		switch (actionIndex) {
 		case 12:
 
-			    token_actual = new TokenDetectado(true, getText(), "TOKEN_DISTINTO");
+			    token_actual = new TokenDetectadoClass(true, getText(), "TOKEN_DISTINTO");
 			    listaTokens.añadirToken(token_actual);
 			break;
 		}
@@ -435,7 +435,7 @@ public class practicaObligatoriaLexer extends Lexer {
 		switch (actionIndex) {
 		case 13:
 
-			    token_actual = new TokenDetectado(true, getText(), "TOKEN_IGUAL");
+			    token_actual = new TokenDetectadoClass(true, getText(), "TOKEN_IGUAL");
 			    listaTokens.añadirToken(token_actual);
 			break;
 		}
@@ -444,7 +444,7 @@ public class practicaObligatoriaLexer extends Lexer {
 		switch (actionIndex) {
 		case 14:
 
-			    token_actual = new TokenDetectado(true, getText(), "TOKEN_COMA");
+			    token_actual = new TokenDetectadoClass(true, getText(), "TOKEN_COMA");
 			    listaTokens.añadirToken(token_actual);
 			break;
 		}
@@ -453,7 +453,7 @@ public class practicaObligatoriaLexer extends Lexer {
 		switch (actionIndex) {
 		case 15:
 
-			    token_actual = new TokenDetectado(true, getText(), "TOKEN_INTEGER");
+			    token_actual = new TokenDetectadoClass(true, getText(), "TOKEN_INTEGER");
 			    listaTokens.añadirToken(token_actual);
 			break;
 		}
@@ -462,7 +462,7 @@ public class practicaObligatoriaLexer extends Lexer {
 		switch (actionIndex) {
 		case 16:
 
-			    token_actual = new TokenDetectado(true, getText(), "TOKEN_REAL");
+			    token_actual = new TokenDetectadoClass(true, getText(), "TOKEN_REAL");
 			    listaTokens.añadirToken(token_actual);
 			break;
 		}
@@ -471,7 +471,7 @@ public class practicaObligatoriaLexer extends Lexer {
 		switch (actionIndex) {
 		case 17:
 
-			    token_actual = new TokenDetectado(true, getText(), "TOKEN_CHARACTER");
+			    token_actual = new TokenDetectadoClass(true, getText(), "TOKEN_CHARACTER");
 			    listaTokens.añadirToken(token_actual);
 			break;
 		}
@@ -480,7 +480,7 @@ public class practicaObligatoriaLexer extends Lexer {
 		switch (actionIndex) {
 		case 18:
 
-			    token_actual = new TokenDetectado(true, getText(), "TOKEN_PARENTESIS_IZQ");
+			    token_actual = new TokenDetectadoClass(true, getText(), "TOKEN_PARENTESIS_IZQ");
 			    listaTokens.añadirToken(token_actual);
 			break;
 		}
@@ -489,7 +489,7 @@ public class practicaObligatoriaLexer extends Lexer {
 		switch (actionIndex) {
 		case 19:
 
-			    token_actual = new TokenDetectado(true, getText(), "TOKEN_PARENTESIS_DER");
+			    token_actual = new TokenDetectadoClass(true, getText(), "TOKEN_PARENTESIS_DER");
 			    listaTokens.añadirToken(token_actual);
 			break;
 		}
@@ -498,7 +498,7 @@ public class practicaObligatoriaLexer extends Lexer {
 		switch (actionIndex) {
 		case 20:
 
-			    token_actual = new TokenDetectado(true, getText(), "TOKEN_SUBROUTINE");
+			    token_actual = new TokenDetectadoClass(true, getText(), "TOKEN_SUBROUTINE");
 			    listaTokens.añadirToken(token_actual);
 			break;
 		}
@@ -507,7 +507,7 @@ public class practicaObligatoriaLexer extends Lexer {
 		switch (actionIndex) {
 		case 21:
 
-			    token_actual = new TokenDetectado(true, getText(), "TOKEN_IN");
+			    token_actual = new TokenDetectadoClass(true, getText(), "TOKEN_IN");
 			    listaTokens.añadirToken(token_actual);
 			break;
 		}
@@ -516,7 +516,7 @@ public class practicaObligatoriaLexer extends Lexer {
 		switch (actionIndex) {
 		case 22:
 
-			    token_actual = new TokenDetectado(true, getText(), "TOKEN_OUT");
+			    token_actual = new TokenDetectadoClass(true, getText(), "TOKEN_OUT");
 			    listaTokens.añadirToken(token_actual);
 			break;
 		}
@@ -525,7 +525,7 @@ public class practicaObligatoriaLexer extends Lexer {
 		switch (actionIndex) {
 		case 23:
 
-			    token_actual = new TokenDetectado(true, getText(), "TOKEN_INOUT");
+			    token_actual = new TokenDetectadoClass(true, getText(), "TOKEN_INOUT");
 			    listaTokens.añadirToken(token_actual);
 			break;
 		}
@@ -534,7 +534,7 @@ public class practicaObligatoriaLexer extends Lexer {
 		switch (actionIndex) {
 		case 24:
 
-			    token_actual = new TokenDetectado(true, getText(), "TOKEN_FUNCTION");
+			    token_actual = new TokenDetectadoClass(true, getText(), "TOKEN_FUNCTION");
 			    listaTokens.añadirToken(token_actual);
 			break;
 		}
@@ -543,7 +543,7 @@ public class practicaObligatoriaLexer extends Lexer {
 		switch (actionIndex) {
 		case 25:
 
-			    token_actual = new TokenDetectado(true, getText(), "TOKEN_INTENT");
+			    token_actual = new TokenDetectadoClass(true, getText(), "TOKEN_INTENT");
 			    listaTokens.añadirToken(token_actual);
 			break;
 		}
@@ -552,7 +552,7 @@ public class practicaObligatoriaLexer extends Lexer {
 		switch (actionIndex) {
 		case 26:
 
-			    token_actual = new TokenDetectado(true, getText(), "TOKEN_MAS");
+			    token_actual = new TokenDetectadoClass(true, getText(), "TOKEN_MAS");
 			    listaTokens.añadirToken(token_actual);
 			break;
 		}
@@ -561,7 +561,7 @@ public class practicaObligatoriaLexer extends Lexer {
 		switch (actionIndex) {
 		case 27:
 
-			    token_actual = new TokenDetectado(true, getText(),  "TOKEN_MENOS");
+			    token_actual = new TokenDetectadoClass(true, getText(),  "TOKEN_MENOS");
 			    listaTokens.añadirToken(token_actual);
 			break;
 		}
@@ -570,7 +570,7 @@ public class practicaObligatoriaLexer extends Lexer {
 		switch (actionIndex) {
 		case 28:
 
-			    token_actual = new TokenDetectado(true, getText(), "TOKEN_MULTIPLICACION");
+			    token_actual = new TokenDetectadoClass(true, getText(), "TOKEN_MULTIPLICACION");
 			    listaTokens.añadirToken(token_actual);
 			break;
 		}
@@ -579,7 +579,7 @@ public class practicaObligatoriaLexer extends Lexer {
 		switch (actionIndex) {
 		case 29:
 
-			    token_actual = new TokenDetectado(true, getText(), "TOKEN_DIVISION");
+			    token_actual = new TokenDetectadoClass(true, getText(), "TOKEN_DIVISION");
 			    listaTokens.añadirToken(token_actual);
 			break;
 		}
@@ -588,7 +588,7 @@ public class practicaObligatoriaLexer extends Lexer {
 		switch (actionIndex) {
 		case 30:
 
-			    token_actual = new TokenDetectado(true, getText(), "TOKEN_CALL");
+			    token_actual = new TokenDetectadoClass(true, getText(), "TOKEN_CALL");
 			    listaTokens.añadirToken(token_actual);
 			break;
 		}
@@ -597,7 +597,7 @@ public class practicaObligatoriaLexer extends Lexer {
 		switch (actionIndex) {
 		case 31:
 
-			    token_actual = new TokenDetectado(true, getText(), "TOKEN_OP_LOG");
+			    token_actual = new TokenDetectadoClass(true, getText(), "TOKEN_OP_LOG");
 			    listaTokens.añadirToken(token_actual);
 			break;
 		}
@@ -606,7 +606,7 @@ public class practicaObligatoriaLexer extends Lexer {
 		switch (actionIndex) {
 		case 32:
 
-			    token_actual = new TokenDetectado(true, getText(), "TOKEN_IF");
+			    token_actual = new TokenDetectadoClass(true, getText(), "TOKEN_IF");
 			    listaTokens.añadirToken(token_actual);
 			break;
 		}
@@ -615,7 +615,7 @@ public class practicaObligatoriaLexer extends Lexer {
 		switch (actionIndex) {
 		case 33:
 
-			    token_actual = new TokenDetectado(true, getText(), "TOKEN_THEN");
+			    token_actual = new TokenDetectadoClass(true, getText(), "TOKEN_THEN");
 			    listaTokens.añadirToken(token_actual);
 			break;
 		}
@@ -624,7 +624,7 @@ public class practicaObligatoriaLexer extends Lexer {
 		switch (actionIndex) {
 		case 34:
 
-			    token_actual = new TokenDetectado(true, getText(), "TOKEN_ELSE");
+			    token_actual = new TokenDetectadoClass(true, getText(), "TOKEN_ELSE");
 			    listaTokens.añadirToken(token_actual);
 			break;
 		}
@@ -633,7 +633,7 @@ public class practicaObligatoriaLexer extends Lexer {
 		switch (actionIndex) {
 		case 35:
 
-			    token_actual = new TokenDetectado(true, getText(), "TOKEN_ENDIF");
+			    token_actual = new TokenDetectadoClass(true, getText(), "TOKEN_ENDIF");
 			    listaTokens.añadirToken(token_actual);
 			break;
 		}
@@ -642,7 +642,7 @@ public class practicaObligatoriaLexer extends Lexer {
 		switch (actionIndex) {
 		case 36:
 
-			    token_actual = new TokenDetectado(true, getText(), "TOKEN_DO");
+			    token_actual = new TokenDetectadoClass(true, getText(), "TOKEN_DO");
 			    listaTokens.añadirToken(token_actual);
 			break;
 		}
@@ -651,7 +651,7 @@ public class practicaObligatoriaLexer extends Lexer {
 		switch (actionIndex) {
 		case 37:
 
-			    token_actual = new TokenDetectado(true, getText(), "TOKEN_WHILE");
+			    token_actual = new TokenDetectadoClass(true, getText(), "TOKEN_WHILE");
 			    listaTokens.añadirToken(token_actual);
 			break;
 		}
@@ -660,7 +660,7 @@ public class practicaObligatoriaLexer extends Lexer {
 		switch (actionIndex) {
 		case 38:
 
-			    token_actual = new TokenDetectado(true, getText(), "TOKEN_ENDDO");
+			    token_actual = new TokenDetectadoClass(true, getText(), "TOKEN_ENDDO");
 			    listaTokens.añadirToken(token_actual);
 			break;
 		}
@@ -669,7 +669,7 @@ public class practicaObligatoriaLexer extends Lexer {
 		switch (actionIndex) {
 		case 39:
 
-			    token_actual = new TokenDetectado(true, getText(), "TOKEN_SELECT");
+			    token_actual = new TokenDetectadoClass(true, getText(), "TOKEN_SELECT");
 			    listaTokens.añadirToken(token_actual);
 			break;
 		}
@@ -678,7 +678,7 @@ public class practicaObligatoriaLexer extends Lexer {
 		switch (actionIndex) {
 		case 40:
 
-			    token_actual = new TokenDetectado(true, getText(), "TOKEN_CASE");
+			    token_actual = new TokenDetectadoClass(true, getText(), "TOKEN_CASE");
 			    listaTokens.añadirToken(token_actual);
 			break;
 		}
@@ -687,7 +687,7 @@ public class practicaObligatoriaLexer extends Lexer {
 		switch (actionIndex) {
 		case 41:
 
-			    token_actual = new TokenDetectado(true, getText(), "TOKEN_DEFAULT");
+			    token_actual = new TokenDetectadoClass(true, getText(), "TOKEN_DEFAULT");
 			    listaTokens.añadirToken(token_actual);
 			break;
 		}
@@ -696,7 +696,7 @@ public class practicaObligatoriaLexer extends Lexer {
 		switch (actionIndex) {
 		case 42:
 
-			    token_actual = new TokenDetectado(true, getText(), "NUM_INT_CONST_B");
+			    token_actual = new TokenDetectadoClass(true, getText(), "NUM_INT_CONST_B");
 			    listaTokens.añadirToken(token_actual);
 			break;
 		}
@@ -705,7 +705,7 @@ public class practicaObligatoriaLexer extends Lexer {
 		switch (actionIndex) {
 		case 43:
 
-			    token_actual = new TokenDetectado(true, getText(), "NUM_INT_CONST_O");
+			    token_actual = new TokenDetectadoClass(true, getText(), "NUM_INT_CONST_O");
 			    listaTokens.añadirToken(token_actual);
 			break;
 		}
@@ -714,7 +714,7 @@ public class practicaObligatoriaLexer extends Lexer {
 		switch (actionIndex) {
 		case 44:
 
-			    token_actual = new TokenDetectado(true, getText(), "NUM_INT_CONST_H");
+			    token_actual = new TokenDetectadoClass(true, getText(), "NUM_INT_CONST_H");
 			    listaTokens.añadirToken(token_actual);
 			break;
 		}
@@ -723,7 +723,7 @@ public class practicaObligatoriaLexer extends Lexer {
 		switch (actionIndex) {
 		case 45:
 
-			    token_actual = new TokenDetectado(true, getText(), "LOGIC_CONST");
+			    token_actual = new TokenDetectadoClass(true, getText(), "LOGIC_CONST");
 			    listaTokens.añadirToken(token_actual);
 			break;
 		}
@@ -732,7 +732,7 @@ public class practicaObligatoriaLexer extends Lexer {
 		switch (actionIndex) {
 		case 46:
 
-			    token_actual = new TokenDetectado(true, getText(), "TOKEN_NOT");
+			    token_actual = new TokenDetectadoClass(true, getText(), "TOKEN_NOT");
 			    listaTokens.añadirToken(token_actual);
 			break;
 		}
@@ -741,7 +741,7 @@ public class practicaObligatoriaLexer extends Lexer {
 		switch (actionIndex) {
 		case 47:
 			 
-			    token_actual = new TokenDetectado(true, getText(), "IDENT");
+			    token_actual = new TokenDetectadoClass(true, getText(), "IDENT");
 			    listaTokens.añadirToken(token_actual);
 			break;
 		}
@@ -750,7 +750,7 @@ public class practicaObligatoriaLexer extends Lexer {
 		switch (actionIndex) {
 		case 48:
 			   
-			    token_actual = new TokenDetectado(true, getText(), "NUM_INT_CONST");
+			    token_actual = new TokenDetectadoClass(true, getText(), "NUM_INT_CONST");
 			    listaTokens.añadirToken(token_actual);
 			break;
 		}
@@ -759,7 +759,7 @@ public class practicaObligatoriaLexer extends Lexer {
 		switch (actionIndex) {
 		case 49:
 			   
-			    token_actual = new TokenDetectado(true, getText(), "NUM_REAL_CONST");
+			    token_actual = new TokenDetectadoClass(true, getText(), "NUM_REAL_CONST");
 			    listaTokens.añadirToken(token_actual);
 			break;
 		}
@@ -768,7 +768,7 @@ public class practicaObligatoriaLexer extends Lexer {
 		switch (actionIndex) {
 		case 50:
 
-			    token_actual = new TokenDetectado(true, getText(), "STRING_CONST");
+			    token_actual = new TokenDetectadoClass(true, getText(), "STRING_CONST");
 			    listaTokens.añadirToken(token_actual);
 			break;
 		}
