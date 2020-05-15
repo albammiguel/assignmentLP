@@ -14,8 +14,8 @@ import java.util.ArrayList;
 public class DefinesClass {
     private ArrayList<ConstanteClass> listaConstantes; 
     
-    public DefinesClass(){
-           listaConstantes = new ArrayList <ConstanteClass> ();   
+    public DefinesClass(ArrayList<ConstanteClass> listaConstantes){
+           this.listaConstantes = listaConstantes;
     }
 
     public ArrayList<ConstanteClass> getListaConstantes() {
@@ -27,6 +27,15 @@ public class DefinesClass {
     }
     
     public void imprimir(){
+        String espacio = " ";
+        String constanteDefine = "#define";
+        String puntoComa = ";"; 
+        
+        listaConstantes.forEach((c) -> {
+            System.out.println(constanteDefine + espacio + c.getNombre()
+                                + espacio + c.getValor() + puntoComa);
+        });
+        
         
     }
     

@@ -38,6 +38,6 @@ public class ProgramaFinalClass {
     
     public void mostrar(){
         defines.imprimir();
-        decfuns.imprimir();
+        //decfuns.imprimir();
     }   
 }

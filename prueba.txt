@@ -1,16 +1,7 @@
-PROGRAM Prueba1Correcto ;
+PROGRAM PruebaConstantes;
 
-! Declaracion de variables
-REAL :: r1, r2;
-CHARACTER (2) :: c1, c2 = 'NO' ;
- 
-! Declaracion de constantes
-REAL , PARAMETER :: cte = 5.84 ;
+INTEGER , PARAMETER :: bloque = 1024; 
+REAL , PARAMETER :: PI = 3.141592, E = 2.718281; 
+CHARACTER (2) , PARAMETER :: S = "SI", N = "NO";
 
-r1 = 24.1 ;
-r2 = r1 + cte ;
-mensaje = 'Suma "basica"'; 
-
-END PROGRAM Prueba1Correcto
-
-
+END PROGRAM PruebaConstantes
