@@ -12,14 +12,17 @@ package practicaobligatoria;
 public class ParametroClass {
     private String tipo;
     private String nombre;
+    private int tamañoChar;
     private boolean entrada;
     private boolean salida;
     
-    public ParametroClass(String tipo, String nombre, boolean entrada, boolean salida){
-        this.tipo = tipo;
+    public ParametroClass(String nombre){
         this.nombre = nombre;
-        this.entrada = entrada;
-        this.salida = salida;
+        this.tipo = null;
+        this.tamañoChar = 0;
+        this.entrada = false;
+        this.salida = false;
+        
     }
 
     public String getTipo() {
@@ -37,6 +40,32 @@ public class ParametroClass {
     public void setNombre(String nombre) {
         this.nombre = nombre;
     }
+
+    public int getTamañoChar() {
+        return tamañoChar;
+    }
+
+    public void setTamañoChar(int tamañoChar) {
+        this.tamañoChar = tamañoChar;
+    }
+
+    public boolean isEntrada() {
+        return entrada;
+    }
+
+    public void setEntrada(boolean entrada) {
+        this.entrada = entrada;
+    }
+
+    public boolean isSalida() {
+        return salida;
+    }
+
+    public void setSalida(boolean salida) {
+        this.salida = salida;
+    }
+
+  
     
     
   

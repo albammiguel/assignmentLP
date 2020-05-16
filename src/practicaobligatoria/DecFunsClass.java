@@ -14,8 +14,8 @@ import java.util.ArrayList;
 public class DecFunsClass {
     private ArrayList<FuncionClass> listaFunciones;
     
-    public DecFunsClass(){
-        listaFunciones = new ArrayList<FuncionClass>();
+    public DecFunsClass(ArrayList<FuncionClass> listaFunciones){
+        this.listaFunciones = listaFunciones;
     }
     
      public ArrayList<FuncionClass> getListaFunciones() {
