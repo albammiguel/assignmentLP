@@ -5,16 +5,19 @@
  */
 package practicaobligatoria;
 
+import java.util.ArrayList;
+
 /**
  *
  * @author albam
  */
 public class DeclaracionClass extends SentenciaClass {
-    private ParametroClass parametro;
+    private ArrayList<VariableClass> listaVariablesDeclaradas;
     
-    public DeclaracionClass(String tipoSentencia, ParametroClass parametro){
+    public DeclaracionClass(String tipoSentencia, 
+            ArrayList<VariableClass> listaVariablesDeclaradas){
         super(tipoSentencia);
-        this.parametro = parametro;
+        this.listaVariablesDeclaradas = listaVariablesDeclaradas;
     }
     
     @Override

@@ -13,13 +13,13 @@ import java.util.ArrayList;
  */
 public class EstructuraDoClass extends SentenciaClass {
     private String identificador;
-    private int valorInicial;
-    private int valorFinal;
-    private int incremento;
+    private String valorInicial;
+    private String valorFinal;
+    private String incremento;
     private ArrayList<SentenciaClass> listaSentencias;
     
     public EstructuraDoClass(String tipoSentencia, String identificador, 
-            int valorInicial, int valorFinal, int incremento,
+            String valorInicial, String valorFinal, String incremento,
             ArrayList<SentenciaClass> listaSentencias){
         
         super(tipoSentencia);

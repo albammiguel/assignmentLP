@@ -12,16 +12,14 @@ import java.util.ArrayList;
  * @author albam
  */
 public class LlamadaClass extends SentenciaClass {
-    private boolean esProcedimiento;
     private String nombre;
-    ArrayList <ParametroClass> listaParametros;
+    ArrayList <String> listaInputs;
     
     public LlamadaClass(String tipoSentencia, boolean esProcedimiento, 
-            String nombre, ArrayList<ParametroClass> listaParametros){
+            String nombre, ArrayList<String> listaInputs){
         super(tipoSentencia);
-        this.esProcedimiento = esProcedimiento;
         this.nombre = nombre;
-        this.listaParametros = listaParametros;
+        this.listaInputs= listaInputs;
     }
     
     @Override

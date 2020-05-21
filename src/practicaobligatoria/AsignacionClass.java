@@ -10,12 +10,12 @@ package practicaobligatoria;
  * @author albam
  */
 public class AsignacionClass extends SentenciaClass {
-    private ParametroClass parametro;
+    private String identificador;
     private String valor;
     
-    public AsignacionClass(String tipoSentencia, ParametroClass parametro, String valor){
+    public AsignacionClass(String tipoSentencia, String identificador, String valor){
         super(tipoSentencia);
-        this.parametro = parametro;
+        this.identificador = identificador;
         this.valor = valor;
     }
     
