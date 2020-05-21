@@ -40,7 +40,7 @@ grammar practicaObligatoria;
             } else if(e_s.equals("OUT") || e_s.equals("INOUT")) 
                     {p_encontrado.setSalida(true);}
         }else{
-            //lamar error semántic
+            //lamar error semántico
     }
         return lista;
     }
@@ -234,7 +234,8 @@ dec_f_paramlist[ArrayList<ParametroClass> lh_parametros]
 returns [ArrayList<ParametroClass> lv_parametros]: 
 tipo TOKEN_COMA TOKEN_INTENT TOKEN_PARENTESIS_IZQ 
 TOKEN_IN TOKEN_PARENTESIS_DER IDENT TOKEN_PUNTOCOMA 
-{$lh_parametros = CompletarParametro($lh_parametros, $IDENT.text, $tipo.v, $tipo.c, $TOKEN_IN.text);} 
+{$lh_parametros = 
+CompletarParametro($lh_parametros, $IDENT.text, $tipo.v, $tipo.c, $TOKEN_IN.text);} 
 aux4[$lh_parametros] {$lv_parametros = $aux4.lv_parametros;};
 
 aux4[ArrayList<ParametroClass> lh_parametros] 
