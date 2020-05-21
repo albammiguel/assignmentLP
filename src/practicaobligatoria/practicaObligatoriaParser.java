@@ -155,7 +155,7 @@ public class practicaObligatoriaParser extends Parser {
 	            } else if(e_s.equals("OUT") || e_s.equals("INOUT")) 
 	                    {p_encontrado.setSalida(true);}
 	        }else{
-	            //lamar error semántic
+	            //lamar error semántico
 	    }
 	        return lista;
 	    }
@@ -1910,7 +1910,8 @@ public class practicaObligatoriaParser extends Parser {
 			((Dec_f_paramlistContext)_localctx).IDENT = match(IDENT);
 			setState(329);
 			match(TOKEN_PUNTOCOMA);
-			((Dec_f_paramlistContext)_localctx).lh_parametros =  CompletarParametro(_localctx.lh_parametros, (((Dec_f_paramlistContext)_localctx).IDENT!=null?((Dec_f_paramlistContext)_localctx).IDENT.getText():null), ((Dec_f_paramlistContext)_localctx).tipo.v, ((Dec_f_paramlistContext)_localctx).tipo.c, (((Dec_f_paramlistContext)_localctx).TOKEN_IN!=null?((Dec_f_paramlistContext)_localctx).TOKEN_IN.getText():null));
+			((Dec_f_paramlistContext)_localctx).lh_parametros =  
+			CompletarParametro(_localctx.lh_parametros, (((Dec_f_paramlistContext)_localctx).IDENT!=null?((Dec_f_paramlistContext)_localctx).IDENT.getText():null), ((Dec_f_paramlistContext)_localctx).tipo.v, ((Dec_f_paramlistContext)_localctx).tipo.c, (((Dec_f_paramlistContext)_localctx).TOKEN_IN!=null?((Dec_f_paramlistContext)_localctx).TOKEN_IN.getText():null));
 			setState(331);
 			((Dec_f_paramlistContext)_localctx).aux4 = aux4(_localctx.lh_parametros);
 			((Dec_f_paramlistContext)_localctx).lv_parametros =  ((Dec_f_paramlistContext)_localctx).aux4.lv_parametros;

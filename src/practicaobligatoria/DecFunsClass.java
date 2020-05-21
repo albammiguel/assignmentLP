@@ -14,10 +14,12 @@ import java.util.ArrayList;
 public class DecFunsClass {
     private ArrayList<FuncionClass> listaFunciones;
     
+    //CONSTRUCTOR
     public DecFunsClass(ArrayList<FuncionClass> listaFunciones){
         this.listaFunciones = listaFunciones;
     }
     
+    //GETTERS Y SETTERS
      public ArrayList<FuncionClass> getListaFunciones() {
         return listaFunciones;
     }
@@ -26,7 +28,27 @@ public class DecFunsClass {
         this.listaFunciones = listaConstantes;
     }
     
-    public void imprimir(){
+    //METODOS
+    private void imprimirSinArgumentos(String tipo, String nombre){
+        String parentesis_izq = "(";
+        String parentesis_der = ")";
+        String puntoComa =";";
+        String vacio = "void";
+        String espacio = " ";
+        if(tipo ==null){
+            System.out.println(vacio + espacio + nombre +
+                                      espacio + parentesis_izq + espacio
+                                      + vacio + espacio + parentesis_der + 
+                                       puntoComa);
+        } else {
+              System.out.println(tipo + espacio + nombre +
+                                      espacio + parentesis_izq + espacio
+                                      + vacio + espacio + parentesis_der + 
+                                       puntoComa);
+        }
+    }
+    
+    private void imprimirConArgumentos(FuncionClass f){
         String parentesis_izq = "(";
         String parentesis_der = ")";
         String puntoComa =";";
@@ -34,32 +56,32 @@ public class DecFunsClass {
         String espacio = " ";
         String saltoLinea = "\n";
         
+        String tipo = f.getTipoDevuelto();
+        String nombre = f.getNombre();
+        
+        if(tipo==null){
+            System.out.print(vacio + espacio 
+                            + nombre + espacio
+                            +parentesis_izq + espacio);
+            f.imprimirListaParametros();
+            System.out.print(parentesis_der + puntoComa + saltoLinea);
+        } else {
+            System.out.print(tipo+ espacio 
+                               + nombre + espacio
+                               +parentesis_izq + espacio);
+            f.imprimirListaParametros();
+            System.out.print(parentesis_der + puntoComa + saltoLinea);
+        }
+    }
+    
+    public void imprimir(){
+        
         listaFunciones.forEach((f) -> {
-            if(f.getTipoDevuelto() == null){
-                if(f.getListaParametros().isEmpty()){
-                    System.out.println(vacio + espacio + f.getNombre() +
-                                      espacio + parentesis_izq + espacio
-                                      + vacio + espacio + parentesis_der + 
-                                       puntoComa);
-                }else{
-                    System.out.print(vacio + espacio 
-                                    + f.getNombre() + espacio
-                                    +parentesis_izq + espacio);
-                    f.imprimirListaParametros();
-                    System.out.print(parentesis_der + puntoComa + saltoLinea);}
-            } else {
-                if(f.getListaParametros().isEmpty()){
-                    System.out.println(f.getTipoDevuelto() + espacio + f.getNombre() +
-                                      espacio + parentesis_izq + espacio
-                                      + vacio + espacio + parentesis_der + 
-                                       puntoComa);
-                }else{
-                    System.out.print(f.getTipoDevuelto() + espacio 
-                                    + f.getNombre() + espacio
-                                    +parentesis_izq + espacio);
-                    f.imprimirListaParametros();
-                    System.out.print(parentesis_der + puntoComa + saltoLinea);}
-            }
+           if(f.getListaParametros().isEmpty()){
+               imprimirSinArgumentos(f.getTipoDevuelto(),f.getNombre());
+           }else{
+               imprimirConArgumentos(f);
+           }
         });
     }
     
