@@ -5,6 +5,8 @@
  */
 package practicaobligatoria;
 
+import java.util.Objects;
+
 /**
  *
  * @author albam
@@ -65,9 +67,40 @@ public class ParametroClass {
         this.salida = salida;
     }
 
-  
-    
-    
-  
-    
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final ParametroClass other = (ParametroClass) obj;
+        if (this.tamañoChar != other.tamañoChar) {
+            return false;
+        }
+        if (this.entrada != other.entrada) {
+            return false;
+        }
+        if (this.salida != other.salida) {
+            return false;
+        }
+        if (!Objects.equals(this.tipo, other.tipo)) {
+            return false;
+        }
+        if (!Objects.equals(this.nombre, other.nombre)) {
+            return false;
+        }
+        return true;
+    }
+
 }

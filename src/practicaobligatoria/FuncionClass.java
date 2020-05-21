@@ -16,18 +16,25 @@ public class FuncionClass {
     private String nombre;
     private ArrayList <ParametroClass> listaParametros;
     
+    //CONSTRUCTORES
     public FuncionClass (String tipoDevuelto, String nombre, 
-                        ArrayList<ParametroClass>listaParametros){
+                        ArrayList<ParametroClass> listaParametros){
         this.tipoDevuelto = tipoDevuelto;
         this.nombre = nombre;
         this.listaParametros = listaParametros;
     }
     
     public FuncionClass (String nombre, 
-                        ArrayList<ParametroClass>listaParametros){
+                        ArrayList<ParametroClass> listaParametros){
         this.tipoDevuelto = null;
         this.nombre = nombre;
         this.listaParametros = listaParametros;
+    }
+    
+    public FuncionClass(){
+        this.tipoDevuelto = null;
+        this.nombre = null;
+        this.listaParametros = null;
     }
 
     public String getTipoDevuelto() {
@@ -54,5 +61,34 @@ public class FuncionClass {
         this.listaParametros = listaParametros;
     }
     
-    
+    public void imprimirListaParametros(){
+        String coma = ",";
+        String corchete_izq = "[";
+        String corchete_der = "]";
+        String espacio = " ";
+        String asterisco = "*";
+        
+        listaParametros.forEach((p)-> {
+            if(p.getTipo()=="char" && p.getTamañoChar() > 0){
+                if(p.isSalida()){
+                   System.out.print(p.getTipo() + espacio + asterisco +
+                           p.getNombre()+ corchete_izq + corchete_der);
+                }else{
+                    System.out.print(p.getTipo() + espacio + p.getNombre()
+                                 + corchete_izq + corchete_der);
+                }
+            }else{
+                 if(p.isSalida()){
+                    System.out.print(p.getTipo()+espacio+asterisco+p.getNombre());
+                }else{
+                    System.out.print(p.getTipo()+espacio+p.getNombre());
+                }
+            //comprobamos si es el último parametro o hay que seguir imprimiendo
+            if(listaParametros.get(listaParametros.size()-1) == p){
+                   System.out.print(espacio);
+            } else {System.out.print(coma+espacio);}
+            }
+            });
+    }
+ 
 }

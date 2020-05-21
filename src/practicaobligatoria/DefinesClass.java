@@ -29,11 +29,11 @@ public class DefinesClass {
     public void imprimir(){
         String espacio = " ";
         String constanteDefine = "#define";
-        String puntoComa = ";"; 
+        //String puntoComa = ";"; 
         
         listaConstantes.forEach((c) -> {
             System.out.println(constanteDefine + espacio + c.getNombre()
-                                + espacio + c.getValor() + puntoComa);
+                                + espacio + c.getValor()/*+ puntoComa*/);
         });
         
         

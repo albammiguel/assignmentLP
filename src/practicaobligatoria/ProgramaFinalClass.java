@@ -5,6 +5,8 @@
  */
 package practicaobligatoria;
 
+import java.util.ArrayList;
+
 /**
  *
  * @author albam
@@ -17,7 +19,7 @@ public class ProgramaFinalClass {
     //CONSTRUCTORES
     public ProgramaFinalClass(){
         this.defines = null;
-        this.decfuns = null;      
+        this.decfuns = null;
     }
 
     public DefinesClass getDefines() {
@@ -37,7 +39,9 @@ public class ProgramaFinalClass {
     }
     
     public void mostrar(){
-        defines.imprimir();
-        //decfuns.imprimir();
+        if(!defines.getListaConstantes().isEmpty()){defines.imprimir();}
+        if(!decfuns.getListaFunciones().isEmpty()){decfuns.imprimir();}
+        
+
     }   
 }
