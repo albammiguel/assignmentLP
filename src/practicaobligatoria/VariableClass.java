@@ -5,6 +5,8 @@
  */
 package practicaobligatoria;
 
+import java.util.Objects;
+
 /**
  *
  * @author albam
@@ -15,10 +17,10 @@ public class VariableClass {
     private int tamañoChar;
     private String valor;
     
-    public VariableClass(String tipo, String nombre, int tamañoChar, String valor){
-        this.tipo = tipo;
+    public VariableClass(String nombre, String valor){
+        this.tipo = null;
         this.nombre = nombre;
-        this.tamañoChar = tamañoChar;
+        this.tamañoChar = 0;
         this.valor = valor;
     }
 
@@ -52,6 +54,39 @@ public class VariableClass {
 
     public void setValor(String valor) {
         this.valor = valor;
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final VariableClass other = (VariableClass) obj;
+        if (this.tamañoChar != other.tamañoChar) {
+            return false;
+        }
+        if (!Objects.equals(this.tipo, other.tipo)) {
+            return false;
+        }
+        if (!Objects.equals(this.nombre, other.nombre)) {
+            return false;
+        }
+        if (!Objects.equals(this.valor, other.valor)) {
+            return false;
+        }
+        return true;
     }
     
     

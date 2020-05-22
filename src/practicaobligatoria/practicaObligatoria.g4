@@ -27,14 +27,15 @@ grammar practicaObligatoria;
             this.lenguajeFinal = lenguajeFinal;
     }
 
-    public ArrayList<ParametroClass> CompletarParametro(ArrayList<ParametroClass> lista, 
+    public ArrayList<ParametroClass> CompletarParametro
+    (ArrayList<ParametroClass> lista, 
     String nombre, String tipo_parametro, int tamaño_char, String e_s){
         ParametroClass p = new ParametroClass(nombre);
         int i = lista.indexOf(p);
         if(i != -1){
             ParametroClass p_encontrado = lista.get(i);
             p_encontrado.setTipo(tipo_parametro);
-            if(tipo_parametro=="char"){p_encontrado.setTamañoChar(tamaño_char);}
+            if(tipo_parametro.equals("char")){p_encontrado.setTamañoChar(tamaño_char);}
             if(e_s.equals("IN")){
               p_encontrado.setEntrada(true);  
             } else if(e_s.equals("OUT") || e_s.equals("INOUT")) 
@@ -44,6 +45,15 @@ grammar practicaObligatoria;
     }
         return lista;
     }
+
+    public ArrayList<VariableClass> AsignarTipo
+    (ArrayList<VariableClass> lista, String tipo_variable, int tamaño_char){
+        lista.forEach((v) -> {
+           v.setTipo(tipo_variable);
+           if(tipo_variable.equals("char")){v.setTamañoChar(tamaño_char);}
+        });
+        return lista;
+    }
 }
 
 
@@ -51,21 +61,32 @@ grammar practicaObligatoria;
 //ANALISIS SINTACTICO
 //PRINCIPIO - ESTRUCTURA PROGRAMA
 prg : TOKEN_PROGRAM IDENT TOKEN_PUNTOCOMA 
-{ArrayList<ConstanteClass> lista_final = new ArrayList <ConstanteClass>();}
-dcllist[lista_final] 
+{ArrayList<ConstanteClass> lista_constantes = new ArrayList <ConstanteClass>();
+ArrayList<DeclaracionClass> lista_declaraciones = new ArrayList<DeclaracionClass>();
+ArrayList<SentenciaClass> sentencias_programa = new ArrayList<SentenciaClass>();}
+dcllist[lista_constantes, lista_declaraciones] 
 {DefinesClass defines = new DefinesClass($dcllist.lv_constantes);
-lenguajeFinal.setDefines(defines);}
+lenguajeFinal.setDefines(defines);
+$dcllist.lv_declaraciones.forEach((d)->{
+    sentencias_programa.add(d);});
+}
 cabecera 
 {DecFunsClass decfuns = new DecFunsClass($cabecera.lv_funciones);
 lenguajeFinal.setDecfuns(decfuns);}
  sent sentlist
+{if(sentencias_programa.isEmpty()){System.out.println("ta vacio");}
+else{sentencias_programa.forEach((s)->{System.out.println(s.getTipoSentencia());});}
+lenguajeFinal.setSentenciasMain(sentencias_programa);}
 TOKEN_END TOKEN_PROGRAM IDENT subproglist <EOF>;
 
-dcllist[ArrayList<ConstanteClass> l_constantes] returns 
-[ArrayList<ConstanteClass> lv_constantes]:
-dcl dcllist[$dcl.l_constantes] 
-{$lv_constantes = $dcllist.lv_constantes;}
-|     {$lv_constantes = $l_constantes;}
+dcllist[ArrayList<ConstanteClass> l_constantes, 
+ArrayList<DeclaracionClass> l_declaraciones] 
+returns [ArrayList<ConstanteClass> lv_constantes, 
+ArrayList<DeclaracionClass> lv_declaraciones]:
+dcl dcllist[$dcl.l_constantes, $dcl.l_declaraciones] 
+{$lv_constantes = $dcllist.lv_constantes;
+$lv_declaraciones = $dcllist.lv_declaraciones;}
+|     {$lv_constantes = $l_constantes; $lv_declaraciones = $l_declaraciones;}
 ;
 
 
@@ -103,11 +124,16 @@ sentlist : sent sentlist
 ;
 
 //PRIMERA ZONA DE DECLARACIONES
-dcl returns[ArrayList<ConstanteClass> l_constantes]: 
+dcl returns[ArrayList<ConstanteClass> l_constantes, ArrayList<DeclaracionClass> l_declaraciones]: 
 {ArrayList<ConstanteClass> l = new ArrayList <ConstanteClass>();} 
 defcte[l] 
-{$l_constantes = $defcte.lv;}
-| defvar;
+{$l_constantes = $defcte.lv; 
+$l_declaraciones = new ArrayList<DeclaracionClass>();}
+|{ArrayList<DeclaracionClass> l = new ArrayList <DeclaracionClass>();} 
+ defvar[l]
+{$l_declaraciones = $defvar.lv_declaraciones;
+$l_constantes = new ArrayList<ConstanteClass>();}
+;
 
 defcte[ArrayList<ConstanteClass> lh] returns [ArrayList<ConstanteClass> lv]: 
 tipo TOKEN_COMA TOKEN_PARAMETER TOKEN_DOBLEPUNTO IDENT TOKEN_IGUAL simpvalue 
@@ -134,10 +160,22 @@ simpvalue returns [String v]: NUM_INT_CONST {$v = $NUM_INT_CONST.text;}
 | NUM_INT_CONST_H {$v = $NUM_INT_CONST_H.text;} 
 ;
 
-defvar: tipo TOKEN_DOBLEPUNTO varlist TOKEN_PUNTOCOMA aux2;
+defvar[ArrayList<DeclaracionClass> lh_declaraciones] 
+returns [ArrayList<DeclaracionClass> lv_declaraciones]: 
+tipo TOKEN_DOBLEPUNTO 
+{ArrayList<VariableClass> l = new ArrayList<VariableClass>();} 
+varlist[l] 
+{$varlist.lv_variables = AsignarTipo($varlist.lv_variables, $tipo.v, $tipo.c);
+DeclaracionClass d = new DeclaracionClass("declaracion", $tipo.v, $varlist.lv_variables);
+$lh_declaraciones.add(d);}
+TOKEN_PUNTOCOMA aux2[$lh_declaraciones] 
+{$lv_declaraciones = $aux2.lv_declaraciones;}
+;
 
-aux2: defvar 
-|
+aux2[ArrayList<DeclaracionClass> lh_declaraciones] 
+returns [ArrayList<DeclaracionClass> lv_declaraciones]: 
+defvar[$lh_declaraciones] {$lv_declaraciones = $defvar.lv_declaraciones;}
+|           {$lv_declaraciones = $lh_declaraciones;}
 ;
 
 tipo returns [String v, int c]: TOKEN_INTEGER {$v = "int"; $c=0;}
@@ -151,14 +189,22 @@ TOKEN_PARENTESIS_IZQ NUM_INT_CONST TOKEN_PARENTESIS_DER
 |       {$c=0;}
 ;
 
-varlist: IDENT init aux6;
-
-aux6: TOKEN_COMA varlist
-|
+varlist[ArrayList<VariableClass> lh_variables] 
+returns [ArrayList<VariableClass> lv_variables]: 
+IDENT init 
+{VariableClass v = new VariableClass($IDENT.text, $init.v); 
+$lh_variables.add(v);}
+ aux6[$lh_variables] {$lv_variables = $aux6.lv_variables;}
 ;
 
-init: TOKEN_IGUAL simpvalue
-|
+aux6[ArrayList<VariableClass> lh_variables] 
+returns [ArrayList<VariableClass> lv_variables]: 
+TOKEN_COMA varlist[$lh_variables] {$lv_variables = $varlist.lv_variables;}
+|                 {$lv_variables = $lh_variables;}
+;
+
+init returns [String v]: TOKEN_IGUAL simpvalue {$v = $simpvalue.v;}
+|   {$v = null;}
  ;
 
 
@@ -297,14 +343,14 @@ subproglist : codproc subproglist
 
 codproc : TOKEN_SUBROUTINE IDENT formal_paramlist 
 dec_s_paramlist[$formal_paramlist.lv_parametros] 
-dcllist[null] 
+dcllist[null, null] 
 sent sentlist TOKEN_END TOKEN_SUBROUTINE IDENT;
 
 codfun : TOKEN_FUNCTION IDENT TOKEN_PARENTESIS_IZQ
 {ArrayList<ParametroClass> l = new ArrayList<ParametroClass>();}   
 nomparamlist[l] TOKEN_PARENTESIS_DER  tipo TOKEN_DOBLEPUNTO IDENT TOKEN_PUNTOCOMA
 dec_f_paramlist[$nomparamlist.lv_parametros] 
-dcllist[null] sent sentlist IDENT TOKEN_IGUAL exp TOKEN_PUNTOCOMA
+dcllist[null, null] sent sentlist IDENT TOKEN_IGUAL exp TOKEN_PUNTOCOMA
 TOKEN_END TOKEN_FUNCTION IDENT;
 
 //SECUENCIAS DE CONTROL DE FLUJO

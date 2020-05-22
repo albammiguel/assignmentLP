@@ -13,9 +13,11 @@ import java.util.ArrayList;
  */
 public class ListaTokensDetectadosClass {
     private ArrayList<TokenDetectadoClass> listaTokens;
+    boolean esDepuracion;
     //CONSTRUCTORES
-    public ListaTokensDetectadosClass(){
+    public ListaTokensDetectadosClass(boolean esDepuracion){
         listaTokens = new ArrayList <TokenDetectadoClass> ();   
+        this.esDepuracion = esDepuracion;
     }
     
     //GETTERS
@@ -30,12 +32,14 @@ public class ListaTokensDetectadosClass {
     }
     
     public void mostrarLista(){
-         System.out.println("Los tokens detectados son:");
-         for (TokenDetectadoClass t: getLista()){
-            if (t.getDetectado()==true)
-                System.out.println("Tipo: " + t.getTipoToken()+ " " 
-                        + "Contenido: " + t.getInfoToken());
-        }
+        if(esDepuracion){
+            System.out.println("Los tokens detectados son:");
+            for (TokenDetectadoClass t: getLista()){
+               if (t.getDetectado()==true)
+                   System.out.println("Tipo: " + t.getTipoToken()+ " " 
+                           + "Contenido: " + t.getInfoToken());
+           }
+       }
     }
     
     

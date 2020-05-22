@@ -69,7 +69,7 @@ public class FuncionClass {
         String asterisco = "*";
         
         listaParametros.forEach((p)-> {
-            if(p.getTipo()=="char" && p.getTamañoChar() > 0){
+            if(p.getTipo().equals("char") && p.getTamañoChar() > 0){
                 if(p.isSalida()){
                    System.out.print(p.getTipo() + espacio + asterisco +
                            p.getNombre()+ corchete_izq + corchete_der);
@@ -84,7 +84,7 @@ public class FuncionClass {
                     System.out.print(p.getTipo()+espacio+p.getNombre());
                 }
             //comprobamos si es el último parametro o hay que seguir imprimiendo
-            if(listaParametros.get(listaParametros.size()-1) == p){
+            if(listaParametros.get(listaParametros.size()-1).equals(p)){
                    System.out.print(espacio);
             } else {System.out.print(coma+espacio);}
             }

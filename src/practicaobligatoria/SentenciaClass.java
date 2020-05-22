@@ -17,8 +17,12 @@ public abstract class SentenciaClass {
     public SentenciaClass(String tipoSentencia){
         this.tipoSentencia = tipoSentencia;
     }
+
+    public String getTipoSentencia() {
+        return tipoSentencia;
+    }
     
-    //METDOSO
+    //METODOS
     public abstract void mostrar();
     
 }
