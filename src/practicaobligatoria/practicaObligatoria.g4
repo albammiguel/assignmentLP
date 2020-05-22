@@ -74,18 +74,21 @@ cabecera
 {DecFunsClass decfuns = new DecFunsClass($cabecera.lv_funciones);
 lenguajeFinal.setDecfuns(decfuns);}
  sent sentlist
-{if(sentencias_programa.isEmpty()){System.out.println("ta vacio");}
-else{sentencias_programa.forEach((s)->{System.out.println(s.getTipoSentencia());});}
-lenguajeFinal.setSentenciasMain(sentencias_programa);}
+{lenguajeFinal.setSentenciasMain(sentencias_programa);}
 TOKEN_END TOKEN_PROGRAM IDENT subproglist <EOF>;
+
+
 
 dcllist[ArrayList<ConstanteClass> l_constantes, 
 ArrayList<DeclaracionClass> l_declaraciones] 
 returns [ArrayList<ConstanteClass> lv_constantes, 
 ArrayList<DeclaracionClass> lv_declaraciones]:
-dcl dcllist[$dcl.l_constantes, $dcl.l_declaraciones] 
-{$lv_constantes = $dcllist.lv_constantes;
-$lv_declaraciones = $dcllist.lv_declaraciones;}
+dcl 
+{$lv_constantes=$dcl.l_constantes;  
+$lv_declaraciones=$dcl.l_declaraciones;} 
+dcllist[$dcl.l_constantes, $dcl.l_declaraciones] 
+{if(!$dcllist.lv_constantes.isEmpty())$lv_constantes = $dcllist.lv_constantes;
+if(!$dcllist.lv_declaraciones.isEmpty())$lv_declaraciones = $dcllist.lv_declaraciones;}
 |     {$lv_constantes = $l_constantes; $lv_declaraciones = $l_declaraciones;}
 ;
 

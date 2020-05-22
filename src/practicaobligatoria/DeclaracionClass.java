@@ -39,7 +39,7 @@ public class DeclaracionClass extends SentenciaClass {
     }
     
     
-    private void imprimirVariables(){
+    public void imprimirVariables(){
           String igual = "=";
           String espacio =" ";
           String puntoComa = ";";
@@ -57,6 +57,9 @@ public class DeclaracionClass extends SentenciaClass {
                     System.out.print(v.getNombre()+ corchete_izq + v.getTamañoChar()+ 
                                    corchete_der);
                 }
+            if(listaVariablesDeclaradas.get(listaVariablesDeclaradas.size()-1).equals(v)){
+                   System.out.print(puntoComa);
+            } else {System.out.print(coma+espacio);}
             }else{
                  if(v.getValor() != null){
                     System.out.print(v.getNombre()+ igual + v.getValor());
