@@ -225,6 +225,7 @@ TOKEN_END TOKEN_SUBROUTINE id2=IDENT
 $p = procedimiento;}
 ;
 
+
 formal_paramlist returns [ArrayList<ParametroClass> lv_parametros]:
  TOKEN_PARENTESIS_IZQ 
 {ArrayList<ParametroClass> l = new ArrayList<ParametroClass>();}
@@ -232,6 +233,7 @@ formal_paramlist returns [ArrayList<ParametroClass> lv_parametros]:
 {$lv_parametros = $nomparamlist.lv_parametros;}
 |         {$lv_parametros = new ArrayList<ParametroClass>();}
 ;
+
 
 nomparamlist[ArrayList<ParametroClass> lh_parametros] returns 
 [ArrayList<ParametroClass> lv_parametros]:
@@ -246,6 +248,7 @@ TOKEN_COMA nomparamlist[$lh_parametros]
 {$lv_parametros = $nomparamlist.lv_parametros;}
 ;
 
+
 dec_s_paramlist[ArrayList<ParametroClass> lh_parametros]
 returns [ArrayList<ParametroClass> lv_parametros]:
 tipo TOKEN_COMA TOKEN_INTENT TOKEN_PARENTESIS_IZQ tipoparam 
@@ -257,10 +260,12 @@ dec_s_paramlist[$lh_parametros] {$lv_parametros = $dec_s_paramlist.lv_parametros
 |             {$lv_parametros = $lh_parametros;}
 ;
 
+
 tipoparam returns [String v]: TOKEN_IN {$v = $TOKEN_IN.text;}
 | TOKEN_OUT {$v = $TOKEN_OUT.text;}
 | TOKEN_INOUT {$v = $TOKEN_INOUT.text;}
 ;
+
 
 decfun returns [FuncionClass f]: TOKEN_FUNCTION id1=IDENT TOKEN_PARENTESIS_IZQ
 {ArrayList<ParametroClass> l = new ArrayList<ParametroClass>();}  
@@ -279,6 +284,7 @@ if(($id1.text.equals($id2.text))&&($id1.text.equals($id3.text))&&($id2.text.equa
 }
 ;
 
+
 dec_f_paramlist[ArrayList<ParametroClass> lh_parametros] 
 returns [ArrayList<ParametroClass> lv_parametros]: 
 tipo TOKEN_COMA TOKEN_INTENT TOKEN_PARENTESIS_IZQ 
@@ -287,11 +293,13 @@ TOKEN_IN TOKEN_PARENTESIS_DER IDENT TOKEN_PUNTOCOMA
 CompletarParametro($lh_parametros, $IDENT.text, $tipo.v, $tipo.c, $TOKEN_IN.text);} 
 aux4[$lh_parametros] {$lv_parametros = $aux4.lv_parametros;};
 
+
 aux4[ArrayList<ParametroClass> lh_parametros] 
 returns [ArrayList<ParametroClass> lv_parametros]:
 dec_f_paramlist[$lh_parametros] {$lv_parametros = $dec_f_paramlist.lv_parametros;}
 |      {$lv_parametros = $lh_parametros;}
 ;
+
 
 //ZONA DE SENTENCIAS DEL PROGRAMA PRINCIPAL
 
@@ -315,14 +323,16 @@ exp: exp op exp
 
 op: oparit;
 
-oparit: TOKEN_MAS
-| TOKEN_MENOS
-| TOKEN_MULTIPLICACION
-| TOKEN_DIVISION;
+oparit returns [String v]: TOKEN_MAS{$v = "+";}
+| TOKEN_MENOS {$v = "-";}
+| TOKEN_MULTIPLICACION {$v = "*";}
+| TOKEN_DIVISION{$v = "/";}
+;
 
 factor: simpvalue
 | TOKEN_PARENTESIS_IZQ exp TOKEN_PARENTESIS_DER
 | IDENT aux5;
+
 
 aux5: TOKEN_PARENTESIS_IZQ exp explist TOKEN_PARENTESIS_DER 
 |
@@ -361,22 +371,26 @@ TOKEN_END TOKEN_FUNCTION IDENT;
 expcond: expcond oplog expcond
 | factorcond;
 
-oplog: TOKEN_OP_LOG;
+oplog returns[String v]:  TOKEN_OR{$v="||";}
+| TOKEN_AND {$v="&&";}
+| TOKEN_EQV {$v="!^";}
+| TOKEN_NEQV {$v="^";}
+;
 
 factorcond: exp opcomp exp
 | TOKEN_PARENTESIS_IZQ expcond TOKEN_PARENTESIS_DER
 | TOKEN_NOT factorcond
 | LOGIC_CONST;
 
-opcomp: TOKEN_MENORQUE
-| TOKEN_MAYORQUE
-| TOKEN_MENOROIGUAL
-| TOKEN_MAYOROIGUAL
-| TOKEN_IGUALIGUAL
-| TOKEN_DISTINTO;
+opcomp returns [String v]: TOKEN_MENORQUE {$v = $TOKEN_MENORQUE.text;}
+| TOKEN_MAYORQUE {$v = $TOKEN_MAYORQUE.text;}
+| TOKEN_MENOROIGUAL {$v = $TOKEN_MENOROIGUAL.text;}
+| TOKEN_MAYOROIGUAL {$v = $TOKEN_MAYOROIGUAL.text;}
+| TOKEN_IGUALIGUAL {$v = $TOKEN_IGUALIGUAL.text;}
+| TOKEN_DISTINTO {$v = "!=";};
 
-doval: NUM_INT_CONST
-| IDENT;
+doval returns[String v]: NUM_INT_CONST {$v= $NUM_INT_CONST.text;}
+| IDENT{$v= $IDENT.text;};
 
 casos: TOKEN_CASE aux9
 |
@@ -493,8 +507,17 @@ TOKEN_DIVISION:'/'{
 TOKEN_CALL: 'CALL'{
     token_actual = new TokenDetectadoClass(true, getText(), "TOKEN_CALL");
     listaTokens.añadirToken(token_actual);};
-TOKEN_OP_LOG: ('.AND.' | '.OR.' | '.EQV.' | '.NEQV.'){
-    token_actual = new TokenDetectadoClass(true, getText(), "TOKEN_OP_LOG");
+TOKEN_AND: '.AND.' {
+    token_actual = new TokenDetectadoClass(true, getText(), "TOKEN_AND");
+    listaTokens.añadirToken(token_actual);};
+TOKEN_OR: '.OR.' {
+    token_actual = new TokenDetectadoClass(true, getText(), "TOKEN_OR");
+    listaTokens.añadirToken(token_actual);};
+TOKEN_EQV: '.EQV.' {
+    token_actual = new TokenDetectadoClass(true, getText(), "TOKEN_EQV");
+    listaTokens.añadirToken(token_actual);};
+TOKEN_NEQV: '.NEQV.' {
+    token_actual = new TokenDetectadoClass(true, getText(), "TOKEN_NEQV");
     listaTokens.añadirToken(token_actual);};
 TOKEN_IF: 'IF'{
     token_actual = new TokenDetectadoClass(true, getText(), "TOKEN_IF");

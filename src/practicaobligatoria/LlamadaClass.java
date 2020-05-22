@@ -13,12 +13,13 @@ import java.util.ArrayList;
  */
 public class LlamadaClass extends SentenciaClass {
     private String nombre;
+    boolean esProcedimiento;
     ArrayList <String> listaInputs;
-    
     public LlamadaClass(String tipoSentencia, boolean esProcedimiento, 
             String nombre, ArrayList<String> listaInputs){
         super(tipoSentencia);
         this.nombre = nombre;
+        this.esProcedimiento = esProcedimiento;
         this.listaInputs= listaInputs;
     }
     
