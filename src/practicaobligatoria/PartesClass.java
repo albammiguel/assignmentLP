@@ -87,6 +87,7 @@ public class PartesClass {
            }else{
                imprimirConArgumentos(f, lenguaje);
            }
+           lenguaje.println();
         });
         
     }

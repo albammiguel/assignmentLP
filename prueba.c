@@ -29,53 +29,36 @@ void PruebaIfs ( void )
 	int i1, i2=0, i3;
 	if (1) {
 	Subrutina0Param null;
-;
 }
 	if (0) {
 	Subrutina0Param null;
-;
 }
 	if (a==b) {
 	Subrutina0Param null;
-;
 }
 	if (1 || a<b && b>c !^ c==d) {
 	Subrutina1Param (Funcion1Param(i1) + i2 * i3);
-;
 	concatenacionStrings = "comilla doble \" dentro" + "comilla simple ' dentro";
-;
 }
 	if (!(0 || a<=b) && (b>=c ^ c!=d)) {
 	Subrutina1Param (Funcion1Param(i1) + i2 * i3);
-;
 	if (1) {
 	Subrutina0Param null;
-;
 }
-;
 	concatenacionStrings = "comilla doble \" dentro" + "comilla simple ' dentro";
-;
 } else {
 	Subrutina1Param (Funcion1Param(i1) + i2 * i3);
-;
 	if (1 || a<b && b>c !^ c==d) {
 	Subrutina1Param (Funcion1Param(i1) + i2 * i3);
-;
 	concatenacionStrings = "comilla doble \" dentro" + "comilla simple ' dentro";
-;
 } else {
 	Subrutina1Param (Funcion1Param(i1) + i2 * i3);
-;
 	if (1 || a<b && b>c !^ c==d) {
 	Subrutina1Param (Funcion1Param(i1) + i2 * i3);
-;
 	concatenacionStrings = "comilla doble \" dentro" + "comilla simple ' dentro";
-;
 }
-;
-}
-;
-}
+	}
+	}
 }
 void PruebaDOs ( void )
 {
@@ -83,11 +66,11 @@ void PruebaDOs ( void )
 		for(contador=45 ; contador!=-3 ; contador=contador+decremento) {
 	Subrutina1Param (Funcion1Param(i1) + i2 * i3);
 	Subrutina0Param null;
-}
+	}
 	while (1 || a<b && b>c !^ c==d) {
 	PruebaIfs null;
 	contador = contador + 1;
-}
+	}
 	while (1 || a<b && b>c ^ c==d) {
 	PruebaIfs null;
 	for(contador=45 ; contador!=-3 ; contador=contador+decremento) {
@@ -95,16 +78,16 @@ void PruebaDOs ( void )
 	contador = contador + 1;
 	PruebaIfs null;
 	Subrutina0Param null;
-}
-}
+	}
+	}
 	for(contador=45 ; contador!=-3 ; contador=contador+decremento) {
 	Subrutina1Param (Funcion1Param(i1) + i2 * i3);
 	Subrutina0Param null;
 	while (1 || a<b && b>c !^ c==d) {
 	PruebaIfs null;
 	contador = contador + 1;
-}
-}
+	}
+	}
 }
 void PruebaSELECTs ( void )
 {

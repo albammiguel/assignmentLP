@@ -24,6 +24,17 @@ public class LlamadaClass extends SentenciaClass {
     
     @Override
     public void mostrar(PrintWriter lenguaje){
-    lenguaje.println(nombre+ " " + listaInputs + ";");}
+    String espacio = " ";
+    String puntoComa = ";";
+    String parentesis_izq = "(";
+    String parentesis_der = ")";
+    String saltoLinea = "\n";
     
+    lenguaje.print(nombre+ espacio);
+    if(listaInputs != null){
+        lenguaje.print(listaInputs+puntoComa+saltoLinea);
+    }else{
+        lenguaje.print(parentesis_izq + parentesis_der + puntoComa+saltoLinea);
+    }
+   }
 }

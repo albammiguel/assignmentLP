@@ -82,12 +82,7 @@ public class FuncionClass {
         lenguaje.println(llave_izq);
         listaSentencias.forEach((s)->{
             lenguaje.print(tabulacion);
-            if(s.getTipoSentencia().equals("llamada")){
-                
-            }else if (s.getTipoSentencia().equals("asignacion")){
-                
-            }else{
-                s.mostrar(lenguaje);}
+            s.mostrar(lenguaje);
             });
         lenguaje.println(llave_der);
     }

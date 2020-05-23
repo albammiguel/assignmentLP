@@ -88,11 +88,14 @@ public class ProgramaFinalClass {
             BufferedWriter buffer = new BufferedWriter(ficheroSalida);
             PrintWriter lenguaje = new PrintWriter(buffer);
             if(!defines.getListaConstantes().isEmpty())
-                {defines.imprimir(lenguaje);}
+                {defines.imprimir(lenguaje);
+                lenguaje.println();}
             if(!decfuns.getListaFunciones().isEmpty())
-                {decfuns.imprimir(lenguaje);}
+                {decfuns.imprimir(lenguaje);
+                lenguaje.println();}
             if(!partes.getListaImplementacionFunciones().isEmpty())
-                {partes.imprimir(lenguaje);}
+                {partes.imprimir(lenguaje);
+                lenguaje.println();}
 
             if(!sentenciasMain.isEmpty()){
                 lenguaje.println(vacio + espacio + main + espacio + parentesis_izq 
