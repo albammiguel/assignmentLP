@@ -5,6 +5,8 @@
  */
 package practicaobligatoria;
 
+import java.util.ArrayList;
+
 /**
  *
  * @author albam

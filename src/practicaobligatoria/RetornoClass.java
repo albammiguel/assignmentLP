@@ -20,7 +20,7 @@ public class RetornoClass extends SentenciaClass {
     
     @Override
     public void mostrar(){
-        System.out.println("\treturn" + " " + expresionRetorno);
+        System.out.println("return" + " " + expresionRetorno);
     }
     
 }

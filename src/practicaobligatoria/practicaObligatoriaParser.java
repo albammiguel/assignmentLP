@@ -173,6 +173,118 @@ public class practicaObligatoriaParser extends Parser {
 	        return lista;
 	    }
 
+	    public FuncionClass crearFuncionImplementada
+	    (String ident1, String ident2, String ident3, String ident4,
+	    String tipo_devuelto, ArrayList<ParametroClass> listaParametros, 
+	    ArrayList<SentenciaClass> listaSentencias){
+	        FuncionClass funcion = new FuncionClass();
+	        if((ident1.equals(ident2))&&(ident1.equals(ident3))&& 
+	        (ident1.equals(ident4)) && (ident2.equals(ident3)) &&
+	        (ident2.equals(ident4)) && (ident3.equals(ident4))){
+	            funcion.setTipoDevuelto(tipo_devuelto);
+	            funcion.setNombre(ident1);
+	            funcion.setListaParametros(listaParametros);
+	            funcion.setListaSentencias(listaSentencias);
+	        }else{
+	            lenguajeFinal.setEsError(true);
+	            //llamamos a error semántico, no cumple primera y/o tercera regla 
+	        }
+	        return funcion;
+	    }
+	    
+	    public FuncionClass crearProcedimientoImplementado(String ident1, 
+	    String ident2, ArrayList<ParametroClass> listaParametros, 
+	    ArrayList<SentenciaClass> listaSentencias){
+	        FuncionClass procedimiento = new FuncionClass();
+	        if(ident1.equals(ident2)){
+	           procedimiento.setNombre(ident1);
+	           procedimiento.setListaParametros(listaParametros);
+	           procedimiento.setListaSentencias(listaSentencias);
+	        }else{
+	            lenguajeFinal.setEsError(true);
+	           //llamamos a error semántico, no cumple primera  regla
+	        }
+	        return procedimiento;
+	    }
+	    
+	    public FuncionClass crearDeclaracionFuncion(String ident1, String ident2,
+	    String ident3, String tipo_devuelto, ArrayList<ParametroClass> listaParametros){
+	        FuncionClass funcion = new FuncionClass();
+	        if((ident1.equals(ident2))&&(ident1.equals(ident3))&&
+	        (ident2.equals(ident3))){
+	                funcion.setTipoDevuelto(tipo_devuelto);
+	                funcion.setNombre(ident1);
+	                funcion.setListaParametros(listaParametros);
+	            }else{
+	                lenguajeFinal.setEsError(true);
+	                //llamamos a error semántico, no cumple primera y/o tercera regla
+	            }
+	        return funcion;
+	    }
+
+	    public FuncionClass crearDeclaracionProcedimiento(String ident1, String ident2,
+	    ArrayList<ParametroClass> listaParametros){
+	        FuncionClass procedimiento = new FuncionClass();
+	         if(ident1.equals(ident2)){
+	            procedimiento.setNombre(ident1);
+	            procedimiento.setListaParametros(listaParametros);
+	         }else{
+	            //llamamos a error semántico, no cumple primera  regla
+	         }
+	        return procedimiento;
+	    }
+
+	    public String traducirBinario(String textoBinario){
+	        String texto= "0b";
+	        for(int i= 2; i<(textoBinario.length() - 1); i++){
+	            texto= texto + textoBinario.charAt(i);
+	        }
+	        return texto;   
+	    }
+
+	    public String traducirOctal(String textoOctal){
+	        String texto= "0o";
+	        for(int i= 2; i<(textoOctal.length() - 1); i++){
+	            texto= texto + textoOctal.charAt(i);
+	        }
+	        return texto;
+	    }
+	    
+	    public String traducirHexadecimal(String textoHexadecimal){
+	        String texto= "0x";
+	        for(int i= 2; i<(textoHexadecimal.length() - 1); i++){
+	            texto= texto + textoHexadecimal.charAt(i);
+	        }
+	        return texto;
+	    }
+
+	    public String traducirConstanteStrings(String constanteString){
+	        String texto= constanteString.substring(1, constanteString.length()-1);
+	        texto="\"" + texto + "\"";
+	        String t1, t2;
+	        for(int i = 1; i < texto.length()-2; i++){
+	            if(texto.charAt(i) == '\'' && texto.charAt(i+1) == '\''){
+	                t1 = texto.substring(0, i);
+	                t2 = texto.substring(i+1);
+	                texto= t1 +t2;
+	            }
+	            if(texto.charAt(i) == '"' && texto.charAt(i+1) == '"'){
+	                t1 = texto.substring(0, i);
+	                t2 = texto.substring(i+1);
+	                texto= t1 +t2;
+	                }
+	            }
+	        for(int i = 1; i < texto.length()-1; i++){
+	            if(texto.charAt(i) == '"'){
+	                t1 = texto.substring(0, i);
+	                t2 = texto.substring(i);
+	                texto = t1 + "\\" + t2;
+	                i++;
+	            }
+	        }
+	        return texto;
+	    }
+
 	public practicaObligatoriaParser(TokenStream input) {
 		super(input);
 		_interp = new ParserATNSimulator(this,_ATN,_decisionToDFA,_sharedContextCache);
@@ -982,7 +1094,7 @@ public class practicaObligatoriaParser extends Parser {
 				{
 				setState(213);
 				((SimpvalueContext)_localctx).STRING_CONST = match(STRING_CONST);
-				((SimpvalueContext)_localctx).v =  (((SimpvalueContext)_localctx).STRING_CONST!=null?((SimpvalueContext)_localctx).STRING_CONST.getText():null);
+				((SimpvalueContext)_localctx).v =  traducirConstanteStrings((((SimpvalueContext)_localctx).STRING_CONST!=null?((SimpvalueContext)_localctx).STRING_CONST.getText():null));
 				}
 				break;
 			case NUM_INT_CONST_B:
@@ -990,7 +1102,7 @@ public class practicaObligatoriaParser extends Parser {
 				{
 				setState(215);
 				((SimpvalueContext)_localctx).NUM_INT_CONST_B = match(NUM_INT_CONST_B);
-				((SimpvalueContext)_localctx).v =  (((SimpvalueContext)_localctx).NUM_INT_CONST_B!=null?((SimpvalueContext)_localctx).NUM_INT_CONST_B.getText():null);
+				 ((SimpvalueContext)_localctx).v =  traducirBinario((((SimpvalueContext)_localctx).NUM_INT_CONST_B!=null?((SimpvalueContext)_localctx).NUM_INT_CONST_B.getText():null));
 				}
 				break;
 			case NUM_INT_CONST_O:
@@ -998,7 +1110,7 @@ public class practicaObligatoriaParser extends Parser {
 				{
 				setState(217);
 				((SimpvalueContext)_localctx).NUM_INT_CONST_O = match(NUM_INT_CONST_O);
-				((SimpvalueContext)_localctx).v =  (((SimpvalueContext)_localctx).NUM_INT_CONST_O!=null?((SimpvalueContext)_localctx).NUM_INT_CONST_O.getText():null);
+				 ((SimpvalueContext)_localctx).v =  traducirOctal((((SimpvalueContext)_localctx).NUM_INT_CONST_O!=null?((SimpvalueContext)_localctx).NUM_INT_CONST_O.getText():null));
 				}
 				break;
 			case NUM_INT_CONST_H:
@@ -1006,7 +1118,7 @@ public class practicaObligatoriaParser extends Parser {
 				{
 				setState(219);
 				((SimpvalueContext)_localctx).NUM_INT_CONST_H = match(NUM_INT_CONST_H);
-				((SimpvalueContext)_localctx).v =  (((SimpvalueContext)_localctx).NUM_INT_CONST_H!=null?((SimpvalueContext)_localctx).NUM_INT_CONST_H.getText():null);
+				 ((SimpvalueContext)_localctx).v =  traducirHexadecimal((((SimpvalueContext)_localctx).NUM_INT_CONST_H!=null?((SimpvalueContext)_localctx).NUM_INT_CONST_H.getText():null));
 				}
 				break;
 			default:
@@ -1515,14 +1627,7 @@ public class practicaObligatoriaParser extends Parser {
 			match(TOKEN_SUBROUTINE);
 			setState(281);
 			((DecprocContext)_localctx).id2 = match(IDENT);
-			FuncionClass procedimiento = new FuncionClass();
-			 if((((DecprocContext)_localctx).id1!=null?((DecprocContext)_localctx).id1.getText():null).equals((((DecprocContext)_localctx).id2!=null?((DecprocContext)_localctx).id2.getText():null))){
-			    procedimiento.setNombre((((DecprocContext)_localctx).id1!=null?((DecprocContext)_localctx).id1.getText():null));
-			    procedimiento.setListaParametros(((DecprocContext)_localctx).dec_s_paramlist.lv_parametros);
-			 }else{
-			    //llamamos a error semántico, no cumple primera  regla
-			 }
-			((DecprocContext)_localctx).p =  procedimiento;
+			((DecprocContext)_localctx).p =  crearDeclaracionProcedimiento((((DecprocContext)_localctx).id1!=null?((DecprocContext)_localctx).id1.getText():null), (((DecprocContext)_localctx).id2!=null?((DecprocContext)_localctx).id2.getText():null), ((DecprocContext)_localctx).dec_s_paramlist.lv_parametros);
 			}
 		}
 		catch (RecognitionException re) {
@@ -1912,16 +2017,8 @@ public class practicaObligatoriaParser extends Parser {
 			match(TOKEN_FUNCTION);
 			setState(339);
 			((DecfunContext)_localctx).id3 = match(IDENT);
-			FuncionClass funcion = new FuncionClass();
-			if(((((DecfunContext)_localctx).id1!=null?((DecfunContext)_localctx).id1.getText():null).equals((((DecfunContext)_localctx).id2!=null?((DecfunContext)_localctx).id2.getText():null)))&&((((DecfunContext)_localctx).id1!=null?((DecfunContext)_localctx).id1.getText():null).equals((((DecfunContext)_localctx).id3!=null?((DecfunContext)_localctx).id3.getText():null)))&&((((DecfunContext)_localctx).id2!=null?((DecfunContext)_localctx).id2.getText():null).equals((((DecfunContext)_localctx).id3!=null?((DecfunContext)_localctx).id3.getText():null)))){
-			        funcion.setTipoDevuelto(((DecfunContext)_localctx).tipo.v);
-			        funcion.setNombre((((DecfunContext)_localctx).id1!=null?((DecfunContext)_localctx).id1.getText():null));
-			        funcion.setListaParametros(((DecfunContext)_localctx).dec_f_paramlist.lv_parametros);
-			    }else{
-			        //llamamos a error semántico, no cumple primera y/o tercera regla
-			    }
-			 ((DecfunContext)_localctx).f =  funcion;
-
+			((DecfunContext)_localctx).f =  crearDeclaracionFuncion((((DecfunContext)_localctx).id1!=null?((DecfunContext)_localctx).id1.getText():null), (((DecfunContext)_localctx).id2!=null?((DecfunContext)_localctx).id2.getText():null), (((DecfunContext)_localctx).id3!=null?((DecfunContext)_localctx).id3.getText():null), ((DecfunContext)_localctx).tipo.v, 
+			((DecfunContext)_localctx).dec_f_paramlist.lv_parametros);
 			}
 		}
 		catch (RecognitionException re) {
@@ -2166,8 +2263,7 @@ public class practicaObligatoriaParser extends Parser {
 				setState(373);
 				((SentContext)_localctx).aux7 = aux7();
 				EstructuraIfClass if_sentencia = new EstructuraIfClass("if", 
-				((SentContext)_localctx).expcond.v, ((SentContext)_localctx).aux7.sentencias_if, ((SentContext)_localctx).aux7.sentencias_else);
-				((SentContext)_localctx).s =  if_sentencia;
+				((SentContext)_localctx).expcond.v, ((SentContext)_localctx).aux7.sentencias_if, ((SentContext)_localctx).aux7.sentencias_else); ((SentContext)_localctx).s =  if_sentencia;
 				}
 				break;
 			case TOKEN_DO:
@@ -2203,7 +2299,7 @@ public class practicaObligatoriaParser extends Parser {
 				match(TOKEN_SELECT);
 				EstructuraCaseClass case_sentencia = new 
 				EstructuraCaseClass("case", ((SentContext)_localctx).exp.v, ((SentContext)_localctx).casos.lv_casos, ((SentContext)_localctx).casos.esDefault_v, ((SentContext)_localctx).casos.sv_default);
-				case_sentencia.mostrar(); ((SentContext)_localctx).s = case_sentencia;
+				((SentContext)_localctx).s = case_sentencia;
 				}
 				break;
 			default:
@@ -2392,7 +2488,6 @@ public class practicaObligatoriaParser extends Parser {
 				match(TOKEN_ENDDO);
 				EstructuraDoWhileClass dowhile_sentencia = new EstructuraDoWhileClass("while", 
 				((Aux8Context)_localctx).expcond.v, ((Aux8Context)_localctx).sentlist.lv_sentencias);
-				dowhile_sentencia.mostrar();
 				((Aux8Context)_localctx).s =  dowhile_sentencia;
 				}
 				break;
@@ -2420,7 +2515,6 @@ public class practicaObligatoriaParser extends Parser {
 				match(TOKEN_ENDDO);
 				EstructuraDoClass do_sentencia = new EstructuraDoClass("for", 
 				(((Aux8Context)_localctx).IDENT!=null?((Aux8Context)_localctx).IDENT.getText():null), ((Aux8Context)_localctx).d1.v, ((Aux8Context)_localctx).d2.v, ((Aux8Context)_localctx).d3.v, ((Aux8Context)_localctx).sentlist.lv_sentencias);
-				do_sentencia.mostrar();
 				((Aux8Context)_localctx).s =  do_sentencia;
 				}
 				break;
@@ -2511,7 +2605,7 @@ public class practicaObligatoriaParser extends Parser {
 					((ExpContext)_localctx).op = op();
 					setState(445);
 					((ExpContext)_localctx).id2 = exp(3);
-					((ExpContext)_localctx).v =  ((ExpContext)_localctx).id1.v + ((ExpContext)_localctx).op.v + ((ExpContext)_localctx).id2.v;
+					((ExpContext)_localctx).v =  ((ExpContext)_localctx).id1.v + " " + ((ExpContext)_localctx).op.v + " "+ ((ExpContext)_localctx).id2.v;
 					}
 					} 
 				}
@@ -3151,15 +3245,8 @@ public class practicaObligatoriaParser extends Parser {
 			match(TOKEN_SUBROUTINE);
 			setState(537);
 			((CodprocContext)_localctx).id2 = match(IDENT);
-			FuncionClass procedimiento = new FuncionClass();
-			 if((((CodprocContext)_localctx).id1!=null?((CodprocContext)_localctx).id1.getText():null).equals((((CodprocContext)_localctx).id2!=null?((CodprocContext)_localctx).id2.getText():null))){
-			    procedimiento.setNombre((((CodprocContext)_localctx).id1!=null?((CodprocContext)_localctx).id1.getText():null));
-			    procedimiento.setListaParametros(((CodprocContext)_localctx).dec_s_paramlist.lv_parametros);
-			    procedimiento.setListaSentencias(sentencias_procedimiento);
-			 }else{
-			    //llamamos a error semántico, no cumple primera  regla
-			 }
-			((CodprocContext)_localctx).p =  procedimiento;
+			((CodprocContext)_localctx).p =  crearProcedimientoImplementado((((CodprocContext)_localctx).id1!=null?((CodprocContext)_localctx).id1.getText():null), (((CodprocContext)_localctx).id2!=null?((CodprocContext)_localctx).id2.getText():null), ((CodprocContext)_localctx).dec_s_paramlist.lv_parametros,
+			sentencias_procedimiento);
 			}
 		}
 		catch (RecognitionException re) {
@@ -3290,18 +3377,8 @@ public class practicaObligatoriaParser extends Parser {
 			match(TOKEN_FUNCTION);
 			setState(564);
 			((CodfunContext)_localctx).id4 = match(IDENT);
-			FuncionClass funcion = new FuncionClass();
-			if(((((CodfunContext)_localctx).id1!=null?((CodfunContext)_localctx).id1.getText():null).equals((((CodfunContext)_localctx).id2!=null?((CodfunContext)_localctx).id2.getText():null)))&&((((CodfunContext)_localctx).id1!=null?((CodfunContext)_localctx).id1.getText():null).equals((((CodfunContext)_localctx).id3!=null?((CodfunContext)_localctx).id3.getText():null)))&& 
-			   ((((CodfunContext)_localctx).id1!=null?((CodfunContext)_localctx).id1.getText():null).equals((((CodfunContext)_localctx).id4!=null?((CodfunContext)_localctx).id4.getText():null))) && ((((CodfunContext)_localctx).id2!=null?((CodfunContext)_localctx).id2.getText():null).equals((((CodfunContext)_localctx).id3!=null?((CodfunContext)_localctx).id3.getText():null))) &&
-			    ((((CodfunContext)_localctx).id2!=null?((CodfunContext)_localctx).id2.getText():null).equals((((CodfunContext)_localctx).id4!=null?((CodfunContext)_localctx).id4.getText():null))) && ((((CodfunContext)_localctx).id3!=null?((CodfunContext)_localctx).id3.getText():null).equals((((CodfunContext)_localctx).id4!=null?((CodfunContext)_localctx).id4.getText():null)))){
-			        funcion.setTipoDevuelto(((CodfunContext)_localctx).tipo.v);
-			        funcion.setNombre((((CodfunContext)_localctx).id1!=null?((CodfunContext)_localctx).id1.getText():null));
-			        funcion.setListaParametros(((CodfunContext)_localctx).dec_f_paramlist.lv_parametros);
-			        funcion.setListaSentencias(sentencias_funcion);
-			    }else{
-			        //llamamos a error semántico, no cumple primera y/o tercera regla 
-			    }
-			 ((CodfunContext)_localctx).f =  funcion;
+			((CodfunContext)_localctx).f =  crearFuncionImplementada((((CodfunContext)_localctx).id1!=null?((CodfunContext)_localctx).id1.getText():null), (((CodfunContext)_localctx).id2!=null?((CodfunContext)_localctx).id2.getText():null), (((CodfunContext)_localctx).id3!=null?((CodfunContext)_localctx).id3.getText():null), (((CodfunContext)_localctx).id4!=null?((CodfunContext)_localctx).id4.getText():null), ((CodfunContext)_localctx).tipo.v,
+			 ((CodfunContext)_localctx).dec_f_paramlist.lv_parametros, sentencias_funcion);
 			}
 		}
 		catch (RecognitionException re) {

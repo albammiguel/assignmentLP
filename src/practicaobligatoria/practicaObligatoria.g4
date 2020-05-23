@@ -54,6 +54,118 @@ grammar practicaObligatoria;
         });
         return lista;
     }
+
+    public FuncionClass crearFuncionImplementada
+    (String ident1, String ident2, String ident3, String ident4,
+    String tipo_devuelto, ArrayList<ParametroClass> listaParametros, 
+    ArrayList<SentenciaClass> listaSentencias){
+        FuncionClass funcion = new FuncionClass();
+        if((ident1.equals(ident2))&&(ident1.equals(ident3))&& 
+        (ident1.equals(ident4)) && (ident2.equals(ident3)) &&
+        (ident2.equals(ident4)) && (ident3.equals(ident4))){
+            funcion.setTipoDevuelto(tipo_devuelto);
+            funcion.setNombre(ident1);
+            funcion.setListaParametros(listaParametros);
+            funcion.setListaSentencias(listaSentencias);
+        }else{
+            lenguajeFinal.setEsError(true);
+            //llamamos a error semántico, no cumple primera y/o tercera regla 
+        }
+        return funcion;
+    }
+    
+    public FuncionClass crearProcedimientoImplementado(String ident1, 
+    String ident2, ArrayList<ParametroClass> listaParametros, 
+    ArrayList<SentenciaClass> listaSentencias){
+        FuncionClass procedimiento = new FuncionClass();
+        if(ident1.equals(ident2)){
+           procedimiento.setNombre(ident1);
+           procedimiento.setListaParametros(listaParametros);
+           procedimiento.setListaSentencias(listaSentencias);
+        }else{
+            lenguajeFinal.setEsError(true);
+           //llamamos a error semántico, no cumple primera  regla
+        }
+        return procedimiento;
+    }
+    
+    public FuncionClass crearDeclaracionFuncion(String ident1, String ident2,
+    String ident3, String tipo_devuelto, ArrayList<ParametroClass> listaParametros){
+        FuncionClass funcion = new FuncionClass();
+        if((ident1.equals(ident2))&&(ident1.equals(ident3))&&
+        (ident2.equals(ident3))){
+                funcion.setTipoDevuelto(tipo_devuelto);
+                funcion.setNombre(ident1);
+                funcion.setListaParametros(listaParametros);
+            }else{
+                lenguajeFinal.setEsError(true);
+                //llamamos a error semántico, no cumple primera y/o tercera regla
+            }
+        return funcion;
+    }
+
+    public FuncionClass crearDeclaracionProcedimiento(String ident1, String ident2,
+    ArrayList<ParametroClass> listaParametros){
+        FuncionClass procedimiento = new FuncionClass();
+         if(ident1.equals(ident2)){
+            procedimiento.setNombre(ident1);
+            procedimiento.setListaParametros(listaParametros);
+         }else{
+            //llamamos a error semántico, no cumple primera  regla
+         }
+        return procedimiento;
+    }
+
+    public String traducirBinario(String textoBinario){
+        String texto= "0b";
+        for(int i= 2; i<(textoBinario.length() - 1); i++){
+            texto= texto + textoBinario.charAt(i);
+        }
+        return texto;   
+    }
+
+    public String traducirOctal(String textoOctal){
+        String texto= "0o";
+        for(int i= 2; i<(textoOctal.length() - 1); i++){
+            texto= texto + textoOctal.charAt(i);
+        }
+        return texto;
+    }
+    
+    public String traducirHexadecimal(String textoHexadecimal){
+        String texto= "0x";
+        for(int i= 2; i<(textoHexadecimal.length() - 1); i++){
+            texto= texto + textoHexadecimal.charAt(i);
+        }
+        return texto;
+    }
+
+    public String traducirConstanteStrings(String constanteString){
+        String texto= constanteString.substring(1, constanteString.length()-1);
+        texto="\"" + texto + "\"";
+        String t1, t2;
+        for(int i = 1; i < texto.length()-2; i++){
+            if(texto.charAt(i) == '\'' && texto.charAt(i+1) == '\''){
+                t1 = texto.substring(0, i);
+                t2 = texto.substring(i+1);
+                texto= t1 +t2;
+            }
+            if(texto.charAt(i) == '"' && texto.charAt(i+1) == '"'){
+                t1 = texto.substring(0, i);
+                t2 = texto.substring(i+1);
+                texto= t1 +t2;
+                }
+            }
+        for(int i = 1; i < texto.length()-1; i++){
+            if(texto.charAt(i) == '"'){
+                t1 = texto.substring(0, i);
+                t2 = texto.substring(i);
+                texto = t1 + "\\" + t2;
+                i++;
+            }
+        }
+        return texto;
+    }
 }
 
 
@@ -165,10 +277,10 @@ ctelist[$lh] {$lv = $ctelist.lv;}
 
 simpvalue returns [String v]: NUM_INT_CONST {$v = $NUM_INT_CONST.text;} 
 | NUM_REAL_CONST {$v = $NUM_REAL_CONST.text;} 
-| STRING_CONST {$v = $STRING_CONST.text;} 
-| NUM_INT_CONST_B {$v = $NUM_INT_CONST_B.text;} 
-| NUM_INT_CONST_O {$v = $NUM_INT_CONST_O.text;} 
-| NUM_INT_CONST_H {$v = $NUM_INT_CONST_H.text;} 
+| STRING_CONST {$v = traducirConstanteStrings($STRING_CONST.text);} 
+| NUM_INT_CONST_B { $v = traducirBinario($NUM_INT_CONST_B.text);} 
+| NUM_INT_CONST_O { $v = traducirOctal($NUM_INT_CONST_O.text);} 
+| NUM_INT_CONST_H { $v = traducirHexadecimal($NUM_INT_CONST_H.text);} 
 ;
 
 defvar[ArrayList<DeclaracionClass> lh_declaraciones] 
@@ -223,14 +335,7 @@ init returns [String v]: TOKEN_IGUAL simpvalue {$v = $simpvalue.v;}
 decproc returns [FuncionClass p]:  TOKEN_SUBROUTINE id1=IDENT formal_paramlist 
 dec_s_paramlist[$formal_paramlist.lv_parametros]
 TOKEN_END TOKEN_SUBROUTINE id2=IDENT 
-{FuncionClass procedimiento = new FuncionClass();
- if($id1.text.equals($id2.text)){
-    procedimiento.setNombre($id1.text);
-    procedimiento.setListaParametros($dec_s_paramlist.lv_parametros);
- }else{
-    //llamamos a error semántico, no cumple primera  regla
- }
-$p = procedimiento;}
+{$p = crearDeclaracionProcedimiento($id1.text, $id2.text, $dec_s_paramlist.lv_parametros);}
 ;
 
 
@@ -280,16 +385,8 @@ decfun returns [FuncionClass f]: TOKEN_FUNCTION id1=IDENT TOKEN_PARENTESIS_IZQ
 nomparamlist[l] TOKEN_PARENTESIS_DER  tipo TOKEN_DOBLEPUNTO id2=IDENT 
 TOKEN_PUNTOCOMA dec_f_paramlist[$nomparamlist.lv_parametros] TOKEN_END TOKEN_FUNCTION 
 id3=IDENT
-{FuncionClass funcion = new FuncionClass();
-if(($id1.text.equals($id2.text))&&($id1.text.equals($id3.text))&&($id2.text.equals($id3.text))){
-        funcion.setTipoDevuelto($tipo.v);
-        funcion.setNombre($id1.text);
-        funcion.setListaParametros($dec_f_paramlist.lv_parametros);
-    }else{
-        //llamamos a error semántico, no cumple primera y/o tercera regla
-    }
- $f = funcion;
-}
+{$f = crearDeclaracionFuncion($id1.text, $id2.text, $id3.text, $tipo.v, 
+$dec_f_paramlist.lv_parametros);}
 ;
 
 
@@ -317,8 +414,7 @@ $s = a;}
 | proc_call TOKEN_PUNTOCOMA {$s = $proc_call.llamada_proc;}
 | TOKEN_IF TOKEN_PARENTESIS_IZQ expcond aux7 
 {EstructuraIfClass if_sentencia = new EstructuraIfClass("if", 
-$expcond.v, $aux7.sentencias_if, $aux7.sentencias_else);
-$s = if_sentencia;}
+$expcond.v, $aux7.sentencias_if, $aux7.sentencias_else); $s = if_sentencia;}
 | TOKEN_DO aux8 {$s = $aux8.s;}
 | TOKEN_SELECT TOKEN_CASE TOKEN_PARENTESIS_IZQ exp TOKEN_PARENTESIS_DER
 {ArrayList<CasosClass> l_casos = new ArrayList<CasosClass>(); boolean esDefault = false; 
@@ -327,7 +423,7 @@ casos[l_casos, esDefault, sentencias_default]
 TOKEN_END TOKEN_SELECT 
 {EstructuraCaseClass case_sentencia = new 
 EstructuraCaseClass("case", $exp.v, $casos.lv_casos, $casos.esDefault_v, $casos.sv_default);
-case_sentencia.mostrar(); $s=case_sentencia;}
+$s=case_sentencia;}
 ;
 
 
@@ -356,19 +452,17 @@ TOKEN_WHILE TOKEN_PARENTESIS_IZQ expcond TOKEN_PARENTESIS_DER
 sentlist[l] TOKEN_ENDDO
 {EstructuraDoWhileClass dowhile_sentencia = new EstructuraDoWhileClass("while", 
 $expcond.v, $sentlist.lv_sentencias);
-dowhile_sentencia.mostrar();
 $s= dowhile_sentencia;}
 | IDENT TOKEN_IGUAL d1=doval TOKEN_COMA d2=doval TOKEN_COMA d3=doval 
 {ArrayList<SentenciaClass> l_do = new ArrayList<SentenciaClass>();} 
 sentlist[l_do] TOKEN_ENDDO
 {EstructuraDoClass do_sentencia = new EstructuraDoClass("for", 
 $IDENT.text, $d1.v, $d2.v, $d3.v, $sentlist.lv_sentencias);
-do_sentencia.mostrar();
 $s = do_sentencia;}
 ;
 
 
-exp returns [String v]: id1=exp op id2=exp {$v = $id1.v + $op.v + $id2.v;}
+exp returns [String v]: id1=exp op id2=exp {$v = $id1.v + " " + $op.v + " "+ $id2.v;}
 | factor {$v = $factor.v;}
 ;
 
@@ -429,15 +523,8 @@ dcllist[lista_constantes, lista_declaraciones]
 sent
 {sentencias_procedimiento.add($sent.s);} 
 sentlist[sentencias_procedimiento] TOKEN_END TOKEN_SUBROUTINE id2=IDENT
-{FuncionClass procedimiento = new FuncionClass();
- if($id1.text.equals($id2.text)){
-    procedimiento.setNombre($id1.text);
-    procedimiento.setListaParametros($dec_s_paramlist.lv_parametros);
-    procedimiento.setListaSentencias(sentencias_procedimiento);
- }else{
-    //llamamos a error semántico, no cumple primera  regla
- }
-$p = procedimiento;}
+{$p = crearProcedimientoImplementado($id1.text, $id2.text, $dec_s_paramlist.lv_parametros,
+sentencias_procedimiento);}
 ;
 
 
@@ -455,24 +542,14 @@ sent
 sentlist[sentencias_funcion] id3=IDENT TOKEN_IGUAL exp TOKEN_PUNTOCOMA
 {RetornoClass r = new RetornoClass("retorno",$exp.v); sentencias_funcion.add(r);}
 TOKEN_END TOKEN_FUNCTION id4=IDENT
-{FuncionClass funcion = new FuncionClass();
-if(($id1.text.equals($id2.text))&&($id1.text.equals($id3.text))&& 
-   ($id1.text.equals($id4.text)) && ($id2.text.equals($id3.text)) &&
-    ($id2.text.equals($id4.text)) && ($id3.text.equals($id4.text))){
-        funcion.setTipoDevuelto($tipo.v);
-        funcion.setNombre($id1.text);
-        funcion.setListaParametros($dec_f_paramlist.lv_parametros);
-        funcion.setListaSentencias(sentencias_funcion);
-    }else{
-        //llamamos a error semántico, no cumple primera y/o tercera regla 
-    }
- $f = funcion;}
+{$f = crearFuncionImplementada($id1.text, $id2.text, $id3.text, $id4.text, $tipo.v,
+ $dec_f_paramlist.lv_parametros, sentencias_funcion);}
 ;
 
 //SECUENCIAS DE CONTROL DE FLUJO
 
 expcond returns[String v]: 
-id1=expcond oplog id2=expcond {$v = $id1.v + $oplog.v + $id2.v;}
+id1=expcond oplog id2=expcond {$v = $id1.v + " " + $oplog.v + " " +  $id2.v;}
 | factorcond {$v = $factorcond.v;}
 ;
 
@@ -695,7 +772,7 @@ NUM_INT_CONST_B: 'b' '\'' [0-1]+ '\''{
 NUM_INT_CONST_O: 'o' '\'' [0-7]+ '\''{
     token_actual = new TokenDetectadoClass(true, getText(), "NUM_INT_CONST_O");
     listaTokens.añadirToken(token_actual);};
-NUM_INT_CONST_H: 'h' '\'' [0-9A-F]+ '\''{
+NUM_INT_CONST_H: 'z' '\'' [0-9A-F]+ '\''{
     token_actual = new TokenDetectadoClass(true, getText(), "NUM_INT_CONST_H");
     listaTokens.añadirToken(token_actual);};
 TOKEN_TRUE: '.TRUE.'{

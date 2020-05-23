@@ -22,6 +22,7 @@ public class LlamadaClass extends SentenciaClass {
     }
     
     @Override
-    public void mostrar(){}
+    public void mostrar(){
+    System.out.println(nombre+ " " + listaInputs + ";");}
     
 }

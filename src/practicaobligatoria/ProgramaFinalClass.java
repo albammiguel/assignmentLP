@@ -79,23 +79,25 @@ public class ProgramaFinalClass {
         String parentesis_izq = "(";
         String parentesis_der = ")";
         String espacio = " ";
-        
-        if(!defines.getListaConstantes().isEmpty())
-            {defines.imprimir();}
-        if(!decfuns.getListaFunciones().isEmpty())
-            {decfuns.imprimir();}
-        if(!partes.getListaImplementacionFunciones().isEmpty())
-            {partes.imprimir();}
-        
-        if(!sentenciasMain.isEmpty()){
-            System.out.println(vacio + espacio + main + espacio + parentesis_izq 
-                              + espacio + vacio + espacio + parentesis_der);
-            System.out.println(llave_izq);
-            sentenciasMain.forEach((s) -> {
-                 System.out.print(tabulacion);
-                 s.mostrar();});
-            System.out.println(llave_der);
-             
+        if(!isEsError()){
+            
+            if(!defines.getListaConstantes().isEmpty())
+                {defines.imprimir();}
+            if(!decfuns.getListaFunciones().isEmpty())
+                {decfuns.imprimir();}
+            if(!partes.getListaImplementacionFunciones().isEmpty())
+                {partes.imprimir();}
+
+            if(!sentenciasMain.isEmpty()){
+                System.out.println(vacio + espacio + main + espacio + parentesis_izq 
+                                  + espacio + vacio + espacio + parentesis_der);
+                System.out.println(llave_izq);
+                sentenciasMain.forEach((s) -> {
+                     System.out.print(tabulacion);
+                     s.mostrar();});
+                System.out.println(llave_der);
+
+            }
         }
         
         
