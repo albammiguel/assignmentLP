@@ -23,9 +23,8 @@ public class PracticaObligatoria {
             // Preparar el fichero de entrada para asignarlo al analizador léxico
             CharStream input = CharStreams.fromFileName(args[0]);
             // Crear el objeto correspondiente al analizador léxico con el fichero de entrada
-            /*String modoDepuracion = args[1];
-            boolean depuracion = modoDepuracion.equals("s");*/
-            boolean depuracion = false;
+            String modoDepuracion = args[1];
+            boolean depuracion = modoDepuracion.equals("-d");
             ListaTokensDetectadosClass depurador = new ListaTokensDetectadosClass(depuracion);
             practicaObligatoriaLexer analex = new practicaObligatoriaLexer(input, depurador);
             // Identificar al analizador léxico como fuente de tokens para el sintactico
@@ -44,7 +43,9 @@ public class PracticaObligatoria {
                 Llamar al método para imprimir el código del lenguaje final que
                 será posteriormente recogido en un fichero .bat
             */
-                lenguajeFinal.mostrar();
+               
+                String nombreFichero = ("prueba").concat(".c");
+                lenguajeFinal.generarFichero(nombreFichero);
             
         } catch (org.antlr.v4.runtime.RecognitionException e) { 
             //Fallo al reconocer la entrada    

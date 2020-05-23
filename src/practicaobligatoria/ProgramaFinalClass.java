@@ -5,6 +5,10 @@
  */
 package practicaobligatoria;
 
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 
 /**
@@ -70,7 +74,7 @@ public class ProgramaFinalClass {
     
     
     
-    public void mostrar(){
+    public void generarFichero(String nombreFichero) throws IOException{
         String vacio = "void";
         String main = "main";
         String tabulacion = "\t";
@@ -80,22 +84,26 @@ public class ProgramaFinalClass {
         String parentesis_der = ")";
         String espacio = " ";
         if(!isEsError()){
-            
+            FileWriter ficheroSalida = new FileWriter(nombreFichero);
+            BufferedWriter buffer = new BufferedWriter(ficheroSalida);
+            PrintWriter lenguaje = new PrintWriter(buffer);
             if(!defines.getListaConstantes().isEmpty())
-                {defines.imprimir();}
+                {defines.imprimir(lenguaje);}
             if(!decfuns.getListaFunciones().isEmpty())
-                {decfuns.imprimir();}
+                {decfuns.imprimir(lenguaje);}
             if(!partes.getListaImplementacionFunciones().isEmpty())
-                {partes.imprimir();}
+                {partes.imprimir(lenguaje);}
 
             if(!sentenciasMain.isEmpty()){
-                System.out.println(vacio + espacio + main + espacio + parentesis_izq 
+                lenguaje.println(vacio + espacio + main + espacio + parentesis_izq 
                                   + espacio + vacio + espacio + parentesis_der);
-                System.out.println(llave_izq);
+                lenguaje.println(llave_izq);
                 sentenciasMain.forEach((s) -> {
-                     System.out.print(tabulacion);
-                     s.mostrar();});
-                System.out.println(llave_der);
+                     lenguaje.print(tabulacion);
+                     s.mostrar(lenguaje);});
+                lenguaje.println(llave_der);
+                
+            lenguaje.close();
 
             }
         }

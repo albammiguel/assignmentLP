@@ -3464,7 +3464,7 @@ public class practicaObligatoriaParser extends Parser {
 					((ExpcondContext)_localctx).oplog = oplog();
 					setState(573);
 					((ExpcondContext)_localctx).id2 = expcond(3);
-					((ExpcondContext)_localctx).v =  ((ExpcondContext)_localctx).id1.v + ((ExpcondContext)_localctx).oplog.v + ((ExpcondContext)_localctx).id2.v;
+					((ExpcondContext)_localctx).v =  ((ExpcondContext)_localctx).id1.v + " " + ((ExpcondContext)_localctx).oplog.v + " " +  ((ExpcondContext)_localctx).id2.v;
 					}
 					} 
 				}

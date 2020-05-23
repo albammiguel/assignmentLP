@@ -5,6 +5,7 @@
  */
 package practicaobligatoria;
 
+import java.io.PrintWriter;
 import java.util.ArrayList;
 
 /**
@@ -73,13 +74,16 @@ public class EstructuraDoClass extends SentenciaClass {
     
     
     @Override
-    public void mostrar(){
-        System.out.println("for(" + identificador + "=" + valorInicial + " ; " + identificador + "!=" + valorFinal + " ; " + identificador + "=" + identificador + "+" + incremento + ") {");
+    public void mostrar(PrintWriter lenguaje){
+        lenguaje.println("for(" + identificador + "=" + 
+                valorInicial + " ; " + identificador + "!=" + 
+                valorFinal + " ; " + identificador + "=" 
+                + identificador + "+" + incremento + ") {");
         for(SentenciaClass sentencias: listaSentencias){
-            System.out.print("\t");
-            sentencias.mostrar();
+            lenguaje.print("\t");
+            sentencias.mostrar(lenguaje);
         }
-        System.out.println("}");
+        lenguaje.println("}");
     }
     
 }

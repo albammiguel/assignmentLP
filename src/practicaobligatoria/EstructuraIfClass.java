@@ -5,6 +5,7 @@
  */
 package practicaobligatoria;
 
+import java.io.PrintWriter;
 import java.util.ArrayList;
 
 /**
@@ -26,24 +27,24 @@ public class EstructuraIfClass extends SentenciaClass{
     }
     
     @Override
-    public void mostrar(){
-        System.out.println("if (" + condicion +") {");
+    public void mostrar(PrintWriter lenguaje){
+        lenguaje.println("if (" + condicion +") {");
         for(SentenciaClass sentencia: sentenciasIf){
-                System.out.print("\t");
-                sentencia.mostrar();
-                System.out.println(";");
+                lenguaje.print("\t");
+                sentencia.mostrar(lenguaje);
+                lenguaje.println(";");
         }
-        System.out.print("}");
+        lenguaje.print("}");
         if(!sentenciasElse.isEmpty()){
-            System.out.println(" else {");
+            lenguaje.println(" else {");
             for(SentenciaClass sentencias: sentenciasElse){
-                System.out.print("\t");
-                sentencias.mostrar();
-                System.out.println(";");
+                lenguaje.print("\t");
+                sentencias.mostrar(lenguaje);
+                lenguaje.println(";");
             }
-            System.out.print("}");
+            lenguaje.print("}");
         }
-        System.out.println();
+        lenguaje.println();
     }
     
     

@@ -5,6 +5,7 @@
  */
 package practicaobligatoria;
 
+import java.io.PrintWriter;
 import java.util.ArrayList;
 
 /**
@@ -39,7 +40,7 @@ public class DeclaracionClass extends SentenciaClass {
     }
     
     
-    private void imprimirVariables(){
+    private void imprimirVariables(PrintWriter lenguaje){
           String igual = "=";
           String espacio =" ";
           String puntoComa = ";";
@@ -51,25 +52,25 @@ public class DeclaracionClass extends SentenciaClass {
         listaVariablesDeclaradas.forEach((v)-> {
             if(v.getTipo().equals("char") && v.getTamañoChar() > 0){
                 if(v.getValor() != null){
-                   System.out.print(v.getNombre()+ corchete_izq + v.getTamañoChar()+ 
+                   lenguaje.print(v.getNombre()+ corchete_izq + v.getTamañoChar()+ 
                                    corchete_der + igual + v.getValor());
                 }else{
-                    System.out.print(v.getNombre()+ corchete_izq + v.getTamañoChar()+ 
+                    lenguaje.print(v.getNombre()+ corchete_izq + v.getTamañoChar()+ 
                                    corchete_der);
                 }
             if(listaVariablesDeclaradas.get(listaVariablesDeclaradas.size()-1).equals(v)){
-                   System.out.print(puntoComa);
-            } else {System.out.print(coma+espacio);}
+                   lenguaje.print(puntoComa);
+            } else {lenguaje.print(coma+espacio);}
             }else{
                  if(v.getValor() != null){
-                    System.out.print(v.getNombre()+ igual + v.getValor());
+                    lenguaje.print(v.getNombre()+ igual + v.getValor());
                 }else{
-                    System.out.print(v.getNombre());
+                    lenguaje.print(v.getNombre());
                 }
             //comprobamos si es la última variable o hay que seguir imprimiendo
             if(listaVariablesDeclaradas.get(listaVariablesDeclaradas.size()-1).equals(v)){
-                   System.out.print(puntoComa);
-            } else {System.out.print(coma+espacio);}
+                  lenguaje.print(puntoComa);
+            } else {lenguaje.print(coma+espacio);}
             }
             });
           
@@ -78,13 +79,12 @@ public class DeclaracionClass extends SentenciaClass {
     }
     
     @Override
-    public void mostrar(){
+    public void mostrar(PrintWriter lenguaje){
         String espacio = " ";
-        String igual = ";";
         String saltoLinea = "\n";
         
-        System.out.print(tipoVariables + espacio);
-        imprimirVariables();
-        System.out.print(saltoLinea);
+        lenguaje.print(tipoVariables + espacio);
+        imprimirVariables(lenguaje);
+        lenguaje.print(saltoLinea);
     } 
 }

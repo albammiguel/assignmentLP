@@ -5,6 +5,7 @@
  */
 package practicaobligatoria;
 
+import java.io.PrintWriter;
 import java.util.ArrayList;
 
 /**
@@ -29,26 +30,26 @@ public class DecFunsClass {
     }
     
     //METODOS
-    private void imprimirSinArgumentos(String tipo, String nombre){
+    private void imprimirSinArgumentos(String tipo, String nombre, PrintWriter lenguaje){
         String parentesis_izq = "(";
         String parentesis_der = ")";
         String puntoComa =";";
         String vacio = "void";
         String espacio = " ";
         if(tipo ==null){
-            System.out.println(vacio + espacio + nombre +
+            lenguaje.println(vacio + espacio + nombre +
                                       espacio + parentesis_izq + espacio
                                       + vacio + espacio + parentesis_der + 
                                        puntoComa);
         } else {
-              System.out.println(tipo + espacio + nombre +
+              lenguaje.println(tipo + espacio + nombre +
                                       espacio + parentesis_izq + espacio
                                       + vacio + espacio + parentesis_der + 
                                        puntoComa);
         }
     }
     
-    private void imprimirConArgumentos(FuncionClass f){
+    private void imprimirConArgumentos(FuncionClass f, PrintWriter lenguaje){
         String parentesis_izq = "(";
         String parentesis_der = ")";
         String puntoComa =";";
@@ -60,27 +61,27 @@ public class DecFunsClass {
         String nombre = f.getNombre();
         
         if(tipo==null){
-            System.out.print(vacio + espacio 
+            lenguaje.print(vacio + espacio 
                             + nombre + espacio
                             +parentesis_izq + espacio);
-            f.imprimirListaParametros();
-            System.out.print(parentesis_der + puntoComa + saltoLinea);
+            f.imprimirListaParametros(lenguaje);
+            lenguaje.print(parentesis_der + puntoComa + saltoLinea);
         } else {
-            System.out.print(tipo+ espacio 
+            lenguaje.print(tipo+ espacio 
                                + nombre + espacio
                                +parentesis_izq + espacio);
-            f.imprimirListaParametros();
-            System.out.print(parentesis_der + puntoComa + saltoLinea);
+            f.imprimirListaParametros(lenguaje);
+            lenguaje.print(parentesis_der + puntoComa + saltoLinea);
         }
     }
     
-    public void imprimir(){
+    public void imprimir(PrintWriter lenguaje){
         
         listaFunciones.forEach((f) -> {
            if(f.getListaParametros().isEmpty()){
-               imprimirSinArgumentos(f.getTipoDevuelto(),f.getNombre());
+               imprimirSinArgumentos(f.getTipoDevuelto(),f.getNombre(),lenguaje);
            }else{
-               imprimirConArgumentos(f);
+               imprimirConArgumentos(f,lenguaje);
            }
         });
     }

@@ -5,6 +5,7 @@
  */
 package practicaobligatoria;
 
+import java.io.PrintWriter;
 import java.util.ArrayList;
 
 /**
@@ -40,12 +41,12 @@ public class EstructuraDoWhileClass extends SentenciaClass {
     
     
     @Override
-    public void mostrar(){
-        System.out.println("while (" + condicion + ") {");
+    public void mostrar(PrintWriter lenguaje){
+        lenguaje.println("while (" + condicion + ") {");
             for(SentenciaClass sentencias: listaSentencias){
-                System.out.print("\t");
-                sentencias.mostrar();
+                lenguaje.print("\t");
+                sentencias.mostrar(lenguaje);
             }
-            System.out.println("}");
+            lenguaje.println("}");
     }
 }

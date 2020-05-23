@@ -5,6 +5,7 @@
  */
 package practicaobligatoria;
 
+import java.io.PrintWriter;
 import java.util.ArrayList;
 
 /**
@@ -25,6 +26,6 @@ public abstract class SentenciaClass {
     }
     
     //METODOS
-    public abstract void mostrar();
+    public abstract void mostrar(PrintWriter lenguaje);
     
 }

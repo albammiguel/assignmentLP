@@ -5,6 +5,8 @@
  */
 package practicaobligatoria;
 
+import java.io.PrintWriter;
+
 /**
  *
  * @author albam
@@ -19,8 +21,8 @@ public class RetornoClass extends SentenciaClass {
     }
     
     @Override
-    public void mostrar(){
-        System.out.println("return" + " " + expresionRetorno);
+    public void mostrar(PrintWriter lenguaje){
+        lenguaje.println("return" + " " + expresionRetorno);
     }
     
 }

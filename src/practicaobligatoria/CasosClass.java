@@ -23,7 +23,6 @@ public class CasosClass {
     public ArrayList<String> getEtiquetas() {
         return etiquetas;
     }
-
     public void setEtiquetas(ArrayList<String> etiqueta) {
         this.etiquetas = etiqueta;
     }

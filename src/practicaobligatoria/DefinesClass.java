@@ -5,6 +5,7 @@
  */
 package practicaobligatoria;
 
+import java.io.PrintWriter;
 import java.util.ArrayList;
 
 /**
@@ -26,13 +27,13 @@ public class DefinesClass {
         this.listaConstantes = listaConstantes;
     }
     
-    public void imprimir(){
+    public void imprimir(PrintWriter lenguaje){
         String espacio = " ";
         String constanteDefine = "#define";
         //String puntoComa = ";"; 
         
         listaConstantes.forEach((c) -> {
-            System.out.println(constanteDefine + espacio + c.getNombre()
+            lenguaje.println(constanteDefine + espacio + c.getNombre()
                                 + espacio + c.getValor()/*+ puntoComa*/);
         });
         

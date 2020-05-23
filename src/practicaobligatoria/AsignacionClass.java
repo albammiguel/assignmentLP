@@ -5,6 +5,8 @@
  */
 package practicaobligatoria;
 
+import java.io.PrintWriter;
+
 /**
  *
  * @author albam
@@ -20,8 +22,8 @@ public class AsignacionClass extends SentenciaClass {
     }
     
     @Override
-    public void mostrar(){
-        System.out.println(identificador + " = " + valor + ";");
+    public void mostrar(PrintWriter lenguaje){
+        lenguaje.println(identificador + " = " + valor + ";");
     }
     
 }

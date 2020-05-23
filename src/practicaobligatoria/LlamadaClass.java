@@ -5,6 +5,7 @@
  */
 package practicaobligatoria;
 
+import java.io.PrintWriter;
 import java.util.ArrayList;
 
 /**
@@ -22,7 +23,7 @@ public class LlamadaClass extends SentenciaClass {
     }
     
     @Override
-    public void mostrar(){
-    System.out.println(nombre+ " " + listaInputs + ";");}
+    public void mostrar(PrintWriter lenguaje){
+    lenguaje.println(nombre+ " " + listaInputs + ";");}
     
 }

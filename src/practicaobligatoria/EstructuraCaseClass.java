@@ -5,6 +5,7 @@
  */
 package practicaobligatoria;
 
+import java.io.PrintWriter;
 import java.util.ArrayList;
 
 /**
@@ -29,26 +30,26 @@ public class EstructuraCaseClass extends SentenciaClass{
     }
     
     @Override
-    public void mostrar(){
-        System.out.println("switch ( " + selector + ") {");
+    public void mostrar(PrintWriter lenguaje){
+       lenguaje.println("switch ( " + selector + ") {");
         for(CasosClass casos: listaCasos){
-            System.out.print("\t" + "case "); 
             for(String etiqueta: casos.getEtiquetas()){
-                System.out.println(etiqueta + " :");
-                for(SentenciaClass sentencias: casos.getListaSentencias()){
-                    System.out.print("\t\t");
-                    sentencias.mostrar();
-                }
-                System.out.println("\t\tbreak;");
+                lenguaje.print("\t" + "case "); 
+                lenguaje.println(etiqueta + " :");
             }
+            for(SentenciaClass sentencias: casos.getListaSentencias()){
+                    lenguaje.print("\t\t");
+                    sentencias.mostrar(lenguaje);
+                }
+                lenguaje.println("\t\tbreak;");
         }
         if(hayDefault){
-            System.out.println("\tdefault:");
+            lenguaje.println("\tdefault:");
             for(SentenciaClass sentencia: sentenciasDefault){
-                System.out.print("\t\t");
-                sentencia.mostrar();
+                lenguaje.print("\t\t");
+                sentencia.mostrar(lenguaje);
             }
         }
-        System.out.println("}");
+        lenguaje.println("\t}");
     }
 }

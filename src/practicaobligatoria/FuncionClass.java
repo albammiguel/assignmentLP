@@ -5,6 +5,7 @@
  */
 package practicaobligatoria;
 
+import java.io.PrintWriter;
 import java.util.ArrayList;
 
 /**
@@ -73,20 +74,20 @@ public class FuncionClass {
         this.listaSentencias = listaSentencias;
     }
     
-    public void imprimirListaSentencias(){
+    public void imprimirListaSentencias(PrintWriter lenguaje){
         String tabulacion ="\t";
         String llave_izq = "{";
         String llave_der = "}";
         
-        System.out.println(llave_izq);
+        lenguaje.println(llave_izq);
         listaSentencias.forEach((s)->{
-            System.out.print(tabulacion);
-            s.mostrar();}
+            lenguaje.print(tabulacion);
+            s.mostrar(lenguaje);}
         );
-        System.out.println(llave_der);
+        lenguaje.println(llave_der);
     }
     
-    public void imprimirListaParametros(){
+    public void imprimirListaParametros(PrintWriter lenguaje){
         String coma = ",";
         String corchete_izq = "[";
         String corchete_der = "]";
@@ -96,22 +97,22 @@ public class FuncionClass {
         listaParametros.forEach((p)-> {
             if(p.getTipo().equals("char") && p.getTamañoChar() > 0){
                 if(p.isSalida()){
-                   System.out.print(p.getTipo() + espacio + asterisco +
+                   lenguaje.print(p.getTipo() + espacio + asterisco +
                            p.getNombre()+ corchete_izq + corchete_der);
                 }else{
-                    System.out.print(p.getTipo() + espacio + p.getNombre()
+                    lenguaje.print(p.getTipo() + espacio + p.getNombre()
                                  + corchete_izq + corchete_der);
                 }
             }else{
                  if(p.isSalida()){
-                    System.out.print(p.getTipo()+espacio+asterisco+p.getNombre());
+                    lenguaje.print(p.getTipo()+espacio+asterisco+p.getNombre());
                 }else{
-                    System.out.print(p.getTipo()+espacio+p.getNombre());
+                    lenguaje.print(p.getTipo()+espacio+p.getNombre());
                 }
             //comprobamos si es el último parametro o hay que seguir imprimiendo
             if(listaParametros.get(listaParametros.size()-1).equals(p)){
-                   System.out.print(espacio);
-            } else {System.out.print(coma+espacio);}
+                   lenguaje.print(espacio);
+            } else {lenguaje.print(coma+espacio);}
             }
             });
     }

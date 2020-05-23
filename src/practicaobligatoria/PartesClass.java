@@ -5,6 +5,7 @@
  */
 package practicaobligatoria;
 
+import java.io.PrintWriter;
 import java.util.ArrayList;
 
 /**
@@ -30,10 +31,9 @@ public class PartesClass {
     }
     
     //METODOS
-     private void imprimirSinArgumentos(FuncionClass f){
+     private void imprimirSinArgumentos(FuncionClass f, PrintWriter lenguaje){
         String parentesis_izq = "(";
         String parentesis_der = ")";
-        String puntoComa =";";
         String vacio = "void";
         String espacio = " ";
         
@@ -41,53 +41,51 @@ public class PartesClass {
         String nombre = f.getNombre();
         
         if(tipo ==null){
-            System.out.println(vacio + espacio + nombre +
+            lenguaje.println(vacio + espacio + nombre +
                                       espacio + parentesis_izq + espacio
                                       + vacio + espacio + parentesis_der);
-            f.imprimirListaSentencias();
+            f.imprimirListaSentencias(lenguaje);
         } else {
-              System.out.println(tipo + espacio + nombre +
+              lenguaje.println(tipo + espacio + nombre +
                                       espacio + parentesis_izq + espacio
                                       + vacio + espacio + parentesis_der);
-              f.imprimirListaSentencias();
+              f.imprimirListaSentencias(lenguaje);
         }
     }
     
-    private void imprimirConArgumentos(FuncionClass f){
+    private void imprimirConArgumentos(FuncionClass f, PrintWriter lenguaje){
         String parentesis_izq = "(";
         String parentesis_der = ")";
-        String puntoComa =";";
         String vacio = "void";
         String espacio = " ";
-        String saltoLinea = "\n";
         
         String tipo = f.getTipoDevuelto();
         String nombre = f.getNombre();
         
         if(tipo==null){
-            System.out.print(vacio + espacio 
+            lenguaje.print(vacio + espacio 
                             + nombre + espacio
                             +parentesis_izq + espacio);
-            f.imprimirListaParametros();
-            System.out.print(parentesis_der);
-            f.imprimirListaSentencias();
+            f.imprimirListaParametros(lenguaje);
+            lenguaje.print(parentesis_der);
+            f.imprimirListaSentencias(lenguaje);
             
         } else {
-            System.out.print(tipo+ espacio 
+            lenguaje.print(tipo+ espacio 
                                + nombre + espacio
                                +parentesis_izq + espacio);
-            f.imprimirListaParametros();
-            System.out.print(parentesis_der);
-            f.imprimirListaSentencias();
+            f.imprimirListaParametros(lenguaje);
+            lenguaje.print(parentesis_der);
+            f.imprimirListaSentencias(lenguaje);
         }
     }
      
-    public void imprimir(){
+    public void imprimir(PrintWriter lenguaje){
          listaImplementacionFunciones.forEach((f) -> {
            if(f.getListaParametros().isEmpty()){
-               imprimirSinArgumentos(f);
+               imprimirSinArgumentos(f, lenguaje);
            }else{
-               imprimirConArgumentos(f);
+               imprimirConArgumentos(f, lenguaje);
            }
         });
         
