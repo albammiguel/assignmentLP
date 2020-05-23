@@ -67,15 +67,19 @@ ArrayList<SentenciaClass> sentencias_programa = new ArrayList<SentenciaClass>();
 dcllist[lista_constantes, lista_declaraciones] 
 {DefinesClass defines = new DefinesClass($dcllist.lv_constantes);
 lenguajeFinal.setDefines(defines);
-$dcllist.lv_declaraciones.forEach((d)->{
-    sentencias_programa.add(d);});
+$dcllist.lv_declaraciones.forEach((d)->{sentencias_programa.add(d);});
 }
 cabecera 
 {DecFunsClass decfuns = new DecFunsClass($cabecera.lv_funciones);
 lenguajeFinal.setDecfuns(decfuns);}
- sent sentlist
+ sent sentlist[sentencias_programa]
 {lenguajeFinal.setSentenciasMain(sentencias_programa);}
-TOKEN_END TOKEN_PROGRAM IDENT subproglist <EOF>;
+TOKEN_END TOKEN_PROGRAM IDENT 
+{ArrayList<FuncionClass> lista_funciones = new ArrayList<FuncionClass>();}
+subproglist[lista_funciones]
+{PartesClass partes = new PartesClass($subproglist.lv_funciones_implementadas);
+lenguajeFinal.setPartes(partes);} 
+;
 
 
 
@@ -89,6 +93,7 @@ $lv_declaraciones=$dcl.l_declaraciones;}
 dcllist[$dcl.l_constantes, $dcl.l_declaraciones] 
 {if(!$dcllist.lv_constantes.isEmpty())$lv_constantes = $dcllist.lv_constantes;
 if(!$dcllist.lv_declaraciones.isEmpty())$lv_declaraciones = $dcllist.lv_declaraciones;}
+
 |     {$lv_constantes = $l_constantes; $lv_declaraciones = $l_declaraciones;}
 ;
 
@@ -122,8 +127,11 @@ decsubprog[$lh_funciones] {$lv_funciones = $decsubprog.lv_funciones;}
 |                         {$lv_funciones = $lh_funciones;}
 ;
 
-sentlist : sent sentlist 
-| 
+sentlist[ArrayList<SentenciaClass> lh_sentencias] 
+returns[ArrayList<SentenciaClass> lv_sentencias]: 
+sent {lh_sentencias.add($sent.s);} sentlist[$lh_sentencias]
+{$lv_sentencias = $sentlist.lv_sentencias;} 
+|                       {$lv_sentencias = $lh_sentencias;}
 ;
 
 //PRIMERA ZONA DE DECLARACIONES
@@ -303,25 +311,63 @@ dec_f_paramlist[$lh_parametros] {$lv_parametros = $dec_f_paramlist.lv_parametros
 
 //ZONA DE SENTENCIAS DEL PROGRAMA PRINCIPAL
 
-sent: IDENT TOKEN_IGUAL exp TOKEN_PUNTOCOMA
-| proc_call TOKEN_PUNTOCOMA
-| TOKEN_IF TOKEN_PARENTESIS_IZQ expcond aux7
-| TOKEN_DO aux8
-| TOKEN_SELECT TOKEN_CASE TOKEN_PARENTESIS_IZQ exp TOKEN_PARENTESIS_DER casos TOKEN_END TOKEN_SELECT;
-
-aux7: TOKEN_PARENTESIS_DER sent
-| TOKEN_PARENTESIS_DER TOKEN_THEN sentlist TOKEN_ENDIF
-| TOKEN_PARENTESIS_DER TOKEN_THEN sentlist TOKEN_ELSE sentlist TOKEN_ENDIF;
-
-aux8: TOKEN_WHILE TOKEN_PARENTESIS_IZQ expcond TOKEN_PARENTESIS_DER sentlist TOKEN_ENDDO
-| IDENT TOKEN_IGUAL doval TOKEN_COMA doval TOKEN_COMA doval sentlist TOKEN_ENDDO;
-
+sent returns [SentenciaClass s]: IDENT TOKEN_IGUAL exp TOKEN_PUNTOCOMA
+{AsignacionClass a = new AsignacionClass("asignacion", $IDENT.text, $exp.v);
+$s = a;}
+| proc_call TOKEN_PUNTOCOMA {$s = $proc_call.llamada_proc;}
+| TOKEN_IF TOKEN_PARENTESIS_IZQ expcond aux7 
+{EstructuraIfClass i = new EstructuraIfClass("control flujo if", $expcond.v,
+$aux7.sentencias_if, $aux7.sentencias_else);
+$s= i;}
+| TOKEN_DO aux8 {$s = $aux8.s;}
+| TOKEN_SELECT TOKEN_CASE TOKEN_PARENTESIS_IZQ exp TOKEN_PARENTESIS_DER casos TOKEN_END TOKEN_SELECT
+{ $s =null;};
 
 
-exp: exp op exp 
-| factor;
+aux7 
+returns[ArrayList<SentenciaClass> sentencias_if,
+ArrayList<SentenciaClass> sentencias_else, ]: 
+TOKEN_PARENTESIS_DER 
+{ArrayList<SentenciaClass> l = new ArrayList<SentenciaClass>();} 
+sent  {l.add($sent.s); $sentencias_if = l; 
+$sentencias_else = new ArrayList<SentenciaClass>();}
+| TOKEN_PARENTESIS_DER TOKEN_THEN 
+{ArrayList<SentenciaClass> l = new ArrayList<SentenciaClass>();} 
+sentlist[l] TOKEN_ENDIF  {$sentencias_if = $sentlist.lv_sentencias; 
+$sentencias_else = l;}
+| TOKEN_PARENTESIS_DER TOKEN_THEN 
+{ArrayList<SentenciaClass> lista_if = new ArrayList<SentenciaClass>();} 
+l1=sentlist[lista_if] 
+TOKEN_ELSE
+{ArrayList<SentenciaClass> lista_else = new ArrayList<SentenciaClass>();}  
+l2=sentlist[lista_else] 
+TOKEN_ENDIF {$sentencias_if = $l1.lv_sentencias; 
+$sentencias_else = $l2.lv_sentencias;}
+;
 
-op: oparit;
+aux8 returns[SentenciaClass s]: 
+TOKEN_WHILE TOKEN_PARENTESIS_IZQ expcond TOKEN_PARENTESIS_DER
+{ArrayList<SentenciaClass> l = new ArrayList<SentenciaClass>();} 
+sentlist[l] TOKEN_ENDDO
+{EstructuraDoWhileClass w = new EstructuraDoWhileClass("control flujo while",
+$expcond.v, $sentlist.lv_sentencias);
+$s = w;}
+| IDENT TOKEN_IGUAL doval TOKEN_COMA doval TOKEN_COMA doval 
+{ArrayList<SentenciaClass> l = new ArrayList<SentenciaClass>();} 
+sentlist[l] TOKEN_ENDDO
+{EstructuraDoClass f = new EstructuraDoClass("control flujo for",$IDENT.text, $doval.v, $doval.v, 
+$doval.v, $sentlist.lv_sentencias);
+$s = f;}
+;
+
+
+
+exp returns [String v]: id1=exp op id2=exp {$v = $id1.v + $op.v + $id2.v;}
+| factor {$v = $factor.v;}
+;
+
+op returns [String v]: oparit {$v = $oparit.v;}
+;
 
 oparit returns [String v]: TOKEN_MAS{$v = "+";}
 | TOKEN_MENOS {$v = "-";}
@@ -329,47 +375,100 @@ oparit returns [String v]: TOKEN_MAS{$v = "+";}
 | TOKEN_DIVISION{$v = "/";}
 ;
 
-factor: simpvalue
-| TOKEN_PARENTESIS_IZQ exp TOKEN_PARENTESIS_DER
-| IDENT aux5;
-
-
-aux5: TOKEN_PARENTESIS_IZQ exp explist TOKEN_PARENTESIS_DER 
-|
+factor returns [String v]: simpvalue {$v = $simpvalue.v;}
+| TOKEN_PARENTESIS_IZQ exp TOKEN_PARENTESIS_DER {$v= "(" + $exp.v + ")";}
+| IDENT aux5[$IDENT.text] {$v = $aux5.v;}
 ;
 
-explist: TOKEN_COMA exp explist
-|
+
+aux5[String vh] returns [String v]: TOKEN_PARENTESIS_IZQ exp explist[$exp.v] 
+TOKEN_PARENTESIS_DER {$v= $vh + "(" + $explist.v + ")";}
+|          {$v = $vh;}
 ;
 
-proc_call: TOKEN_CALL IDENT subpparamlist;
-
-subpparamlist: TOKEN_PARENTESIS_IZQ exp explist TOKEN_PARENTESIS_DER
-|
+explist[String vh] returns [String v]: TOKEN_COMA exp 
+{$vh = $vh + "," + " "+$exp.v;}  explist[$vh] {$v = $explist.v;}
+|   {$v= $vh;}
 ;
+
+proc_call returns [LlamadaClass llamada_proc]: TOKEN_CALL IDENT subpparamlist
+{LlamadaClass llamada = new LlamadaClass("llamada", $IDENT.text, $subpparamlist.v);
+$llamada_proc = llamada;};
+
+subpparamlist returns[String v]: 
+TOKEN_PARENTESIS_IZQ exp explist[$exp.v] TOKEN_PARENTESIS_DER
+{$v="(" + $explist.v + ")";}
+|       {$v = null;}
+;
+
 
 //ZONA IMPLEMENTACION
-subproglist : codproc subproglist 
-| codfun subproglist 
-|
+subproglist[ArrayList<FuncionClass> lh_funciones_implementadas]
+returns [ArrayList<FuncionClass> lv_funciones_implementadas]: 
+codproc {$lh_funciones_implementadas.add($codproc.p);} 
+subproglist[$lh_funciones_implementadas]
+{$lv_funciones_implementadas = $subproglist.lv_funciones_implementadas;} 
+| codfun {$lh_funciones_implementadas.add($codfun.f);}  
+subproglist[$lh_funciones_implementadas] 
+{$lv_funciones_implementadas = $subproglist.lv_funciones_implementadas;}
+|          {$lv_funciones_implementadas = $lh_funciones_implementadas;}
 ;
 
-codproc : TOKEN_SUBROUTINE IDENT formal_paramlist 
+codproc returns[FuncionClass p] : TOKEN_SUBROUTINE id1=IDENT formal_paramlist 
 dec_s_paramlist[$formal_paramlist.lv_parametros] 
-dcllist[null, null] 
-sent sentlist TOKEN_END TOKEN_SUBROUTINE IDENT;
+{ArrayList<ConstanteClass> lista_constantes = new ArrayList <ConstanteClass>();
+ArrayList<DeclaracionClass> lista_declaraciones = new ArrayList<DeclaracionClass>();
+ArrayList<SentenciaClass> sentencias_procedimiento = new ArrayList<SentenciaClass>();}
+dcllist[lista_constantes, lista_declaraciones]
+{$dcllist.lv_declaraciones.forEach((d)->{sentencias_procedimiento.add(d);});} 
+sent
+{sentencias_procedimiento.add($sent.s);} 
+sentlist[sentencias_procedimiento] TOKEN_END TOKEN_SUBROUTINE id2=IDENT
+{FuncionClass procedimiento = new FuncionClass();
+ if($id1.text.equals($id2.text)){
+    procedimiento.setNombre($id1.text);
+    procedimiento.setListaParametros($dec_s_paramlist.lv_parametros);
+    procedimiento.setListaSentencias(sentencias_procedimiento);
+ }else{
+    //llamamos a error semántico, no cumple primera  regla
+ }
+$p = procedimiento;}
+;
 
-codfun : TOKEN_FUNCTION IDENT TOKEN_PARENTESIS_IZQ
+
+codfun returns[FuncionClass f]: TOKEN_FUNCTION id1=IDENT TOKEN_PARENTESIS_IZQ
 {ArrayList<ParametroClass> l = new ArrayList<ParametroClass>();}   
-nomparamlist[l] TOKEN_PARENTESIS_DER  tipo TOKEN_DOBLEPUNTO IDENT TOKEN_PUNTOCOMA
+nomparamlist[l] TOKEN_PARENTESIS_DER  tipo TOKEN_DOBLEPUNTO id2=IDENT TOKEN_PUNTOCOMA
 dec_f_paramlist[$nomparamlist.lv_parametros] 
-dcllist[null, null] sent sentlist IDENT TOKEN_IGUAL exp TOKEN_PUNTOCOMA
-TOKEN_END TOKEN_FUNCTION IDENT;
+{ArrayList<ConstanteClass> lista_constantes = new ArrayList <ConstanteClass>();
+ArrayList<DeclaracionClass> lista_declaraciones = new ArrayList<DeclaracionClass>();
+ArrayList<SentenciaClass> sentencias_funcion = new ArrayList<SentenciaClass>();}
+dcllist[lista_constantes, lista_declaraciones]
+{$dcllist.lv_declaraciones.forEach((d)->{sentencias_funcion.add(d);});} 
+sent
+{sentencias_funcion.add($sent.s);}  
+sentlist[sentencias_funcion] id3=IDENT TOKEN_IGUAL exp TOKEN_PUNTOCOMA
+TOKEN_END TOKEN_FUNCTION id4=IDENT
+{FuncionClass funcion = new FuncionClass();
+if(($id1.text.equals($id2.text))&&($id1.text.equals($id3.text))&& 
+   ($id1.text.equals($id4.text)) && ($id2.text.equals($id3.text)) &&
+    ($id2.text.equals($id4.text)) && ($id3.text.equals($id4.text))){
+        funcion.setTipoDevuelto($tipo.v);
+        funcion.setNombre($id1.text);
+        funcion.setListaParametros($dec_f_paramlist.lv_parametros);
+        funcion.setListaSentencias(sentencias_funcion);
+    }else{
+        //llamamos a error semántico, no cumple primera y/o tercera regla 
+    }
+ $f = funcion;}
+;
 
 //SECUENCIAS DE CONTROL DE FLUJO
 
-expcond: expcond oplog expcond
-| factorcond;
+expcond returns[String v]: 
+id1=expcond oplog id2=expcond {$v = $id1.v + $oplog.v + $id2.v;}
+| factorcond {$v = $factorcond.v;}
+;
 
 oplog returns[String v]:  TOKEN_OR{$v="||";}
 | TOKEN_AND {$v="&&";}
@@ -377,10 +476,12 @@ oplog returns[String v]:  TOKEN_OR{$v="||";}
 | TOKEN_NEQV {$v="^";}
 ;
 
-factorcond: exp opcomp exp
-| TOKEN_PARENTESIS_IZQ expcond TOKEN_PARENTESIS_DER
-| TOKEN_NOT factorcond
-| LOGIC_CONST;
+factorcond returns[String v]: id1=exp opcomp id2=exp {$v = $id1.v + $opcomp.v + $id2.v;}
+| TOKEN_PARENTESIS_IZQ expcond TOKEN_PARENTESIS_DER {$v = "(" + $expcond.v + ")";}
+| TOKEN_NOT factorcond {$v = "!" + $factorcond.v;}
+| TOKEN_TRUE {$v = "1";}
+| TOKEN_FALSE {$v = "0";}
+;
 
 opcomp returns [String v]: TOKEN_MENORQUE {$v = $TOKEN_MENORQUE.text;}
 | TOKEN_MAYORQUE {$v = $TOKEN_MAYORQUE.text;}
@@ -396,8 +497,11 @@ casos: TOKEN_CASE aux9
 |
 ;
 
-aux9: TOKEN_PARENTESIS_IZQ etiquetas TOKEN_PARENTESIS_DER sentlist casos
-| TOKEN_DEFAULT sentlist;
+aux9: TOKEN_PARENTESIS_IZQ etiquetas TOKEN_PARENTESIS_DER
+{ArrayList<SentenciaClass> lista = new ArrayList<SentenciaClass>();} 
+sentlist[lista] casos
+| TOKEN_DEFAULT {ArrayList<SentenciaClass> lista = new ArrayList<SentenciaClass>();}
+ sentlist[lista];
 
 etiquetas: simpvalue aux10
 | TOKEN_DOBLEPUNTO_SIMPLE simpvalue;
@@ -406,7 +510,7 @@ aux10: listaetiqetas
 | TOKEN_DOBLEPUNTO_SIMPLE simpvalue
 | TOKEN_DOBLEPUNTO_SIMPLE;
 
-listaetiqetas: TOKEN_COMA simpvalue
+listaetiqetas: TOKEN_COMA simpvalue listaetiqetas
 | 
 ;
 
@@ -558,8 +662,11 @@ NUM_INT_CONST_O: 'o' '\'' [0-7]+ '\''{
 NUM_INT_CONST_H: 'h' '\'' [0-9A-F]+ '\''{
     token_actual = new TokenDetectadoClass(true, getText(), "NUM_INT_CONST_H");
     listaTokens.añadirToken(token_actual);};
-LOGIC_CONST: ('.TRUE.' | '.FALSE.'){
-    token_actual = new TokenDetectadoClass(true, getText(), "LOGIC_CONST");
+TOKEN_TRUE: '.TRUE.'{
+    token_actual = new TokenDetectadoClass(true, getText(), "TOKEN_TRUE");
+    listaTokens.añadirToken(token_actual);};
+TOKEN_FALSE: '.FALSE.'{
+    token_actual = new TokenDetectadoClass(true, getText(), "TOKEN_FALSE");
     listaTokens.añadirToken(token_actual);};
 TOKEN_NOT: '.NOT.'{
     token_actual = new TokenDetectadoClass(true, getText(), "TOKEN_NOT");

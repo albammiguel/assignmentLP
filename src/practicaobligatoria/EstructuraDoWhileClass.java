@@ -21,6 +21,23 @@ public class EstructuraDoWhileClass extends SentenciaClass {
         this.condicion = condicion;
         this.listaSentencias = listaSentencias;
     }
+
+    public String getCondicion() {
+        return condicion;
+    }
+
+    public void setCondicion(String condicion) {
+        this.condicion = condicion;
+    }
+
+    public ArrayList<SentenciaClass> getListaSentencias() {
+        return listaSentencias;
+    }
+
+    public void setListaSentencias(ArrayList<SentenciaClass> listaSentencias) {
+        this.listaSentencias = listaSentencias;
+    }
+    
     
     @Override
     public void mostrar(){}

@@ -39,7 +39,7 @@ public class DeclaracionClass extends SentenciaClass {
     }
     
     
-    public void imprimirVariables(){
+    private void imprimirVariables(){
           String igual = "=";
           String espacio =" ";
           String puntoComa = ";";

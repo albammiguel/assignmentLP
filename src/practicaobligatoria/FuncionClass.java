@@ -15,6 +15,10 @@ public class FuncionClass {
     private String tipoDevuelto;
     private String nombre;
     private ArrayList <ParametroClass> listaParametros;
+    /*para la implementación de funciones(clase Partes), no la DEFINICION(decFuns
+    NO LA USA)
+    */
+    private ArrayList<SentenciaClass> listaSentencias;
     
     //CONSTRUCTORES
     public FuncionClass (String tipoDevuelto, String nombre, 
@@ -59,6 +63,27 @@ public class FuncionClass {
 
     public void setListaParametros(ArrayList<ParametroClass> listaParametros) {
         this.listaParametros = listaParametros;
+    }
+
+    public ArrayList<SentenciaClass> getListaSentencias() {
+        return listaSentencias;
+    }
+
+    public void setListaSentencias(ArrayList<SentenciaClass> listaSentencias) {
+        this.listaSentencias = listaSentencias;
+    }
+    
+    public void imprimirListaSentencias(){
+        String tabulacion ="    ";
+        String llave_izq = "{";
+        String llave_der = "}";
+        
+        System.out.println(llave_izq);
+        listaSentencias.forEach((s)->{
+            System.out.print(tabulacion);
+            s.mostrar();}
+        );
+        System.out.println(llave_der);
     }
     
     public void imprimirListaParametros(){

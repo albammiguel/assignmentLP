@@ -14,12 +14,18 @@ import java.util.ArrayList;
 public class EstructuraCaseClass extends SentenciaClass{
     private String selector;
     private ArrayList<CasosClass> listaCasos;
+    private boolean hayDefault;
+    private ArrayList<SentenciaClass> sentenciasDefault;
+    
     
     public EstructuraCaseClass(String tipoSentencia, String selector,
-            ArrayList<CasosClass> listaCasos){
+            ArrayList<CasosClass> listaCasos, boolean hayDefault,
+            ArrayList<SentenciaClass> sentenciasDefault){
         super(tipoSentencia);
         this.selector = selector;
         this.listaCasos = listaCasos;
+        this.hayDefault = hayDefault;
+        this.sentenciasDefault = sentenciasDefault;
     }
     
     @Override

@@ -16,7 +16,7 @@ public class EstructuraIfClass extends SentenciaClass{
     private ArrayList<SentenciaClass> sentenciasIf;
     private ArrayList<SentenciaClass> sentenciasElse;
     
-    public EstructuraIfClass(String tipoSentencia,String condicion, 
+    public EstructuraIfClass(String tipoSentencia, String condicion, 
             ArrayList<SentenciaClass> sentenciasIf,
             ArrayList<SentenciaClass> sentenciasElse){
         super(tipoSentencia);

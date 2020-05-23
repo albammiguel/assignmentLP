@@ -29,6 +29,48 @@ public class EstructuraDoClass extends SentenciaClass {
         this.incremento = incremento;
         this.listaSentencias = listaSentencias;
     }
+
+    public String getIdentificador() {
+        return identificador;
+    }
+
+    public void setIdentificador(String identificador) {
+        this.identificador = identificador;
+    }
+
+    public String getValorInicial() {
+        return valorInicial;
+    }
+
+    public void setValorInicial(String valorInicial) {
+        this.valorInicial = valorInicial;
+    }
+
+    public String getValorFinal() {
+        return valorFinal;
+    }
+
+    public void setValorFinal(String valorFinal) {
+        this.valorFinal = valorFinal;
+    }
+
+    public String getIncremento() {
+        return incremento;
+    }
+
+    public void setIncremento(String incremento) {
+        this.incremento = incremento;
+    }
+
+    public ArrayList<SentenciaClass> getListaSentencias() {
+        return listaSentencias;
+    }
+
+    public void setListaSentencias(ArrayList<SentenciaClass> listaSentencias) {
+        this.listaSentencias = listaSentencias;
+    }
+    
+    
     
     @Override
     public void mostrar(){}

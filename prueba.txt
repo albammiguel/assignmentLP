@@ -1,14 +1,115 @@
-PROGRAM Prueba1Correcto ;
+PROGRAM Prueba2Correcto ;
 
 ! Declaracion de variables
-REAL :: r1, r2;
-CHARACTER (2) :: c1, c2 = 'NO' ;
- 
+REAL :: r1, r2, r3, r4, r5;
+INTEGER :: i1, i2;
+
 ! Declaracion de constantes
 REAL , PARAMETER :: cte = 5.84 ;
 
-r1 = 24.1 ;
-r2 = r1 + cte ;
-mensaje = 'Suma "basica"'; 
+INTERFACE
+	SUBROUTINE DarValor ( Para1, Para2, Para3, Para4, Para5, Para6, Para7 )
+		REAL, INTENT ( IN ) Para1 ;
+		REAL, INTENT ( IN ) Para2 ;
+		REAL, INTENT ( IN ) Para3 ;
+		REAL, INTENT ( IN ) Para4 ;
+		REAL, INTENT ( IN ) Para5 ;
+		INTEGER, INTENT ( IN ) Para6;
+		INTEGER, INTENT ( IN ) Para7;
+	END SUBROUTINE DarValor
 
-END PROGRAM Prueba1Correcto
+	FUNCTION Suma ( Para1, Para2)
+		REAL :: Suma ;
+		REAL, INTENT ( IN ) Para1 ;
+		REAL, INTENT ( IN ) Para2 ;
+	END FUNCTION Suma
+
+	FUNCTION Resta ( Para1, Para2)
+		REAL :: Resta ;
+		REAL, INTENT ( IN ) Para1 ;
+		REAL, INTENT ( IN ) Para2 ;
+	END FUNCTION Resta
+
+	FUNCTION Multiplicacion ( Para1, Para2)
+		REAL :: Multiplicacion ;
+		REAL, INTENT ( IN ) Para1 ;
+		REAL, INTENT ( IN ) Para2 ;
+	END FUNCTION Multiplicacion
+
+	FUNCTION Division ( Para1, Para2)
+		INTEGER :: Division ;
+		INTEGER, INTENT ( IN ) Para1 ;
+		INTEGER, INTENT ( IN ) Para2 ;
+	END FUNCTION Division
+
+END INTERFACE
+
+CALL DarValor ( 25.45, 54.58, 154.24, 47.4, 87.5, 100, 20 ) ;
+CALL Suma (r1, cte) ;
+CALL Resta (r3, r2) ;
+CALL Multiplicacion (r4, r5) ;
+CALL Division (i1, i2) ;
+mensaje = 'Todo ''correcto''' ;
+
+END PROGRAM Prueba2Correcto
+
+SUBROUTINE DarValor ( Para1, Para2, Para3, Para4, Para5, Para6, Para7 )
+	REAL, INTENT ( IN ) Para1 ;
+	REAL, INTENT ( IN ) Para2 ;
+	REAL, INTENT ( IN ) Para3 ;
+	REAL, INTENT ( IN ) Para4 ;
+	REAL, INTENT ( IN ) Para5 ;
+	INTEGER, INTENT ( IN ) Para6;
+	INTEGER, INTENT ( IN ) Para7;
+	r1 = Para1 ;
+	r2 = Para2 ;
+	r3 = Para3 ;
+	r4 = Para4 ;
+	r5 = Para5 ;
+	i1 = Para6 ;
+	i2 = Para7 ;
+END SUBROUTINE DarValor
+
+FUNCTION Suma ( Para1, Para2 ) ! Funcion con 2 parametros de entrada
+	REAL :: Suma ;
+	REAL , INTENT ( IN ) Para1 ;
+	REAL , INTENT ( IN ) Para2 ;
+	! Declaracion de variables
+	REAL :: aux ;
+	! Sentencias
+	aux = Para1 + Para2;
+	Suma = aux ;
+END FUNCTION Suma 
+
+FUNCTION Resta ( Para1, Para2) ! Funcion con 2 parametros de entrada
+	REAL :: Resta ;
+	REAL, INTENT ( IN ) Para1 ;
+	REAL, INTENT ( IN ) Para2 ;
+	! Declaracion de variables
+	REAL :: aux ;
+	! Sentencias
+	aux = Para1 - Para2;
+	Resta = aux ;
+END FUNCTION Resta
+
+FUNCTION Multiplicacion ( Para1, Para2) ! Funcion con 2 parametros de entrada
+	REAL :: Multiplicacion ;
+	REAL, INTENT ( IN ) Para1 ;
+	REAL, INTENT ( IN ) Para2 ;
+	! Declaracion de variables
+	REAL :: aux ;
+	! Sentencias
+	aux = Para1 * Para2;
+	Multiplicacion = aux ;
+END FUNCTION Multiplicacion
+
+FUNCTION Division ( Para1, Para2) ! Funcion con 2 parametros de entrada
+	INTEGER :: Division ;
+	INTEGER, INTENT ( IN ) Para1 ;
+	INTEGER, INTENT ( IN ) Para2 ;
+	! Declaracion de variables
+	INTEGER :: aux ;
+	! Sentencias
+	aux = Para1 / Para2;
+	Division = aux ;
+END FUNCTION Division
