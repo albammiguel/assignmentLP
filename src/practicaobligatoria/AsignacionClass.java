@@ -20,6 +20,8 @@ public class AsignacionClass extends SentenciaClass {
     }
     
     @Override
-    public void mostrar(){}
+    public void mostrar(){
+        System.out.println(identificador + " = " + valor + ";");
+    }
     
 }

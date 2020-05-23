@@ -73,7 +73,7 @@ public class ProgramaFinalClass {
     public void mostrar(){
         String vacio = "void";
         String main = "main";
-        String tabulacion = "   ";
+        String tabulacion = "\t";
         String llave_izq = "{";
         String llave_der = "}";
         String parentesis_izq = "(";

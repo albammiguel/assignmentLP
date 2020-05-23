@@ -26,7 +26,25 @@ public class EstructuraIfClass extends SentenciaClass{
     }
     
     @Override
-    public void mostrar(){}
+    public void mostrar(){
+        System.out.println("if (" + condicion +") {");
+        for(SentenciaClass sentencia: sentenciasIf){
+                System.out.print("\t");
+                sentencia.mostrar();
+                System.out.println(";");
+        }
+        System.out.print("}");
+        if(!sentenciasElse.isEmpty()){
+            System.out.println(" else {");
+            for(SentenciaClass sentencias: sentenciasElse){
+                System.out.print("\t");
+                sentencias.mostrar();
+                System.out.println(";");
+            }
+            System.out.print("}");
+        }
+        System.out.println();
+    }
     
     
 }

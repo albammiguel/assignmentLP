@@ -74,7 +74,7 @@ public class FuncionClass {
     }
     
     public void imprimirListaSentencias(){
-        String tabulacion ="    ";
+        String tabulacion ="\t";
         String llave_izq = "{";
         String llave_der = "}";
         

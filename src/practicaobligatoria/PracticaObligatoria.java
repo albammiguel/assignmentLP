@@ -23,7 +23,9 @@ public class PracticaObligatoria {
             // Preparar el fichero de entrada para asignarlo al analizador léxico
             CharStream input = CharStreams.fromFileName(args[0]);
             // Crear el objeto correspondiente al analizador léxico con el fichero de entrada
-            boolean depuracion = false;
+            /*String modoDepuracion = args[1];
+            boolean depuracion = modoDepuracion.equals("s");*/
+            boolean depuracion = true;
             ListaTokensDetectadosClass depurador = new ListaTokensDetectadosClass(depuracion);
             practicaObligatoriaLexer analex = new practicaObligatoriaLexer(input, depurador);
             // Identificar al analizador léxico como fuente de tokens para el sintactico

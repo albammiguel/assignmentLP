@@ -316,50 +316,56 @@ sent returns [SentenciaClass s]: IDENT TOKEN_IGUAL exp TOKEN_PUNTOCOMA
 $s = a;}
 | proc_call TOKEN_PUNTOCOMA {$s = $proc_call.llamada_proc;}
 | TOKEN_IF TOKEN_PARENTESIS_IZQ expcond aux7 
-{EstructuraIfClass i = new EstructuraIfClass("control flujo if", $expcond.v,
-$aux7.sentencias_if, $aux7.sentencias_else);
-$s= i;}
+{EstructuraIfClass if_sentencia = new EstructuraIfClass("if", 
+$expcond.v, $aux7.sentencias_if, $aux7.sentencias_else);
+$s = if_sentencia;}
 | TOKEN_DO aux8 {$s = $aux8.s;}
-| TOKEN_SELECT TOKEN_CASE TOKEN_PARENTESIS_IZQ exp TOKEN_PARENTESIS_DER casos TOKEN_END TOKEN_SELECT
-{ $s =null;};
-
-
-aux7 
-returns[ArrayList<SentenciaClass> sentencias_if,
-ArrayList<SentenciaClass> sentencias_else, ]: 
-TOKEN_PARENTESIS_DER 
-{ArrayList<SentenciaClass> l = new ArrayList<SentenciaClass>();} 
-sent  {l.add($sent.s); $sentencias_if = l; 
-$sentencias_else = new ArrayList<SentenciaClass>();}
-| TOKEN_PARENTESIS_DER TOKEN_THEN 
-{ArrayList<SentenciaClass> l = new ArrayList<SentenciaClass>();} 
-sentlist[l] TOKEN_ENDIF  {$sentencias_if = $sentlist.lv_sentencias; 
-$sentencias_else = l;}
-| TOKEN_PARENTESIS_DER TOKEN_THEN 
-{ArrayList<SentenciaClass> lista_if = new ArrayList<SentenciaClass>();} 
-l1=sentlist[lista_if] 
-TOKEN_ELSE
-{ArrayList<SentenciaClass> lista_else = new ArrayList<SentenciaClass>();}  
-l2=sentlist[lista_else] 
-TOKEN_ENDIF {$sentencias_if = $l1.lv_sentencias; 
-$sentencias_else = $l2.lv_sentencias;}
+| TOKEN_SELECT TOKEN_CASE TOKEN_PARENTESIS_IZQ exp TOKEN_PARENTESIS_DER
+{ArrayList<CasosClass> l_casos = new ArrayList<CasosClass>(); boolean esDefault = false; 
+ArrayList<SentenciaClass> sentencias_default = new ArrayList<SentenciaClass>();} 
+casos[l_casos, esDefault, sentencias_default] 
+TOKEN_END TOKEN_SELECT 
+{EstructuraCaseClass case_sentencia = new 
+EstructuraCaseClass("case", $exp.v, $casos.lv_casos, $casos.esDefault_v, $casos.sv_default);
+case_sentencia.mostrar(); $s=case_sentencia;}
 ;
 
-aux8 returns[SentenciaClass s]: 
+
+aux7 returns [ArrayList<SentenciaClass> sentencias_if,
+ArrayList<SentenciaClass> sentencias_else]: 
+TOKEN_PARENTESIS_DER sent 
+{ArrayList<SentenciaClass> l_if = new ArrayList<SentenciaClass>();
+ArrayList<SentenciaClass> l_else= new ArrayList<SentenciaClass>();
+l_if.add($sent.s); $sentencias_if = l_if; $sentencias_else = l_else;}
+| TOKEN_PARENTESIS_DER TOKEN_THEN 
+{ArrayList<SentenciaClass> l_if = new ArrayList<SentenciaClass>();
+ArrayList<SentenciaClass> l_else= new ArrayList<SentenciaClass>();} 
+sentlist[l_if] TOKEN_ENDIF  
+{$sentencias_if = $sentlist.lv_sentencias; $sentencias_else = l_else;}
+| TOKEN_PARENTESIS_DER TOKEN_THEN 
+{ArrayList<SentenciaClass> l_if = new ArrayList<SentenciaClass>();} 
+l1=sentlist[l_if] TOKEN_ELSE
+{ArrayList<SentenciaClass> lista_else = new ArrayList<SentenciaClass>();}  
+l2=sentlist[lista_else] TOKEN_ENDIF
+{$sentencias_if = $l1.lv_sentencias; $sentencias_else = $l2.lv_sentencias;}
+;
+
+aux8 returns [SentenciaClass s]: 
 TOKEN_WHILE TOKEN_PARENTESIS_IZQ expcond TOKEN_PARENTESIS_DER
 {ArrayList<SentenciaClass> l = new ArrayList<SentenciaClass>();} 
 sentlist[l] TOKEN_ENDDO
-{EstructuraDoWhileClass w = new EstructuraDoWhileClass("control flujo while",
+{EstructuraDoWhileClass dowhile_sentencia = new EstructuraDoWhileClass("while", 
 $expcond.v, $sentlist.lv_sentencias);
-$s = w;}
-| IDENT TOKEN_IGUAL doval TOKEN_COMA doval TOKEN_COMA doval 
-{ArrayList<SentenciaClass> l = new ArrayList<SentenciaClass>();} 
-sentlist[l] TOKEN_ENDDO
-{EstructuraDoClass f = new EstructuraDoClass("control flujo for",$IDENT.text, $doval.v, $doval.v, 
-$doval.v, $sentlist.lv_sentencias);
-$s = f;}
+dowhile_sentencia.mostrar();
+$s= dowhile_sentencia;}
+| IDENT TOKEN_IGUAL d1=doval TOKEN_COMA d2=doval TOKEN_COMA d3=doval 
+{ArrayList<SentenciaClass> l_do = new ArrayList<SentenciaClass>();} 
+sentlist[l_do] TOKEN_ENDDO
+{EstructuraDoClass do_sentencia = new EstructuraDoClass("for", 
+$IDENT.text, $d1.v, $d2.v, $d3.v, $sentlist.lv_sentencias);
+do_sentencia.mostrar();
+$s = do_sentencia;}
 ;
-
 
 
 exp returns [String v]: id1=exp op id2=exp {$v = $id1.v + $op.v + $id2.v;}
@@ -379,7 +385,6 @@ factor returns [String v]: simpvalue {$v = $simpvalue.v;}
 | TOKEN_PARENTESIS_IZQ exp TOKEN_PARENTESIS_DER {$v= "(" + $exp.v + ")";}
 | IDENT aux5[$IDENT.text] {$v = $aux5.v;}
 ;
-
 
 aux5[String vh] returns [String v]: TOKEN_PARENTESIS_IZQ exp explist[$exp.v] 
 TOKEN_PARENTESIS_DER {$v= $vh + "(" + $explist.v + ")";}
@@ -448,6 +453,7 @@ dcllist[lista_constantes, lista_declaraciones]
 sent
 {sentencias_funcion.add($sent.s);}  
 sentlist[sentencias_funcion] id3=IDENT TOKEN_IGUAL exp TOKEN_PUNTOCOMA
+{RetornoClass r = new RetornoClass("retorno",$exp.v); sentencias_funcion.add(r);}
 TOKEN_END TOKEN_FUNCTION id4=IDENT
 {FuncionClass funcion = new FuncionClass();
 if(($id1.text.equals($id2.text))&&($id1.text.equals($id3.text))&& 
@@ -493,25 +499,55 @@ opcomp returns [String v]: TOKEN_MENORQUE {$v = $TOKEN_MENORQUE.text;}
 doval returns[String v]: NUM_INT_CONST {$v= $NUM_INT_CONST.text;}
 | IDENT{$v= $IDENT.text;};
 
-casos: TOKEN_CASE aux9
-|
+casos [ArrayList<CasosClass>lh_casos, boolean esDefault_h, ArrayList<SentenciaClass> sh_default] 
+returns [ArrayList<CasosClass> lv_casos,
+boolean esDefault_v, ArrayList<SentenciaClass> sv_default]: 
+TOKEN_CASE aux9[$lh_casos, $esDefault_h, $sh_default] 
+{$lv_casos = $aux9.lv_casos; $esDefault_v = $aux9.esDefault_v; $sv_default = $aux9.sv_default;}
+|               {$lv_casos = $lh_casos; $esDefault_v = $esDefault_h; 
+                $sv_default = $sh_default;}
 ;
 
-aux9: TOKEN_PARENTESIS_IZQ etiquetas TOKEN_PARENTESIS_DER
+aux9[ArrayList<CasosClass>lh_casos, boolean esDefault_h, ArrayList<SentenciaClass> sh_default] 
+returns [ArrayList<CasosClass> lv_casos,
+boolean esDefault_v, ArrayList<SentenciaClass> sv_default]: 
+TOKEN_PARENTESIS_IZQ etiquetas TOKEN_PARENTESIS_DER
 {ArrayList<SentenciaClass> lista = new ArrayList<SentenciaClass>();} 
-sentlist[lista] casos
-| TOKEN_DEFAULT {ArrayList<SentenciaClass> lista = new ArrayList<SentenciaClass>();}
- sentlist[lista];
+sentlist[lista] 
+{CasosClass caso = new CasosClass($etiquetas.lv_etiquetas,$sentlist.lv_sentencias); 
+$lh_casos.add(caso);} casos[$lh_casos, $esDefault_h, $sh_default] 
+{$lv_casos = $casos.lv_casos; $esDefault_v = $casos.esDefault_v; 
+$sv_default = $casos.sv_default;}
+| TOKEN_DEFAULT {$esDefault_h = true; 
+ArrayList<SentenciaClass> lista = new ArrayList<SentenciaClass>();}
+ sentlist[lista] {$sh_default = $sentlist.lv_sentencias;
+$lv_casos = $lh_casos; $esDefault_v = $esDefault_h; $sv_default = $sh_default;};
 
-etiquetas: simpvalue aux10
-| TOKEN_DOBLEPUNTO_SIMPLE simpvalue;
+etiquetas returns [ArrayList<String> lv_etiquetas]: 
+simpvalue {ArrayList<String> l_etiquetas = new ArrayList<String>();} 
+aux10[l_etiquetas, $simpvalue.v] {$lv_etiquetas = $aux10.lv_etiquetas;}
+| TOKEN_DOBLEPUNTO_SIMPLE simpvalue 
+{ArrayList<String> l_etiquetas = new ArrayList<String>();
+String etiqueta = "<" + $simpvalue.v; l_etiquetas.add(etiqueta);
+$lv_etiquetas = l_etiquetas;}
+;
 
-aux10: listaetiqetas
-| TOKEN_DOBLEPUNTO_SIMPLE simpvalue
-| TOKEN_DOBLEPUNTO_SIMPLE;
+aux10[ArrayList<String> lh_etiquetas, String vh] returns
+[ArrayList<String> lv_etiquetas]: {$lh_etiquetas.add($vh);}
+listaetiqetas[$lh_etiquetas] {$lv_etiquetas = $listaetiqetas.lv_etiquetas;}
+| TOKEN_DOBLEPUNTO_SIMPLE simpvalue {String etiqueta = $vh
+ + "to" + $simpvalue.v; 
+ $lh_etiquetas.add(etiqueta); $lv_etiquetas = $lh_etiquetas;}
+| TOKEN_DOBLEPUNTO_SIMPLE {
+String etiqueta = ">" + $vh; 
+$lh_etiquetas.add(etiqueta); $lv_etiquetas = $lh_etiquetas;}
+;
 
-listaetiqetas: TOKEN_COMA simpvalue listaetiqetas
-| 
+listaetiqetas[ArrayList<String> lh_etiquetas]
+returns [ArrayList<String> lv_etiquetas]: 
+TOKEN_COMA simpvalue {$lh_etiquetas.add($simpvalue.v);} 
+listaetiqetas[$lh_etiquetas] {$lv_etiquetas = $listaetiqetas.lv_etiquetas;}
+|                           {$lv_etiquetas = $lh_etiquetas;}
 ;
 
 

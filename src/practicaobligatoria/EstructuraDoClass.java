@@ -73,6 +73,13 @@ public class EstructuraDoClass extends SentenciaClass {
     
     
     @Override
-    public void mostrar(){}
+    public void mostrar(){
+        System.out.println("for(" + identificador + "=" + valorInicial + " ; " + identificador + "!=" + valorFinal + " ; " + identificador + "=" + identificador + "+" + incremento + ") {");
+        for(SentenciaClass sentencias: listaSentencias){
+            System.out.print("\t");
+            sentencias.mostrar();
+        }
+        System.out.println("}");
+    }
     
 }

@@ -12,20 +12,20 @@ import java.util.ArrayList;
  * @author albam
  */
 public class CasosClass {
-    private ArrayList<String> etiqueta;
+    private ArrayList<String> etiquetas;
     private ArrayList<SentenciaClass> listaSentencias;
     
-    public CasosClass(String etiqueta, ArrayList<SentenciaClass> listaSentencias){
-        this.etiqueta = new ArrayList<String>();
+    public CasosClass(ArrayList<String>etiquetas, ArrayList<SentenciaClass> listaSentencias){
+        this.etiquetas = etiquetas;
         this.listaSentencias = listaSentencias;
     }
 
-    public ArrayList<String> getEtiqueta() {
-        return etiqueta;
+    public ArrayList<String> getEtiquetas() {
+        return etiquetas;
     }
 
-    public void setEtiqueta(ArrayList<String> etiqueta) {
-        this.etiqueta = etiqueta;
+    public void setEtiquetas(ArrayList<String> etiqueta) {
+        this.etiquetas = etiqueta;
     }
 
     

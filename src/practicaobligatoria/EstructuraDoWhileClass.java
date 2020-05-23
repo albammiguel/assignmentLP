@@ -40,5 +40,12 @@ public class EstructuraDoWhileClass extends SentenciaClass {
     
     
     @Override
-    public void mostrar(){}
+    public void mostrar(){
+        System.out.println("while (" + condicion + ") {");
+            for(SentenciaClass sentencias: listaSentencias){
+                System.out.print("\t");
+                sentencias.mostrar();
+            }
+            System.out.println("}");
+    }
 }

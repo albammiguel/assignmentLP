@@ -19,6 +19,8 @@ public class RetornoClass extends SentenciaClass {
     }
     
     @Override
-    public void mostrar(){}
+    public void mostrar(){
+        System.out.println("\treturn" + " " + expresionRetorno);
+    }
     
 }
