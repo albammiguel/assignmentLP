@@ -47,6 +47,6 @@ public class EstructuraDoWhileClass extends SentenciaClass {
                 lenguaje.print("\t");
                 sentencias.mostrar(lenguaje);
             }
-            lenguaje.println("}");
+            lenguaje.println("\t}");
     }
 }

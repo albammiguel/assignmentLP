@@ -9,30 +9,20 @@ float Funcion2Param ( int Fun2Param1, char Fun2Param2[]);
 void Subrutina0Param ( void )
 {
 	int i1, i2=0, i3;
-	i1 = 0b011 + 0o740 * 0o101;
-	i3 = 0xA34 - 0x890 / 0x106 + 0x010;
-	Subrutina1Param (Funcion1Param(i1) + i2 * i3);
-}
+			}
 void Subrutina1Param ( int Sub1Param1 ){
 	float r1, r2=0.2, r3;
-	Subrutina0Param null;
-	r1 = Sub1Param1;
-}
+		}
 void Subrutina3Param ( int Sub3Param1, float *Sub3Param2, char *Sub3Param3 ){
 	int i1, i2=0, i3;
-	Sub3Param2 = Funcion1Param(Sub3Param1);
-	Subrutina1Param (i2 * i3);
-	Sub3Param3 = Sub3Param2 + i1;
-}
+			}
 int Funcion1Param ( float Fun1Param1 ){
 	float r1, r2=0.2, r3;
-	Subrutina0Param null;
-	return Sub1Param1
+		return Sub1Param1
 }
 float Funcion2Param ( int Fun2Param1, char Fun2Param2[]){
 	float r1, r2=0.2, r3;
-	Subrutina0Param null;
-	return Sub1Param1
+		return Sub1Param1
 }
 void PruebaIfs ( void )
 {
@@ -90,8 +80,7 @@ void PruebaIfs ( void )
 void PruebaDOs ( void )
 {
 	int i1, i2=0, i3;
-	a = 0;
-	for(contador=45 ; contador!=-3 ; contador=contador+decremento) {
+		for(contador=45 ; contador!=-3 ; contador=contador+decremento) {
 	Subrutina1Param (Funcion1Param(i1) + i2 * i3);
 	Subrutina0Param null;
 }

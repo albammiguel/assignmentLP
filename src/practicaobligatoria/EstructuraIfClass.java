@@ -32,7 +32,6 @@ public class EstructuraIfClass extends SentenciaClass{
         for(SentenciaClass sentencia: sentenciasIf){
                 lenguaje.print("\t");
                 sentencia.mostrar(lenguaje);
-                lenguaje.println(";");
         }
         lenguaje.print("}");
         if(!sentenciasElse.isEmpty()){
@@ -40,9 +39,8 @@ public class EstructuraIfClass extends SentenciaClass{
             for(SentenciaClass sentencias: sentenciasElse){
                 lenguaje.print("\t");
                 sentencias.mostrar(lenguaje);
-                lenguaje.println(";");
             }
-            lenguaje.print("}");
+            lenguaje.print("\t}");
         }
         lenguaje.println();
     }

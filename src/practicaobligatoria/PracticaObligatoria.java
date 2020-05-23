@@ -17,14 +17,18 @@ public class PracticaObligatoria {
     /**
      * @param args the command line arguments
      */
-    public static void main(String[] args) {
+    public static void main(String[] args){
         // TODO code application logic here
         try{
             // Preparar el fichero de entrada para asignarlo al analizador léxico
             CharStream input = CharStreams.fromFileName(args[0]);
+            String nombreFichero = args[0].substring(0, args[0].length()-3).concat("c");
             // Crear el objeto correspondiente al analizador léxico con el fichero de entrada
-            String modoDepuracion = args[1];
-            boolean depuracion = modoDepuracion.equals("-d");
+            boolean depuracion = false;
+            if(args.length == 2){
+                String modoDepuracion = args[1];
+                depuracion = modoDepuracion.equals("-d");
+            }else{System.out.println("Para entrar en la depuración de tokens, añade -d");}
             ListaTokensDetectadosClass depurador = new ListaTokensDetectadosClass(depuracion);
             practicaObligatoriaLexer analex = new practicaObligatoriaLexer(input, depurador);
             // Identificar al analizador léxico como fuente de tokens para el sintactico
@@ -43,8 +47,7 @@ public class PracticaObligatoria {
                 Llamar al método para imprimir el código del lenguaje final que
                 será posteriormente recogido en un fichero .bat
             */
-               
-                String nombreFichero = ("prueba").concat(".c");
+             
                 lenguajeFinal.generarFichero(nombreFichero);
             
         } catch (org.antlr.v4.runtime.RecognitionException e) { 

@@ -83,7 +83,7 @@ public class EstructuraDoClass extends SentenciaClass {
             lenguaje.print("\t");
             sentencias.mostrar(lenguaje);
         }
-        lenguaje.println("}");
+        lenguaje.println("\t}");
     }
     
 }
