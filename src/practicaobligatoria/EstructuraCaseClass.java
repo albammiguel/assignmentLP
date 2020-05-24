@@ -42,7 +42,7 @@ public class EstructuraCaseClass extends SentenciaClass{
                     lenguaje.print("\t\t");
                     sentencias.mostrar(lenguaje);
                 }
-                lenguaje.println("\t\tbreak;");
+                lenguaje.println("\t\t\tbreak;");
         }
         if(hayDefault){
             lenguaje.println("\tdefault:");

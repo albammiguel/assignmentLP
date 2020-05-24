@@ -22,7 +22,8 @@ public class RetornoClass extends SentenciaClass {
     
     @Override
     public void mostrar(PrintWriter lenguaje){
-        lenguaje.println("return" + " " + expresionRetorno);
+        lenguaje.print("\t");
+        lenguaje.println("return" + " " + expresionRetorno+";");
     }
     
 }
