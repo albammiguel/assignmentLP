@@ -210,7 +210,7 @@ cabecera
 {DecFunsClass decfuns = new DecFunsClass($cabecera.lv_funciones);
 lenguajeFinal.setDecfuns(decfuns);}
  sent {sentencias_programa.add($sent.s);} sentlist[sentencias_programa]
-{lenguajeFinal.setSentenciasMain(sentencias_programa);}
+{lenguajeFinal.setSentenciasMain($sentlist.lv_sentencias);}
 TOKEN_END TOKEN_PROGRAM IDENT 
 {ArrayList<FuncionClass> lista_funciones = new ArrayList<FuncionClass>();}
 subproglist[lista_funciones]

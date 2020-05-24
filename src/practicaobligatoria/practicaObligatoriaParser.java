@@ -316,6 +316,7 @@ public class practicaObligatoriaParser extends Parser {
 		public DcllistContext dcllist;
 		public CabeceraContext cabecera;
 		public SentContext sent;
+		public SentlistContext sentlist;
 		public SubproglistContext subproglist;
 		public List<TerminalNode> TOKEN_PROGRAM() { return getTokens(practicaObligatoriaParser.TOKEN_PROGRAM); }
 		public TerminalNode TOKEN_PROGRAM(int i) {
@@ -385,8 +386,8 @@ public class practicaObligatoriaParser extends Parser {
 			((PrgContext)_localctx).sent = sent();
 			sentencias_programa.add(((PrgContext)_localctx).sent.s);
 			setState(110);
-			sentlist(sentencias_programa);
-			lenguajeFinal.setSentenciasMain(sentencias_programa);
+			((PrgContext)_localctx).sentlist = sentlist(sentencias_programa);
+			lenguajeFinal.setSentenciasMain(((PrgContext)_localctx).sentlist.lv_sentencias);
 			setState(112);
 			match(TOKEN_END);
 			setState(113);
