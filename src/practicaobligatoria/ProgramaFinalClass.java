@@ -102,13 +102,14 @@ public class ProgramaFinalClass {
                                   + espacio + vacio + espacio + parentesis_der);
                 lenguaje.println(llave_izq);
                 sentenciasMain.forEach((s) -> {
-                     lenguaje.print(tabulacion);
                      s.mostrar(lenguaje);});
                 lenguaje.println(llave_der);
                 
             lenguaje.close();
 
             }
+        } else {
+            System.err.println("El fichero de entrada tiene un error semántico. Inténtelo de nuevo");
         }
         
         

@@ -42,6 +42,7 @@ public class EstructuraDoWhileClass extends SentenciaClass {
     
     @Override
     public void mostrar(PrintWriter lenguaje){
+        lenguaje.print("\t");
         lenguaje.println("while (" + condicion + ") {");
             for(SentenciaClass sentencias: listaSentencias){
                 lenguaje.print("\t");

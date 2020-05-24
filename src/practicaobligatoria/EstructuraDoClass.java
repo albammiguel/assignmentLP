@@ -75,6 +75,7 @@ public class EstructuraDoClass extends SentenciaClass {
     
     @Override
     public void mostrar(PrintWriter lenguaje){
+        lenguaje.print("\t");
         lenguaje.println("for(" + identificador + "=" + 
                 valorInicial + " ; " + identificador + "!=" + 
                 valorFinal + " ; " + identificador + "=" 

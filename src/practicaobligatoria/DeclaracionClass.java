@@ -48,7 +48,7 @@ public class DeclaracionClass extends SentenciaClass {
           String corchete_der = "]";
           String coma = ",";
           
-           
+  
         listaVariablesDeclaradas.forEach((v)-> {
             if(v.getTipo().equals("char") && v.getTamañoChar() > 0){
                 if(v.getValor() != null){
@@ -83,6 +83,7 @@ public class DeclaracionClass extends SentenciaClass {
         String espacio = " ";
         String saltoLinea = "\n";
         
+        lenguaje.print("\t");
         lenguaje.print(tipoVariables + espacio);
         imprimirVariables(lenguaje);
         lenguaje.print(saltoLinea);

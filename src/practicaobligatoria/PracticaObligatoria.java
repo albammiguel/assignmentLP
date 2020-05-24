@@ -31,11 +31,15 @@ public class PracticaObligatoria {
             }else{System.out.println("Para entrar en la depuración de tokens, añade -d");}
             ListaTokensDetectadosClass depurador = new ListaTokensDetectadosClass(depuracion);
             practicaObligatoriaLexer analex = new practicaObligatoriaLexer(input, depurador);
+            analex.removeErrorListeners();
+            analex.addErrorListener(new VerboseListener());
             // Identificar al analizador léxico como fuente de tokens para el sintactico
             CommonTokenStream tokens = new CommonTokenStream(analex);
             ProgramaFinalClass lenguajeFinal = new ProgramaFinalClass();
             practicaObligatoriaParser anasint = new 
                         practicaObligatoriaParser(tokens, lenguajeFinal);
+            anasint.removeErrorListeners();
+            anasint.addErrorListener(new VerboseListener());
             
             /*
                 Comenzar el análisis llamando al axioma de la gramática
@@ -57,8 +61,13 @@ public class PracticaObligatoria {
             //Fallo de entrada/salida   
             System.err.println("IO " + e.getMessage());
         } catch (java.lang.RuntimeException e) { 
-            //CUalquier otro fallo    
-            System.err.println("RUN " + e.getMessage());      
+            //CUalquier otro fallo  
+            if(e.getMessage() == null){
+            System.err.println("\nHay un error sintáctico o léxico en el fichero "
+                    + "de entrada, no se ha podido realizar la traduccion. Inténtelo de nuevo");
+            } else if (e.getMessage().equals("0")){
+                System.err.println("\nNo especificado fichero de entrada. Inténtelo de nuevo");
+            }
         } 
             
     }     

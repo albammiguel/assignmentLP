@@ -134,6 +134,7 @@ public class practicaObligatoriaLexer extends Lexer {
 	        this(ficheroFuente);
 	        listaTokens= lista;
 	    }
+	    
 
 
 	public practicaObligatoriaLexer(CharStream input) {

@@ -28,12 +28,13 @@ public class EstructuraIfClass extends SentenciaClass{
     
     @Override
     public void mostrar(PrintWriter lenguaje){
+        lenguaje.print("\t");
         lenguaje.println("if (" + condicion +") {");
         for(SentenciaClass sentencia: sentenciasIf){
                 lenguaje.print("\t");
                 sentencia.mostrar(lenguaje);
         }
-        lenguaje.print("}");
+        lenguaje.print("\t}");
         if(!sentenciasElse.isEmpty()){
             lenguaje.println(" else {");
             for(SentenciaClass sentencias: sentenciasElse){

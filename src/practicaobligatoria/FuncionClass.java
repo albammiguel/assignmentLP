@@ -75,13 +75,12 @@ public class FuncionClass {
     }
     
     public void imprimirListaSentencias(PrintWriter lenguaje){
-        String tabulacion ="\t";
         String llave_izq = "{";
         String llave_der = "}";
+        String tabulacion = "\t";
         
         lenguaje.println(llave_izq);
         listaSentencias.forEach((s)->{
-            lenguaje.print(tabulacion);
             s.mostrar(lenguaje);
             });
         lenguaje.println(llave_der);

@@ -31,6 +31,7 @@ public class EstructuraCaseClass extends SentenciaClass{
     
     @Override
     public void mostrar(PrintWriter lenguaje){
+       lenguaje.print("\t");
        lenguaje.println("switch ( " + selector + ") {");
         for(CasosClass casos: listaCasos){
             for(String etiqueta: casos.getEtiquetas()){

@@ -30,11 +30,12 @@ public class LlamadaClass extends SentenciaClass {
     String parentesis_der = ")";
     String saltoLinea = "\n";
     
+    lenguaje.print("\t");
     lenguaje.print(nombre+ espacio);
     if(listaInputs != null){
-        lenguaje.print(listaInputs+puntoComa+saltoLinea);
+        lenguaje.println(listaInputs+puntoComa);
     }else{
-        lenguaje.print(parentesis_izq + parentesis_der + puntoComa+saltoLinea);
+        lenguaje.println(parentesis_izq + parentesis_der + puntoComa);
     }
    }
 }

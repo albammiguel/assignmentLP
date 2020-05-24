@@ -5,6 +5,8 @@ grammar practicaObligatoria;
     import java.util.*;
 }
 
+
+
 @lexer::members{
     private ListaTokensDetectadosClass listaTokens;
     private TokenDetectadoClass token_actual;
@@ -15,6 +17,7 @@ grammar practicaObligatoria;
         this(ficheroFuente);
         listaTokens= lista;
     }
+    
 }
 
 @parser::members{
@@ -41,6 +44,7 @@ grammar practicaObligatoria;
             } else if(e_s.equals("OUT") || e_s.equals("INOUT")) 
                     {p_encontrado.setSalida(true);}
         }else{
+            lenguajeFinal.setEsError(true);
             //lamar error semántico
     }
         return lista;
@@ -166,6 +170,7 @@ grammar practicaObligatoria;
         }
         return texto;
     }
+    
 }
 
 
@@ -184,7 +189,7 @@ $dcllist.lv_declaraciones.forEach((d)->{sentencias_programa.add(d);});
 cabecera 
 {DecFunsClass decfuns = new DecFunsClass($cabecera.lv_funciones);
 lenguajeFinal.setDecfuns(decfuns);}
- sent sentlist[sentencias_programa]
+ sent {sentencias_programa.add($sent.s);} sentlist[sentencias_programa]
 {lenguajeFinal.setSentenciasMain(sentencias_programa);}
 TOKEN_END TOKEN_PROGRAM IDENT 
 {ArrayList<FuncionClass> lista_funciones = new ArrayList<FuncionClass>();}
