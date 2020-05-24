@@ -32,9 +32,11 @@ grammar practicaObligatoria;
 
     public ArrayList<ParametroClass> CompletarParametro
     (ArrayList<ParametroClass> lista, 
-    String nombre, String tipo_parametro, int tamaño_char, String e_s){
+    String nombre, String tipo_parametro, int tamaño_char, String e_s, Token pToken){
         ParametroClass p = new ParametroClass(nombre);
         int i = lista.indexOf(p);
+        /*aquí se comprueba si el parámetro definido arriba, tiene el mismo valor que 
+        el indicado, caso 2 de errores semánticos*/
         if(i != -1){
             ParametroClass p_encontrado = lista.get(i);
             p_encontrado.setTipo(tipo_parametro);
@@ -46,7 +48,9 @@ grammar practicaObligatoria;
         }else{
             lenguajeFinal.setEsError(true);
             //lamar error semántico
-    }
+           String message = "el PARAMETRO: " + p + " no está declarado en la FUNCION";
+           imprimirErrorSemantico(pToken, pToken.getLine(), pToken.getCharPositionInLine(), message);
+        }
         return lista;
     }
 
@@ -62,7 +66,7 @@ grammar practicaObligatoria;
     public FuncionClass crearFuncionImplementada
     (String ident1, String ident2, String ident3, String ident4,
     String tipo_devuelto, ArrayList<ParametroClass> listaParametros, 
-    ArrayList<SentenciaClass> listaSentencias){
+    ArrayList<SentenciaClass> listaSentencias, Token id1Token){
         FuncionClass funcion = new FuncionClass();
         if((ident1.equals(ident2))&&(ident1.equals(ident3))&& 
         (ident1.equals(ident4)) && (ident2.equals(ident3)) &&
@@ -73,14 +77,17 @@ grammar practicaObligatoria;
             funcion.setListaSentencias(listaSentencias);
         }else{
             lenguajeFinal.setEsError(true);
-            //llamamos a error semántico, no cumple primera y/o tercera regla 
+            //llamamos a error semántico, no cumple primera y/o tercera regla
+            String message = "el IDENT: " + ident1 + " no coincide con los IDENTS: " 
+                                        +ident2 + " , " +ident3 + " , " +ident4;
+           imprimirErrorSemantico(id1Token, id1Token.getLine(), id1Token.getCharPositionInLine(), message);
         }
         return funcion;
     }
     
     public FuncionClass crearProcedimientoImplementado(String ident1, 
     String ident2, ArrayList<ParametroClass> listaParametros, 
-    ArrayList<SentenciaClass> listaSentencias){
+    ArrayList<SentenciaClass> listaSentencias, Token id1Token){
         FuncionClass procedimiento = new FuncionClass();
         if(ident1.equals(ident2)){
            procedimiento.setNombre(ident1);
@@ -89,12 +96,14 @@ grammar practicaObligatoria;
         }else{
             lenguajeFinal.setEsError(true);
            //llamamos a error semántico, no cumple primera  regla
+           String message = "el IDENT: " + ident1 + " no coincide con el IDENT: " +ident2;
+           imprimirErrorSemantico(id1Token, id1Token.getLine(), id1Token.getCharPositionInLine(), message);
         }
         return procedimiento;
     }
     
     public FuncionClass crearDeclaracionFuncion(String ident1, String ident2,
-    String ident3, String tipo_devuelto, ArrayList<ParametroClass> listaParametros){
+    String ident3, String tipo_devuelto, ArrayList<ParametroClass> listaParametros, Token id1Token){
         FuncionClass funcion = new FuncionClass();
         if((ident1.equals(ident2))&&(ident1.equals(ident3))&&
         (ident2.equals(ident3))){
@@ -104,18 +113,23 @@ grammar practicaObligatoria;
             }else{
                 lenguajeFinal.setEsError(true);
                 //llamamos a error semántico, no cumple primera y/o tercera regla
+                String message = "el IDENT: " + ident1 + " no coincide con los IDENTS: " +ident2 + " , " +ident3;
+                imprimirErrorSemantico(id1Token, id1Token.getLine(), id1Token.getCharPositionInLine(), message);
             }
         return funcion;
     }
 
     public FuncionClass crearDeclaracionProcedimiento(String ident1, String ident2,
-    ArrayList<ParametroClass> listaParametros){
+    ArrayList<ParametroClass> listaParametros, Token id1Token){
         FuncionClass procedimiento = new FuncionClass();
          if(ident1.equals(ident2)){
             procedimiento.setNombre(ident1);
             procedimiento.setListaParametros(listaParametros);
          }else{
+            lenguajeFinal.setEsError(true);
             //llamamos a error semántico, no cumple primera  regla
+            String message = "el IDENT: " + ident1 + " no coincide con el IDENT: " +ident2;
+            imprimirErrorSemantico(id1Token, id1Token.getLine(), id1Token.getCharPositionInLine(), message);
          }
         return procedimiento;
     }
@@ -171,6 +185,12 @@ grammar practicaObligatoria;
         return texto;
     }
     
+    public void imprimirErrorSemantico(Token token, int linea, int posicion, String mensaje){
+        System.err.println("--SE HA PRODUCIDO UN ERROR SEMANTICO--");
+        System.err.println("Linea "+linea+":"+posicion+
+                            " en "+ token+": "+mensaje);
+    }
+    
 }
 
 
@@ -210,7 +230,6 @@ $lv_declaraciones=$dcl.l_declaraciones;}
 dcllist[$dcl.l_constantes, $dcl.l_declaraciones] 
 {if(!$dcllist.lv_constantes.isEmpty())$lv_constantes = $dcllist.lv_constantes;
 if(!$dcllist.lv_declaraciones.isEmpty())$lv_declaraciones = $dcllist.lv_declaraciones;}
-
 |     {$lv_constantes = $l_constantes; $lv_declaraciones = $l_declaraciones;}
 ;
 
@@ -314,6 +333,10 @@ tipo returns [String v, int c]: TOKEN_INTEGER {$v = "int"; $c=0;}
 charlength returns [int c]: 
 TOKEN_PARENTESIS_IZQ NUM_INT_CONST TOKEN_PARENTESIS_DER 
 {$c = Integer.parseInt($NUM_INT_CONST.text);}
+| TOKEN_PARENTESIS_IZQ NUM_INT_CONST TOKEN_PARENTESIS_DER TOKEN_PARENTESIS_DER 
+{notifyErrorListeners("Demasiados parentesis");}
+| TOKEN_PARENTESIS_IZQ NUM_INT_CONST 
+{notifyErrorListeners("Falta el parentesis final");}
 |       {$c=0;}
 ;
 
@@ -340,7 +363,7 @@ init returns [String v]: TOKEN_IGUAL simpvalue {$v = $simpvalue.v;}
 decproc returns [FuncionClass p]:  TOKEN_SUBROUTINE id1=IDENT formal_paramlist 
 dec_s_paramlist[$formal_paramlist.lv_parametros]
 TOKEN_END TOKEN_SUBROUTINE id2=IDENT 
-{$p = crearDeclaracionProcedimiento($id1.text, $id2.text, $dec_s_paramlist.lv_parametros);}
+{$p = crearDeclaracionProcedimiento($id1.text, $id2.text, $dec_s_paramlist.lv_parametros, $id1);}
 ;
 
 
@@ -349,6 +372,12 @@ formal_paramlist returns [ArrayList<ParametroClass> lv_parametros]:
 {ArrayList<ParametroClass> l = new ArrayList<ParametroClass>();}
  nomparamlist[l] TOKEN_PARENTESIS_DER 
 {$lv_parametros = $nomparamlist.lv_parametros;}
+|  TOKEN_PARENTESIS_IZQ {ArrayList<ParametroClass> l = new ArrayList<ParametroClass>();}
+nomparamlist[l] TOKEN_PARENTESIS_DER TOKEN_PARENTESIS_DER 
+{notifyErrorListeners("Demasiados parentesis");}
+|  TOKEN_PARENTESIS_IZQ {ArrayList<ParametroClass> l = new ArrayList<ParametroClass>();}
+nomparamlist[l] 
+{notifyErrorListeners("Falta el parentesis final");}
 |         {$lv_parametros = new ArrayList<ParametroClass>();}
 ;
 
@@ -373,7 +402,7 @@ tipo TOKEN_COMA TOKEN_INTENT TOKEN_PARENTESIS_IZQ tipoparam
 TOKEN_PARENTESIS_DER IDENT  
 TOKEN_PUNTOCOMA
 {$lh_parametros = 
-CompletarParametro($lh_parametros, $IDENT.text, $tipo.v, $tipo.c, $tipoparam.v);} 
+CompletarParametro($lh_parametros, $IDENT.text, $tipo.v, $tipo.c, $tipoparam.v, $IDENT);} 
 dec_s_paramlist[$lh_parametros] {$lv_parametros = $dec_s_paramlist.lv_parametros;}
 |             {$lv_parametros = $lh_parametros;}
 ;
@@ -391,7 +420,7 @@ nomparamlist[l] TOKEN_PARENTESIS_DER  tipo TOKEN_DOBLEPUNTO id2=IDENT
 TOKEN_PUNTOCOMA dec_f_paramlist[$nomparamlist.lv_parametros] TOKEN_END TOKEN_FUNCTION 
 id3=IDENT
 {$f = crearDeclaracionFuncion($id1.text, $id2.text, $id3.text, $tipo.v, 
-$dec_f_paramlist.lv_parametros);}
+$dec_f_paramlist.lv_parametros, $id1);}
 ;
 
 
@@ -400,7 +429,7 @@ returns [ArrayList<ParametroClass> lv_parametros]:
 tipo TOKEN_COMA TOKEN_INTENT TOKEN_PARENTESIS_IZQ 
 TOKEN_IN TOKEN_PARENTESIS_DER IDENT TOKEN_PUNTOCOMA 
 {$lh_parametros = 
-CompletarParametro($lh_parametros, $IDENT.text, $tipo.v, $tipo.c, $TOKEN_IN.text);} 
+CompletarParametro($lh_parametros, $IDENT.text, $tipo.v, $tipo.c, $TOKEN_IN.text, $IDENT);} 
 aux4[$lh_parametros] {$lv_parametros = $aux4.lv_parametros;};
 
 
@@ -471,8 +500,10 @@ exp returns [String v]: id1=exp op id2=exp {$v = $id1.v + " " + $op.v + " "+ $id
 | factor {$v = $factor.v;}
 ;
 
+
 op returns [String v]: oparit {$v = $oparit.v;}
 ;
+
 
 oparit returns [String v]: TOKEN_MAS{$v = "+";}
 | TOKEN_MENOS {$v = "-";}
@@ -482,11 +513,19 @@ oparit returns [String v]: TOKEN_MAS{$v = "+";}
 
 factor returns [String v]: simpvalue {$v = $simpvalue.v;}
 | TOKEN_PARENTESIS_IZQ exp TOKEN_PARENTESIS_DER {$v= "(" + $exp.v + ")";}
+| TOKEN_PARENTESIS_IZQ exp TOKEN_PARENTESIS_DER TOKEN_PARENTESIS_DER 
+{notifyErrorListeners("Demasiados parentesis");}
+| TOKEN_PARENTESIS_IZQ exp 
+{notifyErrorListeners("Falta el parentesis final");}
 | IDENT aux5[$IDENT.text] {$v = $aux5.v;}
 ;
 
 aux5[String vh] returns [String v]: TOKEN_PARENTESIS_IZQ exp explist[$exp.v] 
 TOKEN_PARENTESIS_DER {$v= $vh + "(" + $explist.v + ")";}
+|TOKEN_PARENTESIS_IZQ exp explist[$exp.v] TOKEN_PARENTESIS_DER TOKEN_PARENTESIS_DER
+{notifyErrorListeners("Demasiados parentesis");}
+|TOKEN_PARENTESIS_IZQ exp explist[$exp.v] 
+{notifyErrorListeners("Falta el parentesis final");}
 |          {$v = $vh;}
 ;
 
@@ -502,6 +541,10 @@ $llamada_proc = llamada;};
 subpparamlist returns[String v]: 
 TOKEN_PARENTESIS_IZQ exp explist[$exp.v] TOKEN_PARENTESIS_DER
 {$v="(" + $explist.v + ")";}
+|TOKEN_PARENTESIS_IZQ exp explist[$exp.v] TOKEN_PARENTESIS_DER TOKEN_PARENTESIS_DER
+{notifyErrorListeners("Demasiados parentesis");}
+|TOKEN_PARENTESIS_IZQ exp explist[$exp.v] 
+{notifyErrorListeners("Falta el parentesis final");}
 |       {$v = null;}
 ;
 
@@ -529,7 +572,7 @@ sent
 {sentencias_procedimiento.add($sent.s);} 
 sentlist[sentencias_procedimiento] TOKEN_END TOKEN_SUBROUTINE id2=IDENT
 {$p = crearProcedimientoImplementado($id1.text, $id2.text, $dec_s_paramlist.lv_parametros,
-sentencias_procedimiento);}
+sentencias_procedimiento, $id1);}
 ;
 
 
@@ -548,7 +591,7 @@ sentlist[sentencias_funcion] id3=IDENT TOKEN_IGUAL exp TOKEN_PUNTOCOMA
 {RetornoClass r = new RetornoClass("retorno",$exp.v); sentencias_funcion.add(r);}
 TOKEN_END TOKEN_FUNCTION id4=IDENT
 {$f = crearFuncionImplementada($id1.text, $id2.text, $id3.text, $id4.text, $tipo.v,
- $dec_f_paramlist.lv_parametros, sentencias_funcion);}
+ $dec_f_paramlist.lv_parametros, sentencias_funcion, $id1);}
 ;
 
 //SECUENCIAS DE CONTROL DE FLUJO
