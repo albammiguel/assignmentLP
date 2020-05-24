@@ -48,7 +48,7 @@ grammar practicaObligatoria;
         }else{
             lenguajeFinal.setEsError(true);
             //lamar error semántico
-           String message = "el PARAMETRO: " + p + " no está declarado en la FUNCION";
+           String message = "el PARAMETRO: " + nombre + " no está declarado en la FUNCION";
            imprimirErrorSemantico(pToken, pToken.getLine(), pToken.getCharPositionInLine(), message);
         }
         return lista;
