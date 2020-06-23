@@ -102,7 +102,7 @@ public class ProgramaFinalClass {
                                   + espacio + vacio + espacio + parentesis_der);
                 lenguaje.println(llave_izq);
                 sentenciasMain.forEach((s) -> {
-                     s.mostrar(lenguaje);});
+                     s.mostrar(lenguaje, tabulacion);});
                 lenguaje.println(llave_der);
                 
             lenguaje.close();

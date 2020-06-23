@@ -67,7 +67,7 @@ public class PartesClass {
                             + nombre + espacio
                             +parentesis_izq + espacio);
             f.imprimirListaParametros(lenguaje);
-            lenguaje.print(parentesis_der);
+            lenguaje.println(parentesis_der);
             f.imprimirListaSentencias(lenguaje);
             
         } else {
@@ -75,7 +75,7 @@ public class PartesClass {
                                + nombre + espacio
                                +parentesis_izq + espacio);
             f.imprimirListaParametros(lenguaje);
-            lenguaje.print(parentesis_der);
+            lenguaje.println(parentesis_der);
             f.imprimirListaSentencias(lenguaje);
         }
     }

@@ -81,7 +81,7 @@ public class FuncionClass {
         
         lenguaje.println(llave_izq);
         listaSentencias.forEach((s)->{
-            s.mostrar(lenguaje);
+            s.mostrar(lenguaje, tabulacion);
             });
         lenguaje.println(llave_der);
     }

@@ -74,17 +74,17 @@ public class EstructuraDoClass extends SentenciaClass {
     
     
     @Override
-    public void mostrar(PrintWriter lenguaje){
-        lenguaje.print("\t");
+    public void mostrar(PrintWriter lenguaje, String tabulacion){
+        lenguaje.print(tabulacion);
         lenguaje.println("for(" + identificador + "=" + 
                 valorInicial + " ; " + identificador + "!=" + 
                 valorFinal + " ; " + identificador + "=" 
                 + identificador + "+" + incremento + ") {");
+        String tabulacionForSentencias = tabulacion + "\t";
         for(SentenciaClass sentencias: listaSentencias){
-            lenguaje.print("\t");
-            sentencias.mostrar(lenguaje);
+            sentencias.mostrar(lenguaje, tabulacionForSentencias);
         }
-        lenguaje.println("\t}");
+        lenguaje.println(tabulacion + "}");
     }
     
 }

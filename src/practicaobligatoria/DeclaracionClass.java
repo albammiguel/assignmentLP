@@ -79,11 +79,11 @@ public class DeclaracionClass extends SentenciaClass {
     }
     
     @Override
-    public void mostrar(PrintWriter lenguaje){
+    public void mostrar(PrintWriter lenguaje, String tabulacion){
         String espacio = " ";
         String saltoLinea = "\n";
         
-        lenguaje.print("\t");
+        lenguaje.print(tabulacion);
         lenguaje.print(tipoVariables + espacio);
         imprimirVariables(lenguaje);
         lenguaje.print(saltoLinea);

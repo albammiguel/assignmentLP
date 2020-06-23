@@ -30,27 +30,29 @@ public class EstructuraCaseClass extends SentenciaClass{
     }
     
     @Override
-    public void mostrar(PrintWriter lenguaje){
-       lenguaje.print("\t");
+    public void mostrar(PrintWriter lenguaje, String tabulacion){
+       lenguaje.print(tabulacion);
+       String tabulacionCase = tabulacion + "\t";
+       String tabulacionCaseSentencias = tabulacionCase + "\t";
+       String tabulacionDefault = tabulacion + "\t";
        lenguaje.println("switch ( " + selector + ") {");
         for(CasosClass casos: listaCasos){
             for(String etiqueta: casos.getEtiquetas()){
-                lenguaje.print("\t" + "case "); 
+                lenguaje.print(tabulacionCase + "case "); 
                 lenguaje.println(etiqueta + " :");
             }
             for(SentenciaClass sentencias: casos.getListaSentencias()){
-                    lenguaje.print("\t\t");
-                    sentencias.mostrar(lenguaje);
+                    sentencias.mostrar(lenguaje, tabulacionCaseSentencias);
                 }
-                lenguaje.println("\t\t\tbreak;");
+                lenguaje.println(tabulacionCaseSentencias + "break;");
         }
         if(hayDefault){
-            lenguaje.println("\tdefault:");
+            lenguaje.println(tabulacionDefault + "default:");
+            tabulacionDefault = tabulacionDefault + "\t";
             for(SentenciaClass sentencia: sentenciasDefault){
-                lenguaje.print("\t\t");
-                sentencia.mostrar(lenguaje);
+                sentencia.mostrar(lenguaje, tabulacionDefault);
             }
         }
-        lenguaje.println("\t}");
+        lenguaje.println(tabulacion + "}");
     }
 }

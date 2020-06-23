@@ -22,8 +22,8 @@ public class AsignacionClass extends SentenciaClass {
     }
     
     @Override
-    public void mostrar(PrintWriter lenguaje){
-        lenguaje.print("\t");
+    public void mostrar(PrintWriter lenguaje, String tabulacion){
+        lenguaje.print(tabulacion);
         lenguaje.println(identificador + " = " + valor + ";");
     }
     

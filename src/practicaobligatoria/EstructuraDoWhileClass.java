@@ -41,13 +41,13 @@ public class EstructuraDoWhileClass extends SentenciaClass {
     
     
     @Override
-    public void mostrar(PrintWriter lenguaje){
-        lenguaje.print("\t");
+    public void mostrar(PrintWriter lenguaje, String tabulacion){
+        lenguaje.print(tabulacion);
         lenguaje.println("while (" + condicion + ") {");
-            for(SentenciaClass sentencias: listaSentencias){
-                lenguaje.print("\t");
-                sentencias.mostrar(lenguaje);
-            }
-            lenguaje.println("\t}");
+        String tabulacionWhileSentencias = tabulacion + "\t";
+        for(SentenciaClass sentencias: listaSentencias){
+                sentencias.mostrar(lenguaje, tabulacionWhileSentencias);
+        }
+        lenguaje.println(tabulacion + "}");
     }
 }

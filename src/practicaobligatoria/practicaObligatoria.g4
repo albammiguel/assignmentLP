@@ -230,7 +230,7 @@ $lv_declaraciones=$dcl.l_declaraciones;}
 dcllist[$dcl.l_constantes, $dcl.l_declaraciones] 
 {if(!$dcllist.lv_constantes.isEmpty())$lv_constantes = $dcllist.lv_constantes;
 if(!$dcllist.lv_declaraciones.isEmpty())$lv_declaraciones = $dcllist.lv_declaraciones;}
-|     {$lv_constantes = $l_constantes; $lv_declaraciones = $l_declaraciones;}
+|           {$lv_constantes = $l_constantes; $lv_declaraciones = $l_declaraciones;}
 ;
 
 

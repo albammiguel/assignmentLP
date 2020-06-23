@@ -23,14 +23,14 @@ public class LlamadaClass extends SentenciaClass {
     }
     
     @Override
-    public void mostrar(PrintWriter lenguaje){
+    public void mostrar(PrintWriter lenguaje, String tabulacion){
     String espacio = " ";
     String puntoComa = ";";
     String parentesis_izq = "(";
     String parentesis_der = ")";
     String saltoLinea = "\n";
     
-    lenguaje.print("\t");
+    lenguaje.print(tabulacion);
     lenguaje.print(nombre+ espacio);
     if(listaInputs != null){
         lenguaje.println(listaInputs+puntoComa);

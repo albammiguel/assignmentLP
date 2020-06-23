@@ -26,6 +26,6 @@ public abstract class SentenciaClass {
     }
     
     //METODOS
-    public abstract void mostrar(PrintWriter lenguaje);
+    public abstract void mostrar(PrintWriter lenguaje, String tabulacion);
     
 }

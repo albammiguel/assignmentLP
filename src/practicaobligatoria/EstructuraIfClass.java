@@ -27,21 +27,20 @@ public class EstructuraIfClass extends SentenciaClass{
     }
     
     @Override
-    public void mostrar(PrintWriter lenguaje){
-        lenguaje.print("\t");
+    public void mostrar(PrintWriter lenguaje, String tabulacion){
+        String tabulacionSentencias = tabulacion + "\t";
+        lenguaje.print(tabulacion);
         lenguaje.println("if (" + condicion +") {");
         for(SentenciaClass sentencia: sentenciasIf){
-                lenguaje.print("\t");
-                sentencia.mostrar(lenguaje);
+                sentencia.mostrar(lenguaje, tabulacionSentencias);
         }
-        lenguaje.print("\t}");
+        lenguaje.print(tabulacion + "}");
         if(!sentenciasElse.isEmpty()){
-            lenguaje.println(" else {");
+            lenguaje.println("else{");
             for(SentenciaClass sentencias: sentenciasElse){
-                lenguaje.print("\t");
-                sentencias.mostrar(lenguaje);
+                sentencias.mostrar(lenguaje, tabulacionSentencias);
             }
-            lenguaje.print("\t}");
+            lenguaje.print(tabulacion + "}");
         }
         lenguaje.println();
     }
